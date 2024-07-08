@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '@fortawesome/fontawesome-svg-core/styles.css';
@@ -121,7 +121,7 @@ function Home() {
             </div>
             <div className="h-full mt-10 flex items-center justify-center">
             <div className="max-w-md p-8 bg-white rounded-lg shadow-lg text-center">
-                <h1 className="text-3xl font-bold mb-4">Let's Stay In Touch</h1>
+                <h1 className="text-3xl font-bold mb-4">Let&apos;s Stay In Touch</h1>
                 <p className="text-gray-600 mb-8">Enjoy 10% off on your first purchase and be the first to know about offers, new releases, and latest stories.</p>
                 <form className="mb-4">
                     <input
