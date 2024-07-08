@@ -4,15 +4,16 @@ import {
   faSearch,
   faBagShopping,
 } from "@fortawesome/free-solid-svg-icons";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
 function NavBar() {
   // const navigate = useNavigate();
+  const location = useLocation();
 
   return (
-    <div className="w-full h-20 flex flex-wrap justify-around items-center">
+    <div className="w-full h-20 flex flex-wrap justify-around items-center z-10">
       <a href="/">
         {" "}
         <div className="flex flex-wrap justify-center items-center">Logo</div>
@@ -39,12 +40,8 @@ function NavBar() {
             to={"/categories"}
             className={({ isActive }) =>
               `block duration-200 hover:text-red-500 ${
-                isActive ? "text-red-500" : "text-gray-500"
-              } ${
-                isActive
-                  ? "border-b border-red-500"
-                  : "border-b border-gray-300"
-              } `
+                (isActive || location.pathname.startsWith("/product")) ? "text-red-500 border-b border-red-500" : "text-gray-500 border-b border-gray-300"
+              }`
             }
           >
             Categories
@@ -94,8 +91,8 @@ function NavBar() {
             to={"/login"}
             className={({ isActive }) =>
               `block duration-200 hover:text-red-500 ${
-                isActive ? "text-red-500" : "text-gray-500"
-              } `
+                (isActive || location.pathname === '/register') ? "text-red-500" : "text-gray-500"
+              }`
             }
           >
             <FontAwesomeIcon className="text-xl" icon={faUser} />
