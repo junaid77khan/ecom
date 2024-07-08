@@ -1,19 +1,19 @@
-// import { Outlet } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import {
-  Categories,
-  Category1,
-  CategoryLayout,
   ContactUs,
   NavBar,
 } from "./components";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Login from "./pages/login";
 import Register from "./pages/register";
 import Footer from "./components/Footer";
 import Blog from "./pages/blog";
 import ProductDetails from "./pages/ProductDetails";
-import Home from "./components/Home";
-import CategoryProducts from "./components/Categories_Component/Category1";
+import Home from "./pages/Home";
+import Categories from "./pages/Categories_Component/Categories";
+import CategoryProducts from "./pages/Categories_Component/Category1";
+import Cart from "./pages/Cart";
 
 function App() {
   return (
@@ -32,15 +32,15 @@ function App() {
           {/* <Route path="categories" element={<CategoryLayout />}> */}
           {/* <Route index element={<Categories />} /> */}
           {/* <Route path="category1" element={<Category1 />} /> */}
-          <Route  path="/categories" element={<Categories />} />
+          <Route  path="categories" element={<Categories />} />
           <Route
-            path="/categories/:categoryName"
+            path="categories/:categoryName"
             element={<CategoryProducts />}
           />
-          <Route path="/product/:productId" element={<ProductDetails />} />
-          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="product/:productId" element={<ProductDetails />} />
+          <Route path="contact-us" element={<ContactUs />} />
 
-          {/* </Route> */}
+          <Route path="cart" element={<Cart/>}/>
         </Routes>
       </BrowserRouter>
       <div>
