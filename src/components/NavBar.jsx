@@ -8,9 +8,26 @@ import { NavLink, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
+
+import SearchFilter from './SearchFilter';
+import { useState } from "react";
+
 function NavBar() {
   // const navigate = useNavigate();
   const location = useLocation();
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const products = [
+    { id: 1, name: 'Product 1' },
+    { id: 2, name: 'Product 2' },
+    { id: 3, name: 'Product 3' },
+  ];
+  const handleSearchClick = () => {
+    setIsSearchOpen(true);
+  };
+
+  const handleCloseSearch = () => {
+    setIsSearchOpen(false);
+  };
 
   return (
     <div className="w-full h-20 flex flex-wrap justify-around items-center z-10">
@@ -82,9 +99,13 @@ function NavBar() {
       </ul>
       <ul className="flex flex-wrap justify-center items-center gap-5">
         <li>
-          <NavLink className="block duration-200 hover:text-red-500">
+          {/* <NavLink className="block duration-200 hover:text-red-500">
             <FontAwesomeIcon className="text-xl" icon={faSearch} />
-          </NavLink>
+          </NavLink> */}
+            <button onClick={handleSearchClick} className="block duration-200 hover:text-red-500">
+            <FontAwesomeIcon className="text-xl" icon={faSearch} />
+          </button>
+
         </li>
         <li>
           <NavLink
@@ -111,6 +132,8 @@ function NavBar() {
           </NavLink>
         </li>
       </ul>
+      {isSearchOpen && <SearchFilter products={products} onClose={handleCloseSearch} />}
+
     </div>
   );
 }
