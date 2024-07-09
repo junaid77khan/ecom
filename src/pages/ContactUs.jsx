@@ -2,7 +2,7 @@
 
 const ContactUs = () => {
     return (
-        <div className=" w-full h-full py-10 bg-orange-100">
+        <div className=" w-full h-full py-10 bg-orange-50">
             <div className=" mx-auto w-1/4 ">
                 <div className="bg-white overflow-hidden shadow rounded-lg">
                     <div className="px-4 py-5 sm:p-6">

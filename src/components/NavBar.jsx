@@ -30,12 +30,12 @@ function NavBar() {
   };
 
   return (
-    <div className="w-full h-20 flex flex-wrap justify-around items-center z-10">
+    <div className="w-full h-20 bg-gradient-to-b  from-orange-100 to-orange-50 flex flex-wrap justify-around items-center z-10">
       <a href="/">
         {" "}
-        <div className="flex flex-wrap justify-center items-center">Logo</div>
+        <div className="flex flex-wrap text-lg justify-center items-center">Logo</div>
       </a>
-      <ul className="flex flex-wrap gap-5 justify-center items-center relative">
+      <ul className="flex flex-wrap gap-10 text-lg justify-center items-center relative">
         <li>
           <NavLink
             to={"/"}
@@ -86,7 +86,7 @@ function NavBar() {
           </NavLink>
         </li>
       </ul>
-      <ul className="flex flex-wrap justify-center items-center gap-5">
+      <ul className="flex flex-wrap justify-center text-lg items-center gap-10">
         <li>
           {/* <NavLink className="block duration-200 hover:text-red-500">
             <FontAwesomeIcon className="text-xl" icon={faSearch} />

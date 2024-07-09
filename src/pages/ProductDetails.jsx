@@ -136,8 +136,8 @@ const ProductDetails = () => {
     }
 
     return (
-        <div className="container mx-auto px-6 py-8">
-            <div className="bg-white shadow-md rounded-lg overflow-hidden">
+        <div className="container mx-auto px-6 py-8 bg-gradient-to-b from-orange-50 to-white">
+            <div className=" shadow-md rounded-lg overflow-hidden bg-white">
                 <div className="lg:flex">
                     <div className="lg:w-1/2 p-4">
                         <img src={product.image} alt={product.name} className="w-[80%]  h-80 object-cover transform transition-transform duration-300 hover:scale-105" />
