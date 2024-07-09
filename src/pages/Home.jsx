@@ -215,7 +215,7 @@ function Home() {
                                 </div>
                             </div>
                             {
-                                !bestSellerAllReviews &&
+                                 !bestSellerAllReviews &&
                                 <div className='ease-linear duration-200'>
                                     <div className="border-t border-gray-300 pt-4 mt-4">
                                         <div className="flex items-center mb-2">
