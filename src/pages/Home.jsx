@@ -46,7 +46,7 @@ function Home() {
         <div className='w-full h-full text-black'>
             <div className=' h-[40rem] relative'>
                 <div className='h-full  w-full'>
-                    <img className='bg-cover bg-center brightness-75 w-screen h-full ' src='../../public/hero4.jpeg' />
+                    <img className='bg-cover bg-center brightness-75 w-screen h-full ' src='../../public/herof 1.jpg' />
                 </div>
 
                 <div className=" inset-0 flex items-center justify-center absolute">
