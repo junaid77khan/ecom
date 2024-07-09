@@ -1,9 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import {
-  ContactUs,
-  NavBar,
-} from "./components";
+import { ContactUs, NavBar } from "./components";
 
 import Login from "./pages/login";
 import Register from "./pages/register";
@@ -33,7 +30,7 @@ function App() {
           {/* <Route path="categories" element={<CategoryLayout />}> */}
           {/* <Route index element={<Categories />} /> */}
           {/* <Route path="category1" element={<Category1 />} /> */}
-          <Route  path="categories" element={<Categories />} />
+          <Route path="categories" element={<Categories />} />
           <Route
             path="categories/:categoryName"
             element={<CategoryProducts />}
@@ -42,7 +39,7 @@ function App() {
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="contact-us" element={<ContactUs />} />
 
-          <Route path="cart" element={<Cart/>}/>
+          <Route path="cart" element={<Cart />} />
         </Routes>
       </BrowserRouter>
       <div>
