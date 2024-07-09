@@ -162,9 +162,9 @@ const CategoryProducts = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {sortedProducts.map((product) => (
           <div
+            onClick={() => navigate(`/product/${product.id}`)}
             key={product.id}
             className="bg-white hover:bg-gray-100 duration-200 p-6 shadow-md rounded-lg h-full w-96 px-3 cursor-pointer"
-            onClick={() => navigate(`/product/${product.id}`)}
           >
             <img
               src={product.image}
@@ -175,10 +175,10 @@ const CategoryProducts = () => {
             <p className="text-gray-600 mb-2">{product.description}</p>
             <div className="flex items-center justify-between mb-2">
               <span className="font-bold">${product.price}</span>
-              <span className="text-gray-600">{product.rating} Stars</span>
+              <span className="text-gray-600">{product.rating} <span className="text-yellow-500 text-lg">★</span></span>
             </div>
-            <button className="bg-red-500  text-white font-bold py-2 px-4 rounded">
-              Add to Cart
+            <button className="bg-orange-500 hover:bg-orange-600  text-white font-bold py-2 px-8 rounded-lg">
+                Add to Cart
             </button>
           </div>
         ))}

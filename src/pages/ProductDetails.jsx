@@ -102,7 +102,7 @@
 // };
 
 // export default ProductDetails;
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
 
 const products = [
@@ -115,6 +115,7 @@ const products = [
 const ProductDetails = () => {
     const { productId } = useParams();
     const [productQuantity, setProductQuantity] = useState(1);
+    const navigate = useNavigate();
 
     const product = products.find(p => p.id === parseInt(productId));
 
@@ -142,7 +143,7 @@ const ProductDetails = () => {
                         <img src={product.image} alt={product.name} className="w-[80%]  h-80 object-cover transform transition-transform duration-300 hover:scale-105" />
                     </div>
                     <div className="lg:w-1/2 p-4">
-                        <h2 className="text-3xl font-semibold mb-4 text-red-600">{product.name}</h2>
+                        <h2 className="text-3xl font-semibold mb-4">{product.name}</h2>
                         <div className="flex items-center mb-4">
                             <span className="text-gray-500 line-through mr-2">Rs. {product.originalPrice.toFixed(2)}</span>
                             <span className="text-2xl text-red-600 font-bold">Rs. {product.salePrice.toFixed(2)}</span>
@@ -150,7 +151,7 @@ const ProductDetails = () => {
                         </div>
                         <p className="text-gray-700 mb-4">{product.description}</p>
                         <div className="mb-4">
-                            <h3 className="text-xl font-semibold text-red-600 mb-2">Features:</h3>
+                            <h3 className="text-xl font-semibold mb-2">Features:</h3>
                             <ul className="list-disc list-inside text-gray-700">
                                 {product.features.map((feature, index) => (
                                     <li key={index}>{feature}</li>
@@ -163,8 +164,8 @@ const ProductDetails = () => {
                             <div onClick={increaseQuantity} className='border-l border-black text-center px-4 py-2'>+</div>
                         </div>
                         <div className="flex mb-4">
-                            <button className="bg-red-600 text-white px-6 py-2 rounded mr-2 hover:bg-red-700">Add to Cart</button>
-                            <button className="bg-gray-800 text-white px-6 py-2 rounded hover:bg-gray-900">Buy Now</button>
+                            <button className="bg-orange-500 text-white px-6 py-2 rounded mr-2 hover:bg-orange-600">Add to Cart</button>
+                            <button  className="bg-gray-800 text-white px-6 py-2 rounded hover:bg-gray-900">Buy Now</button>
                         </div>
                         <div>
                             <h3 className="text-xl font-semibold text-red-600 mb-2">Customer Reviews:</h3>

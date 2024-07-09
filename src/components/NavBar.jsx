@@ -40,12 +40,9 @@ function NavBar() {
           <NavLink
             to={"/"}
             className={({ isActive }) =>
-              `block duration-200 hover:text-red-500 ${
-                isActive ? "text-red-500" : "text-gray-500"
-              } ${
-                isActive
-                  ? "border-b border-red-500"
-                  : "border-b border-gray-300"
+              `block duration-200 hover:text-orange-400 ${
+                isActive ? "text-orange-500 border-b border-orange-500" : "text-gray-500 border-b border-gray-300"
+              } 
               } `
             }
           >
@@ -56,8 +53,8 @@ function NavBar() {
           <NavLink
             to={"/categories"}
             className={({ isActive }) =>
-              `block duration-200 hover:text-red-500 ${
-                (isActive || location.pathname.startsWith("/product")) ? "text-red-500 border-b border-red-500" : "text-gray-500 border-b border-gray-300"
+              `block duration-200 hover:text-orange-400 ${
+                (isActive || location.pathname.startsWith("/product")) ? "text-orange-500 border-b border-orange-500" : "text-gray-500 border-b border-gray-300"
               }`
             }
           >
@@ -68,12 +65,8 @@ function NavBar() {
           <NavLink
             to={"/blogs"}
             className={({ isActive }) =>
-              `block duration-200 hover:text-red-500 ${
-                isActive ? "text-red-500" : "text-gray-500"
-              } ${
-                isActive
-                  ? "border-b border-red-500"
-                  : "border-b border-gray-300"
+              `block duration-200 hover:text-orange-400 ${
+                isActive ? "text-orange-500 border-b border-orange-500" : "text-gray-500 border-b border-gray-300"
               } `
             }
           >
@@ -84,12 +77,8 @@ function NavBar() {
           <NavLink
             to={"/contact-us"}
             className={({ isActive }) =>
-              `block  duration-200 hover:text-red-500 ${
-                isActive ? "text-red-500" : "text-gray-500"
-              } ${
-                isActive
-                  ? "border-b border-red-500"
-                  : "border-b border-gray-300"
+              `block  duration-200 hover:text-orange-400 ${
+                isActive ? "text-orange-500 border-b border-orange-500" : "text-gray-500 border-b border-gray-300"
               }`
             }
           >
@@ -102,7 +91,7 @@ function NavBar() {
           {/* <NavLink className="block duration-200 hover:text-red-500">
             <FontAwesomeIcon className="text-xl" icon={faSearch} />
           </NavLink> */}
-            <button onClick={handleSearchClick} className="block duration-200 hover:text-red-500">
+            <button onClick={handleSearchClick} className={`block duration-200 hover:text-orange-400 `}>
             <FontAwesomeIcon className="text-xl" icon={faSearch} />
           </button>
 
@@ -111,8 +100,8 @@ function NavBar() {
           <NavLink
             to={"/login"}
             className={({ isActive }) =>
-              `block duration-200 hover:text-red-500 ${
-                (isActive || location.pathname === '/register') ? "text-red-500" : "text-gray-500"
+              `block duration-200 hover:text-orange-400 ${
+                (isActive || location.pathname === '/register') ? "text-orange-500" : "text-gray-500"
               }`
             }
           >
@@ -123,8 +112,8 @@ function NavBar() {
           <NavLink
             to={"/cart"}
             className={({ isActive }) =>
-              `block  duration-200 hover:text-red-500 ${
-                isActive ? "text-red-500" : "text-gray-500"
+              `block  duration-200 hover:text-orange-400 ${
+                isActive ? "text-orange-500" : "text-gray-500"
               }`
             }
           >

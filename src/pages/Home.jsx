@@ -50,20 +50,22 @@ function Home() {
 
                 <div className=" inset-0 flex items-center justify-center absolute">
                     <div className="text-white text-center">
-                        <h1 className="text-6xl font-bold">Luxury For Every Home</h1>
+                        <h1 className="text-5xl font-bold">Luxury For Every Home</h1>
                         <h3 className="text-xl py-2 pb-8">Stay one step ahead in the world of Aroma & Candles.</h3>
-                        {/* <button onClick={() => navigate("/categories")} className="bg-white text-red-600 px-4 py-2 mt-4 rounded-full">Shop</button> */}
-                        <button    onClick={() => navigate("/categories")} className="relative  rounded-full  border-2 border-orange-500   inline-flex items-center justify-start px-16 py-5 overflow-hidden font-medium transition-all bg-white  hover:bg-white group">
-<span className="w-48 h-48 border-8 border-orange-700  rounded rotate-[-40deg] bg-orange-600 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
-<span className="relative w-full text-center text-2xl text-orange-500 transition-colors duration-300 ease-in-out group-hover:text-white">Shop</span>
-</button>
+                        <button onClick={() => navigate("/categories")} className="relative rounded-full border-2 border-orange-500 inline-flex items-center justify-start px-12 py-4 overflow-hidden font-medium transition-all bg-white hover:bg-white group">
+                        <span className="w-36 h-36 border-6 border-orange-700 rounded rotate-[-40deg] bg-orange-600 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>
+                        <span className="relative w-full text-center text-xl text-orange-500 transition-colors duration-300 ease-in-out group-hover:text-white">Shop</span>
+                        </button>
                     </div>
                 </div>
             </div>
             <div className='h-full py-10 px-52 w-full'>
                 <h1 className='text-6xl'>Our Categories</h1>
 
-                <div className='flex flex-wrap justify-center items-center gap-8 mt-5 py-5'>
+                <div className='w-full flex justify-end items-center mt-5 px-24'>
+                    <button onClick={() => navigate("/categories")} className='border hover:bg-gray-200 transition-200 border-gray-200 px-8 py-3'>View All</button>
+                </div>
+                <div className='flex flex-wrap justify-center items-center gap-8 py-5'>
             
                     <a href='/categories/Pillar Candles' className='flex flex-col justify-center items-start gap-3 w-72 h-96 px-4 py-6   hover:bg-gray-200 duration-200 rounded-lg'>
                         <img className='bg-cover bg-center w-full h-3/4 rounded-lg' src='../../public/candle6.jpg' />
@@ -86,8 +88,19 @@ function Home() {
                     <h1 className='text-xl text-gray-500'>Our universally agreed, most loved products.</h1>
                     <div className='flex flex-wrap justify-between items-center mt-8'>
                         <div className='flex flex-wrap justify-center items-center gap-6'>
-                            <button onClick={() => setIsMostPopularActive(true)}  className={`duration-200 text-xl uppercase ${!isMostPopularActive ? "bg-gray-200": "bg-red-500"} border border-gray-300 px-6 py-1`}>Most Popular</button>
-                            <button onClick={() => setIsMostPopularActive(false)} className={`duration-200 text-xl uppercase ${isMostPopularActive ? "bg-gray-200": "bg-red-500"} border border-gray-300 px-6 py-1`}>New Items</button>
+                            {/* <button onClick={() => setIsMostPopularActive(true)} 
+                            className={`relative rounded-full border-2 border-orange-500 inline-flex items-center justify-start px-12 py-4 overflow-hidden font-medium transition-all hover:bg-white group ${!isMostPopularActive ? "bg-gray-200": "bg-white-500"}`}>
+                            <span className="w-36 h-36 border-6 border-orange-700 rounded rotate-[-40deg] bg-orange-600 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>
+                            <span className="relative w-full text-center text-xl text-orange-500 transition-colors duration-300 ease-in-out group-hover:text-white uppercase">Most Popular</span>
+                            </button> */}
+
+                            {/* <button onClick={() => setIsMostPopularActive(false)} 
+                            className={`relative rounded-full border-2 border-orange-500 inline-flex items-center justify-start px-12 py-4 overflow-hidden font-medium transition-all hover:bg-white group ${isMostPopularActive ? "bg-gray-200": "bg-white-500"}`}>
+                            <span className={`w-36 h-36 border-6 border-orange-700 rounded rotate-[-40deg] ${isMostPopularActive ? "bg-orange-300" : "bg-orange-600"} absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0`}></span>
+                            <span className="relative w-full text-center text-xl text-orange-500 transition-colors duration-300 ease-in-out group-hover:text-white uppercase">New Item</span>
+                            </button> */}
+                            <button onClick={() => setIsMostPopularActive(true)}  className={`duration-200 rounded-full text-xl uppercase ${!isMostPopularActive ? "bg-gray-200": "bg-orange-500"} border border-gray-300 px-6 py-2`}>Most Popular</button>
+                            <button onClick={() => setIsMostPopularActive(false)} className={`duration-200 rounded-full text-xl uppercase ${isMostPopularActive ? "bg-gray-200": "bg-orange-500"} border border-gray-300 px-6 py-2`}>New Items</button>
                         </div>
                         {/* <button className='text-gray-500 border border-gray-500 hover:border-black px-6 py-2 rounded-lg'>View All</button> */}
                     </div>
@@ -162,7 +175,7 @@ function Home() {
                     />
                     <button
                         type="submit"
-                        className="w-full bg-red-600 text-white py-3 rounded-md hover:bg-red-700 transition duration-300"
+                        className="w-full bg-orange-500 text-white py-3 rounded-md hover:bg-orange-600 transition duration-300"
                     >
                         Subscribe
                     </button>

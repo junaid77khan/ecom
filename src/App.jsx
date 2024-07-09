@@ -14,6 +14,7 @@ import Home from "./pages/Home";
 import Categories from "./pages/Categories_Component/Categories";
 import CategoryProducts from "./pages/Categories_Component/Category1";
 import Cart from "./pages/Cart";
+import PaymentPage from "./pages/PaymentPage";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
             element={<CategoryProducts />}
           />
           <Route path="product/:productId" element={<ProductDetails />} />
+          <Route path="/payment" element={<PaymentPage />} />
           <Route path="contact-us" element={<ContactUs />} />
 
           <Route path="cart" element={<Cart/>}/>

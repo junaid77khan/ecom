@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 const PaymentPage = () => {
   const location = useLocation();
   const { product } = location.state || {}; // Retrieve the passed product data
+  console.log(location.state);
 
   return (
     <section className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
