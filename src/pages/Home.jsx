@@ -1,10 +1,11 @@
-// import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import React, { useRef, useState, useEffect } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { InfiniteMovingCards } from '../components/ui/infinite-moving-cards';
+
 
 function Home() {
     const navigate = useNavigate();
@@ -136,7 +137,14 @@ function Home() {
             </div>
             <div className='h-full py-5 px-52'>
                 <h1 className='text-4xl text-center'>Why to choose us?</h1>
-                <div className='flex flex-wrap justify-center items-center mt-10 gap-10'>
+                <div className="h-[30rem] rounded-md flex flex-col antialiased   items-center justify-center relative overflow-hidden">
+      <InfiniteMovingCards
+        items={testimonials}
+        direction="right"
+        speed="slow"
+      />
+    </div>
+                {/* <div className='flex flex-wrap justify-center items-center mt-10 gap-10'>
                     <div className='p-5 bg-gray-100 w-60 h-48 rounded-lg'>
                         <div>
                             <h1 className='text-xl font-semibold'>Pure Materials</h1>
@@ -161,7 +169,7 @@ function Home() {
                             <h1 className='text-gray-500 '>Our candles feature premium waxes, essential oils, and natural fragrances for a clean, consistent burn and delightful scent.</h1>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
             <div className="h-full mt-10 flex items-center justify-center py-6">
             <div className="max-w-md p-8 bg-white rounded-lg shadow-lg text-center">
@@ -186,4 +194,46 @@ function Home() {
     );
 }
 
+
+
+
+const testimonials = [
+    {
+      quote:
+        "Our candles feature premium waxes, essential oils, and natural fragrances for a clean, consistent burn and delightful scent.",
+    //   name: "Charles Dickens",
+      title: "Pure Materials",
+    },
+    {
+        quote:
+          "Our candles feature premium waxes, essential oils, and natural fragrances for a clean, consistent burn and delightful scent.",
+      //   name: "Charles Dickens",
+        title: "Pure Materials",
+      },
+      {
+        quote:
+          "Our candles feature premium waxes, essential oils, and natural fragrances for a clean, consistent burn and delightful scent.",
+      //   name: "Charles Dickens",
+        title: "Pure Materials",
+      },
+      {
+        quote:
+          "Our candles feature premium waxes, essential oils, and natural fragrances for a clean, consistent burn and delightful scent.",
+      //   name: "Charles Dickens",
+        title: "Pure Materials",
+      },
+      {
+        quote:
+          "Our candles feature premium waxes, essential oils, and natural fragrances for a clean, consistent burn and delightful scent.",
+      //   name: "Charles Dickens",
+        title: "Pure Materials",
+      },
+      {
+        quote:
+          "Our candles feature premium waxes, essential oils, and natural fragrances for a clean, consistent burn and delightful scent.",
+      //   name: "Charles Dickens",
+        title: "Pure Materials",
+      },
+  ];
 export default Home;
+
