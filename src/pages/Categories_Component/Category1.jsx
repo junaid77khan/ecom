@@ -332,7 +332,7 @@ const CategoryProducts = () => {
   });
 
   return (
-    <div className="container mx-auto py-12 px-3 flex flex-col justify-center items-center">
+    <div className="container mx-auto py-12 px-3 flex flex-col justify-center items-center bg-orange-50">
       <h2 className="text-3xl font-bold mb-6">{categoryName}</h2>
       <div className="flex flex-wrap gap-4 mb-6">
         <select

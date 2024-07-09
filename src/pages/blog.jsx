@@ -45,7 +45,7 @@ const blogPosts = [
 
 const Blog = () => {
   return (
-    <div className="container mx-auto w-[60%] px-6 lg:px-8 py-8">
+    <div className="container mx-auto w-[60%] px-6 lg:px-8 py-8 bg-orange-50">
       {blogPosts.map(post => (
         <div key={post.id} className="bg-white shadow-md rounded-lg overflow-hidden mb-8">
           <img 
