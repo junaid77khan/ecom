@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import React, { useRef, useState, useEffect } from 'react';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { InfiniteMovingCards } from '../components/ui/infinite-moving-cards';
 
 
@@ -12,6 +12,20 @@ function Home() {
     const scrollRef = useRef(null);
 
     const[isMostPopularActive, setIsMostPopularActive] = useState(true);
+
+    const[bestSellerAllReviews, setBestSellerAllReviews] = useState(false);
+
+    const [productQuantity, setProductQuantity] = useState(1);
+
+    const increaseQuantity = () => {
+        setProductQuantity(productQuantity+1);
+    }
+
+    const decreaseQuantity = () => {
+        if(productQuantity > 0) setProductQuantity(productQuantity-1);
+    }
+
+    const bestSellerProduct = { id: 1, name: 'AuraDecor Fragrance Rose Heart Shape Tealight (Pack of 10)', originalPrice: 199.00, salePrice: 99.00, image: '/candle6.jpg', description: 'Inhaling rose fragrance has therapeutic aroma benefits that help fight depression, overcome anxiety, reduce stress and insomnia.', features: ['Set of 10 Tealight Candles', 'Rose Fragrance', 'Heart Shape', 'Perfect for Decoration and Gifting', 'Burn Time: Up to 4 hours each'], reviews: [{ id: 1, user: 'John Doe', rating: 5, comment: 'Amazing product! The fragrance is wonderful and lasts long.' }, { id: 2, user: 'Jane Smith', rating: 4, comment: 'Beautiful design and great scent, but the burning time could be longer.' }, { id: 3, user: 'Jane Smith', rating: 4, comment: 'Beautiful design and great scent, but the burning time could be longer.' }, { id: 4, user: 'Jane Smith', rating: 4, comment: 'Beautiful design and great scent, but the burning time could be longer.' }] };
 
     useEffect(() => {
         setScrollIndex(0);
@@ -60,23 +74,43 @@ function Home() {
                     </div>
                 </div>
             </div>
-            <div className='h-full py-10 px-52 w-full'>
-                <h1 className='text-6xl'>Our Categories</h1>
+            <div className='h-full py-10 px-36 w-full bg-orange-200 bg-gradient-to-b from-orange-200 to-orange-50'>
+                <h1 className='text-6xl text-white font-bold'>Our Categories</h1>
 
-                <div className='w-full flex justify-end items-center mt-5 px-24'>
-                    <button onClick={() => navigate("/categories")} className='border hover:bg-gray-200 transition-200 border-gray-200 px-8 py-3'>View All</button>
+                <div className='w-full flex justify-end items-center mt-10'>
+                    <button onClick={() => navigate("/categories")} className='border hover:bg-gray-200 transition-200 border-gray-200 bg-white px-8 py-3'>View All</button>
                 </div>
-                <div className='flex flex-wrap justify-center items-center gap-8 py-5'>
+                <div className='flex flex-wrap justify-center items-center gap-5 py-10  mt-5'>
             
-                    <a href='/categories/Pillar Candles' className='flex flex-col justify-center items-start gap-3 w-72 h-96 px-4 py-6   hover:bg-gray-200 duration-200 rounded-lg'>
+                    <a href='/categories/Pillar Candles' className='flex flex-col justify-center items-start gap-3 w-72 h-96 px-4 py-6  bg-white hover:bg-gray-200 duration-200 rounded-lg'>
                         <img className='bg-cover bg-center w-full h-3/4 rounded-lg' src='../../public/candle6.jpg' />
                         <h1 className='text-xl'>Pillar Candles <FontAwesomeIcon onClick={() => navigate('/collections')} className='cursor-pointer' icon={faArrowRight}/> </h1>
                     </a>
-                    <a href='/categories/Tea Light Candles' className='flex flex-col justify-center items-start gap-3 w-72 h-96 px-4 py-6   hover:bg-gray-200 duration-200 rounded-lg'>
+                    <a href='/categories/Tea Light Candles' className='flex flex-col justify-center items-start gap-3 w-72 h-96 px-4 py-6 bg-white  hover:bg-gray-200 duration-200 rounded-lg'>
                         <img className='bg-cover bg-center w-full h-3/4 rounded-lg' src='../../public/candle8.jpg' />
                         <h1 className='text-xl'>Tea Light Candles <FontAwesomeIcon onClick={() => navigate('/collections')} className='cursor-pointer' icon={faArrowRight}/> </h1>
                     </a>
-                    <a href='/categories/Jar Candles' className='flex flex-col justify-center items-start gap-3 w-72 h-96 px-4 py-6   hover:bg-gray-200 duration-200 rounded-lg'>
+                    <a href='/categories/Jar Candles' className='flex flex-col justify-center items-start gap-3 w-72 h-96 px-4 py-6  bg-white hover:bg-gray-200 duration-200 rounded-lg'>
+                        <img className='bg-cover bg-center w-full h-3/4 rounded-lg' src='../../public/candle2.jpg' />
+                        <h1 className='text-xl'>Jar Candles <FontAwesomeIcon onClick={() => navigate('/collections')} className='cursor-pointer' icon={faArrowRight}/> </h1>
+                    </a>
+                    <a href='/categories/Jar Candles' className='flex flex-col justify-center items-start gap-3 w-72 h-96 px-4 py-6  bg-white hover:bg-gray-200 duration-200 rounded-lg'>
+                        <img className='bg-cover bg-center w-full h-3/4 rounded-lg' src='../../public/candle2.jpg' />
+                        <h1 className='text-xl'>Jar Candles <FontAwesomeIcon onClick={() => navigate('/collections')} className='cursor-pointer' icon={faArrowRight}/> </h1>
+                    </a>
+                    <a href='/categories/Jar Candles' className='flex flex-col justify-center items-start gap-3 w-72 h-96 px-4 py-6  bg-white hover:bg-gray-300 duration-200 rounded-lg'>
+                        <img className='bg-cover bg-center w-full h-3/4 rounded-lg' src='../../public/candle2.jpg' />
+                        <h1 className='text-xl'>Jar Candles <FontAwesomeIcon onClick={() => navigate('/collections')} className='cursor-pointer' icon={faArrowRight}/> </h1>
+                    </a>
+                    <a href='/categories/Jar Candles' className='flex flex-col justify-center items-start gap-3 w-72 h-96 px-4 py-6  bg-white hover:bg-gray-200 duration-200 rounded-lg'>
+                        <img className='bg-cover bg-center w-full h-3/4 rounded-lg' src='../../public/candle2.jpg' />
+                        <h1 className='text-xl'>Jar Candles <FontAwesomeIcon onClick={() => navigate('/collections')} className='cursor-pointer' icon={faArrowRight}/> </h1>
+                    </a>
+                    <a href='/categories/Jar Candles' className='flex flex-col justify-center items-start gap-3 w-72 h-96 px-4 py-6  bg-white hover:bg-gray-200 duration-200 rounded-lg'>
+                        <img className='bg-cover bg-center w-full h-3/4 rounded-lg' src='../../public/candle2.jpg' />
+                        <h1 className='text-xl'>Jar Candles <FontAwesomeIcon onClick={() => navigate('/collections')} className='cursor-pointer' icon={faArrowRight}/> </h1>
+                    </a>
+                    <a href='/categories/Jar Candles' className='flex flex-col justify-center items-start gap-3 w-72 h-96 px-4 py-6  bg-white hover:bg-gray-200 duration-200 rounded-lg'>
                         <img className='bg-cover bg-center w-full h-3/4 rounded-lg' src='../../public/candle2.jpg' />
                         <h1 className='text-xl'>Jar Candles <FontAwesomeIcon onClick={() => navigate('/collections')} className='cursor-pointer' icon={faArrowRight}/> </h1>
                     </a>
@@ -84,7 +118,7 @@ function Home() {
                 </div>
             </div>
 
-            <div className='h-full py-5 px-52'>
+            <div className='h-full py-5 px-36 bg-orange-50'>
                     <h1 className='text-4xl mb-4'>Featured Candles</h1>
                     <h1 className='text-xl text-gray-500'>Our universally agreed, most loved products.</h1>
                     <div className='flex flex-wrap justify-between items-center mt-8'>
@@ -111,7 +145,7 @@ function Home() {
                     </button>
                     <div ref={scrollRef} className="flex space-x-4 py-5 px-3" style={{ overflow: 'hidden' }}>
                         {isMostPopularActive && Array(16).fill().map((_, index) => (
-                            <div key={index} className="flex-shrink-0 w-64 sm:w-48 md:w-56 lg:w-64 p-2 bg-white rounded-lg shadow-lg hover:bg-gray-100 transition duration-300">
+                            <div key={index} className="flex-shrink-0 sm:w-48 md:w-56 lg:w-72 px-5 py-5 bg-white rounded-lg shadow-lg hover:bg-gray-100 transition duration-300">
                                 <img className="w-full h-64 object-cover rounded-t-lg" src='/candle3.jpg' alt='Product' />
                                 <div className="p-3 text-center">
                                     <h1 className="text-gray-500 text-sm">AURA DECOR</h1>
@@ -121,7 +155,7 @@ function Home() {
                         ))}
 
                         {!isMostPopularActive && Array(16).fill().map((_, index) => (
-                            <div key={index} className="flex-shrink-0 w-64 sm:w-48 md:w-56 lg:w-64 p-2 bg-white rounded-lg shadow-lg hover:bg-gray-100 transition duration-300">
+                            <div key={index} className="flex-shrink-0 sm:w-48 md:w-56 lg:w-72 px-5 py-5 bg-white rounded-lg shadow-lg hover:bg-gray-100 transition duration-300">
                                 <img className="w-full h-64 object-cover rounded-t-lg" src='/candle8.jpg' alt='Product' />
                                 <div className="p-3 text-center">
                                     <h1 className="text-gray-500 text-sm">TEA LIGHT CANDLES</h1>
@@ -135,14 +169,103 @@ function Home() {
                     </button>
                 </div>
             </div>
-            <div className='h-full py-5 px-52'>
+
+            <div className='h-full w-full py-10 px-36 bg-orange-50'>
+                <h1 className='text-4xl uppercase'>Best Seller</h1>
+
+                <div className=" shadow-md rounded-lg overflow-hidden bg-white mt-5 py-5">
+                    <div className="lg:flex px-5">
+                        <div className="lg:w-1/2   flex justify-center gap-5 items-center">
+                            <img src={bestSellerProduct.image} alt={bestSellerProduct.name} className="w-full  h-96 object-cover transform transition-transform duration-300" />
+                        </div>
+                        <div className="lg:w-1/2 p-4">
+                            <h2 className="text-3xl font-semibold mb-4">{bestSellerProduct.name}</h2>
+                            <div className="flex items-center mb-4">
+                                <span className="text-gray-500 line-through mr-2">Rs. {bestSellerProduct.originalPrice.toFixed(2)}</span>
+                                <span className="text-2xl text-red-600 font-bold">Rs. {bestSellerProduct.salePrice.toFixed(2)}</span>
+                                <span className="text-white bg-red-600 rounded-full px-3 py-1 ml-2">Sale</span>
+                            </div>
+                            <p className="text-gray-700 mb-4">{bestSellerProduct.description}</p>
+                            <div className="mb-4">
+                                <h3 className="text-xl font-semibold mb-2">Features:</h3>
+                                <ul className="list-disc list-inside text-gray-700">
+                                    {bestSellerProduct.features.map((feature, index) => (
+                                        <li key={index}>{feature}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div className='flex justify-between items-center gap-3  border border-black w-36 mb-4'>
+                                <div onClick={decreaseQuantity} className='border-r border-black text-center  px-4 py-2'>-</div>
+                                <div className='py-2 px-2'>{productQuantity}</div>
+                                <div onClick={increaseQuantity} className='border-l border-black text-center px-4 py-2'>+</div>
+                            </div>
+                            <div className="flex mb-4">
+                                <button className="bg-orange-500 text-white px-6 py-2 rounded mr-2 hover:bg-orange-600">Add to Cart</button>
+                                <button  className="bg-gray-800 text-white px-6 py-2 rounded hover:bg-gray-900">Buy Now</button>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    {
+                        bestSellerProduct.reviews.length > 0 && 
+                        <div className='px-5'>
+                            <div>
+                                <div className=''>
+                                    <h3 className="text-xl font-semibold text-red-600 mb-2">Customer Reviews:</h3>
+                                </div>
+                            </div>
+                            {
+                                !bestSellerAllReviews &&
+                                <div className='ease-linear duration-200'>
+                                    <div className="border-t border-gray-300 pt-4 mt-4">
+                                        <div className="flex items-center mb-2">
+                                            <div className="text-lg font-bold text-gray-800 mr-2">{bestSellerProduct?.reviews[0]?.user}</div>
+                                            <div className="text-yellow-500">{Array(bestSellerProduct?.reviews[0]?.rating).fill('★').join('')}</div>
+                                        </div>
+                                        <p className="text-gray-700">{bestSellerProduct?.reviews[0]?.comment}</p>
+                                    </div>
+                                    <div className="border-t border-gray-300 pt-4 mt-4">
+                                        <div className="flex items-center mb-2">
+                                            <div className="text-lg font-bold text-gray-800 mr-2">{bestSellerProduct?.reviews[1]?.user}</div>
+                                            <div className="text-yellow-500">{Array(bestSellerProduct?.reviews[1]?.rating).fill('★').join('')}</div>
+                                        </div>
+                                        <p className="text-gray-700">{bestSellerProduct?.reviews[1]?.comment}</p>
+                                    </div>
+                                    <button onClick={() => setBestSellerAllReviews(true)} className='flex justify-center items-center w-full '>
+                                    <FaChevronDown  className='text-2xl'/>
+                                    </button>
+                                </div>
+                            }
+                            {
+                                bestSellerAllReviews &&
+                                <div className='ease-out duration-300'>
+                                    {bestSellerProduct.reviews.map((review) => (
+                                                <div key={review.id} className="border-t border-gray-300 pt-4 mt-4">
+                                                    <div className="flex items-center mb-2">
+                                                        <div className="text-lg font-bold text-gray-800 mr-2">{review.user}</div>
+                                                        <div className="text-yellow-500">{Array(review.rating).fill('★').join('')}</div>
+                                                    </div>
+                                                    <p className="text-gray-700">{review.comment}</p>
+                                                </div>
+                                    ))}
+                                    <button onClick={() => setBestSellerAllReviews(false)} className='flex justify-center items-center w-full '>
+                                    <FaChevronUp  className='text-2xl'/>
+                                    </button>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        
+            <div className='h-full py-5 px-52 bg-orange-50'>
                 <h1 className='text-4xl text-center'>Why to choose us?</h1>
                 <div className="h-[30rem] rounded-md flex flex-col antialiased   items-center justify-center relative overflow-hidden">
-      <InfiniteMovingCards
-        items={testimonials}
-        direction="right"
-        speed="slow"
-      />
+            <InfiniteMovingCards
+                items={testimonials}
+                direction="right"
+                speed="slow"
+            />
     </div>
                 {/* <div className='flex flex-wrap justify-center items-center mt-10 gap-10'>
                     <div className='p-5 bg-gray-100 w-60 h-48 rounded-lg'>
@@ -171,7 +294,7 @@ function Home() {
                     </div>
                 </div> */}
             </div>
-            <div className="h-full mt-10 flex items-center justify-center py-6">
+            <div className="h-full flex items-center justify-center py-6 bg-orange-50">
             <div className="max-w-md p-8 bg-white rounded-lg shadow-lg text-center">
                 <h1 className="text-3xl font-bold mb-4">Let&apos;s Stay In Touch</h1>
                 <p className="text-gray-600 mb-8">Enjoy 10% off on your first purchase and be the first to know about offers, new releases, and latest stories.</p>
