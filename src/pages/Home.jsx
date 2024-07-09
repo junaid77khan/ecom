@@ -124,7 +124,7 @@ function Home() {
             </div>
             <div className='h-full py-5 px-52'>
                 <h1 className='text-4xl text-center'>Why to choose us?</h1>
-                <div className="h-[40rem] rounded-md flex flex-col antialiased   items-center justify-center relative overflow-hidden">
+                <div className="h-[30rem] rounded-md flex flex-col antialiased   items-center justify-center relative overflow-hidden">
       <InfiniteMovingCards
         items={testimonials}
         direction="right"
