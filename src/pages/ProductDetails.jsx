@@ -13,11 +13,11 @@ const products = [
     originalPrice: 599.0,
     salePrice: 399.0,
     images: [
-      "../../public/candle2.jpg",
-      "../../public/candle3.jpg",
-      "../../public/candle3.jpg",
-      "../../public/candle3.jpg",
-      "../../public/candle3.jpg",
+      "/candle2.jpg",
+      "/candle3.jpg",
+      "/candle3.jpg",
+      "/candle3.jpg",
+      "/candle3.jpg",
     ],
     description: "AuraDecor Luxury Reed Diffuser & Scented Candle Gift Set: Includes a scented tomb lid jar candle and reed diffuser with oil and sticks, all beautifully packaged for an exquisite presentation.",
     features: [
@@ -43,7 +43,7 @@ const products = [
     name: "Lavender Dream Candle",
     originalPrice: 499.0,
     salePrice: 349.0,
-    images: ["../../public/candle4.jpg"],
+    images: ["/candle4.jpg"],
     description: "Experience the soothing aroma of lavender with our Lavender Dream Candle.",
     features: [
       "100% natural soy wax",
@@ -66,7 +66,7 @@ const products = [
     name: "Citrus Burst Reed Diffuser",
     originalPrice: 699.0,
     salePrice: 549.0,
-    images: ["../../public/candle5.jpg"],
+    images: ["/candle5.jpg"],
     description: "Fill your home with the refreshing scent of citrus with our Citrus Burst Reed Diffuser.",
     features: [
       "Long-lasting fragrance for up to 3 months",
