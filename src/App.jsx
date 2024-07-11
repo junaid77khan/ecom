@@ -1,17 +1,21 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { posts } from './data/Blog-Data';
 
 import { ContactUs, NavBar } from "./components";
 
 import Login from "./pages/login";
 import Register from "./pages/register";
 import Footer from "./components/Footer";
-import Blog from "./pages/blog";
+import Blog from "./pages/BlogPost";
 import ProductDetails from "./pages/ProductDetails";
 import Home from "./pages/Home";
 import Categories from "./pages/Categories_Component/Categories";
 import CategoryProducts from "./pages/Categories_Component/Category1";
 import Cart from "./pages/Cart";
 import PaymentPage from "./pages/PaymentPage";
+import BlogPost from "./pages/BlogPost";
+import BlogRead from "./pages/BlogRead";
+
 
 function App() {
   return (
@@ -21,7 +25,9 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/blog" element={<Blog />} />
+          {/* <Route path="/blog" element={<Blog />} /> */}
+          <Route path="/blogs" element={<BlogPost post={posts[0]} />} />
+          <Route path="/blogs/:id" element={<BlogRead posts={posts} />} />
           {/* <Route path="/productDetails" element={<ProductDetails />} /> */}
           {/* <Route path='/' element={<App />}> */}
           <Route path="/" element={<Home />} />
