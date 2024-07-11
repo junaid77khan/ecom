@@ -86,6 +86,44 @@
 // export default Blog;
 
 
+// import { Link } from 'react-router-dom';
+
+// const BlogPost = ({ post }) => {
+//   if (!post) {
+//     return <div>No post found.</div>;
+//   }
+//   return (
+//     <div className="flex flex-col items-center px-4 py-8 md:px-8 lg:px-16">
+      
+//       <Link to={`/blog/${post.id}`} className="w-full max-w-4xl overflow-hidden">
+//         <img 
+//           src={post.imageUrl} 
+//           alt={post.title}
+//           className="w-full object-cover rounded-lg transform transition-transform duration-300 hover:scale-110"
+//         />
+//       </Link>
+
+//       <div className="w-full max-w-4xl mt-8">
+//         <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-4">
+//           {post.title}
+//         </h1>
+//         <div className="text-sm md:text-base lg:text-lg text-gray-600 text-center mb-4">
+//           {post.date}
+//         </div>
+//         <div className="text-base md:text-lg lg:text-xl text-gray-800">
+//           <p>{post.introduction}</p>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default BlogPost;
+
+
+
+// BlogPost.jsx
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 const BlogPost = ({ post }) => {
@@ -94,8 +132,7 @@ const BlogPost = ({ post }) => {
   }
   return (
     <div className="flex flex-col items-center px-4 py-8 md:px-8 lg:px-16">
-      
-      <Link to={`/blog/${post.id}`} className="w-full max-w-4xl overflow-hidden">
+      <Link to={`/blogs/${post.id}`} className="w-full max-w-4xl overflow-hidden">
         <img 
           src={post.imageUrl} 
           alt={post.title}
@@ -119,20 +156,3 @@ const BlogPost = ({ post }) => {
 };
 
 export default BlogPost;
-
-
-//blog as prop
-// const BlogPost = ({ title, date, introduction, imageUrl }) => {
-//   return (
-//     // Use the same structure as above
-//     // Replace static content with the props like {title}, {date}, {introduction}, and {imageUrl}
-//   );
-// };
-
-// // Usage Example
-// <BlogPost
-//   title="The magic of Sand Wax - Aura Decor"
-//   date="MAY 16, 2024"
-//   introduction="Welcome to our comprehensive guide on Sand wax – a practical solution for creative candle making. In this guide, we'll delve into the essentials of Sand wax, from its..."
-//   imageUrl="path-to-your-image.png"
-// />

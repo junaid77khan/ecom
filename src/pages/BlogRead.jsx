@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+// /* eslint-disable react/prop-types */
 import { useParams } from 'react-router-dom';
 
 const BlogRead = ({ posts }) => {
@@ -86,3 +86,6 @@ const BlogRead = ({ posts }) => {
 };
 
 export default BlogRead;
+
+BlogRead.jsx
+
