@@ -343,7 +343,7 @@ function Home() {
         <div className="h-full  w-full">
           <img
             className="bg-cover bg-center brightness-75 w-screen h-full "
-            src="../../public/herof 1.jpg"
+            src="/herof 1.jpg"
           />
         </div>
 
