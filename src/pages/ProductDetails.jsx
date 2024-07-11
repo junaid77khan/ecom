@@ -1,9 +1,11 @@
 
-
-
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../store/cartSlice";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const products = [
   {
@@ -20,6 +22,8 @@ const products = [
       "/candle3.jpg",
     ],
     description: "AuraDecor Luxury Reed Diffuser & Scented Candle Gift Set: Includes a scented tomb lid jar candle and reed diffuser with oil and sticks, all beautifully packaged for an exquisite presentation.",
+    rating: 4.2,
+    availability: true,
     features: [
       "Aromatherapy Benefits: Enjoy the calming effects of blue sage and lavender, promoting a sense of well-being and tranquility in your living space.",
       "Long-lasting Fragrance: The jar candle burns for up to 50 hours, while the reed diffuser oil provides a continuous, soothing aroma of blue sage and lavender.",
@@ -45,6 +49,8 @@ const products = [
     salePrice: 349.0,
     images: ["/candle4.jpg"],
     description: "Experience the soothing aroma of lavender with our Lavender Dream Candle.",
+    rating: 4.5,
+    availability: true,
     features: [
       "100% natural soy wax",
       "Cotton wick for clean burning",
@@ -67,6 +73,8 @@ const products = [
     originalPrice: 699.0,
     salePrice: 549.0,
     images: ["/candle5.jpg"],
+    rating: 4.5,
+    availability: false,
     description: "Fill your home with the refreshing scent of citrus with our Citrus Burst Reed Diffuser.",
     features: [
       "Long-lasting fragrance for up to 3 months",
@@ -89,6 +97,8 @@ const ProductDetails = () => {
   const { productId } = useParams();
   const [productQuantity, setProductQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const product = products.find((p) => p.id === parseInt(productId));
 
@@ -117,6 +127,21 @@ const ProductDetails = () => {
       (prevIndex - 1 + product.images.length) % product.images.length
     );
   };
+
+  const handleAddToCart = () => {
+    const obj = {...product, quantity: productQuantity}
+    dispatch(addToCart({"product": obj}));
+    toast.success('Added to cart', {
+      position: "top-right",
+      autoClose: 3000,  
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -182,7 +207,7 @@ const ProductDetails = () => {
             <div className="flex mb-4 gap-2">
 
               <button
-                onClick={() => navigate("#")}
+                onClick={handleAddToCart}
                 className="relative rounded-lg border-2 inline-flex items-center justify-start px-6 py-2 overflow-hidden font-medium transition-all bg-orange-500 hover:bg-orange-500 hover:border-orange-500 group"
               >
                 <span className="w-40 h-40 rounded rotate-[-40deg] bg-white absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>
@@ -191,7 +216,7 @@ const ProductDetails = () => {
                 </span>
               </button>
               <button
-                onClick={() => navigate("#")}
+                onClick={() => navigate(`/product/${productId}/payment`, {state: product})}
                 className="relative rounded-lg border-2 border-orange-500 inline-flex items-center justify-start px-6 py-2 overflow-hidden font-medium transition-all bg-white hover:bg-white hover:border-white group"
               >
                 <span className="w-40 h-40 rounded rotate-[-40deg] bg-orange-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>
