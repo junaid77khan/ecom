@@ -349,9 +349,9 @@ function Home() {
 
         <div className=" inset-0 flex items-center justify-center absolute">
           <div className="text-white text-center">
-            <h1 className="text-5xl font-bold">Luxury For Every Home</h1>
+            <h1 className="text-5xl font-bold">Light Your Way to Relaxation</h1>
             <h3 className="text-xl py-2 pb-8">
-              Stay one step ahead in the world of Aroma & Candles.
+            Find your perfect ambiance with our soothing candlelight.
             </h3>
             <button
               onClick={() => navigate("/categories")}
