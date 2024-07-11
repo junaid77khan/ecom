@@ -179,12 +179,25 @@ const ProductDetails = () => {
                 <button onClick={increaseQuantity} className="px-3 py-1 bg-gray-100">+</button>
               </div>
             </div>
-            <div className="flex mb-4">
-              <button className="bg-orange-500 text-white px-6 py-2 rounded mr-2 hover:bg-orange-600">
-                Add to Cart
+            <div className="flex mb-4 gap-2">
+
+              <button
+                onClick={() => navigate("#")}
+                className="relative rounded-lg border-2 inline-flex items-center justify-start px-6 py-2 overflow-hidden font-medium transition-all bg-orange-500 hover:bg-orange-500 hover:border-orange-500 group"
+              >
+                <span className="w-40 h-40 rounded rotate-[-40deg] bg-white absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>
+                <span className="relative w-full text-center text-md text-white transition-colors duration-300 ease-in-out group-hover:text-orange-500">
+                  Add to cart
+                </span>
               </button>
-              <button className="bg-gray-800 text-white px-6 py-2 rounded hover:bg-gray-900">
-                Buy Now
+              <button
+                onClick={() => navigate("#")}
+                className="relative rounded-lg border-2 border-orange-500 inline-flex items-center justify-start px-6 py-2 overflow-hidden font-medium transition-all bg-white hover:bg-white hover:border-white group"
+              >
+                <span className="w-40 h-40 rounded rotate-[-40deg] bg-orange-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>
+                <span className="relative w-full text-center text-md text-orange-500 transition-colors duration-300 ease-in-out group-hover:text-white">
+                  Buy now
+                </span>
               </button>
             </div>
             <div className="mt-6">

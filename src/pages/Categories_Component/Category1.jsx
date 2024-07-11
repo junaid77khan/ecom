@@ -37,6 +37,36 @@ const CategoryProducts = () => {
       rating: 4.7,
       availability: true,
     },
+    {
+      id: 1,
+      category: "Scented Candles",
+      name: "Product 1",
+      description: "Lorem ipsum dolor sit amet.",
+      image: "/candle4.jpg",
+      price: 699.99,
+      rating: 4.7,
+      availability: true,
+    },
+    {
+      id: 1,
+      category: "Scented Candles",
+      name: "Product 1",
+      description: "Lorem ipsum dolor sit amet.",
+      image: "/candle4.jpg",
+      price: 699.99,
+      rating: 4.7,
+      availability: true,
+    },
+    {
+      id: 1,
+      category: "Scented Candles",
+      name: "Product 1",
+      description: "Lorem ipsum dolor sit amet.",
+      image: "/candle4.jpg",
+      price: 699.99,
+      rating: 4.7,
+      availability: true,
+    },
     // Add your product data here
   ];
 
@@ -84,12 +114,12 @@ const CategoryProducts = () => {
           <option value="price-high-to-low">Price: High to Low</option>
         </select>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
         {sortedProducts.map((product) => (
           <div
             onClick={() => navigate(`/product/${product.id}`)}
             key={product.id}
-            className="bg-white hover:bg-gray-100 duration-200 p-6 shadow-md rounded-lg h-full w-96 px-3 cursor-pointer"
+            className="bg-white hover:bg-gray-100 duration-200 p-6 shadow-md rounded-lg h-full w-80 px-3 cursor-pointer"
           >
             <img
               src={product.image}
