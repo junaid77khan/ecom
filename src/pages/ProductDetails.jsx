@@ -1,10 +1,14 @@
-import { useParams } from "react-router-dom";
+
+
+
+import { useParams, Link } from "react-router-dom";
 import { useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const products = [
   {
     id: 1,
+    category: "Scented Candles",
     name: "AuraDecor Blue Premium Reed Diffuser Gift Set",
     originalPrice: 599.0,
     salePrice: 399.0,
@@ -33,7 +37,52 @@ const products = [
       { id: 2, user: "Jane Smith", rating: 4, comment: "Beautiful design and great scent, but the burning time could be longer." }
     ]
   },
-  // ... (other products)
+  {
+    id: 2,
+    category: "Scented Candles",
+    name: "Lavender Dream Candle",
+    originalPrice: 499.0,
+    salePrice: 349.0,
+    images: ["../../public/candle4.jpg"],
+    description: "Experience the soothing aroma of lavender with our Lavender Dream Candle.",
+    features: [
+      "100% natural soy wax",
+      "Cotton wick for clean burning",
+      "30-hour burn time",
+      "Handcrafted in small batches"
+    ],
+    specifications: [
+      { name: "Burn Time", value: "30 hours" },
+      { name: "Fragrance", value: "Lavender" },
+      { name: "Weight", value: "8 oz" }
+    ],
+    reviews: [
+      { id: 1, user: "Emma Watson", rating: 5, comment: "The perfect candle to unwind after a long day." }
+    ]
+  },
+  {
+    id: 3,
+    category: "Reed Diffusers",
+    name: "Citrus Burst Reed Diffuser",
+    originalPrice: 699.0,
+    salePrice: 549.0,
+    images: ["../../public/candle5.jpg"],
+    description: "Fill your home with the refreshing scent of citrus with our Citrus Burst Reed Diffuser.",
+    features: [
+      "Long-lasting fragrance for up to 3 months",
+      "Natural rattan reeds",
+      "Pet-friendly and eco-friendly formula",
+      "Elegant glass bottle design"
+    ],
+    specifications: [
+      { name: "Volume", value: "200ml" },
+      { name: "Fragrance", value: "Citrus Blend" },
+      { name: "Duration", value: "Up to 3 months" }
+    ],
+    reviews: [
+      { id: 1, user: "Oliver Green", rating: 4, comment: "Fresh scent that's not overpowering. Love it!" }
+    ]
+  },
 ];
 
 const ProductDetails = () => {
@@ -46,6 +95,8 @@ const ProductDetails = () => {
   if (!product) {
     return <div>Product not found</div>;
   }
+
+  const relatedProducts = products.filter(p => p.category === product.category && p.id !== product.id);
 
   const increaseQuantity = () => {
     setProductQuantity(productQuantity + 1);
@@ -169,22 +220,19 @@ const ProductDetails = () => {
       <div className="mt-12">
         <h3 className="text-2xl font-semibold mb-4">Related Products</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {products
-            .filter((p) => p.id !== product.id)
-            .slice(0, 4)
-            .map((relatedProduct) => (
-              <div key={relatedProduct.id} className="border p-4 rounded">
-                <img
-                  src={relatedProduct.images[0]}
-                  alt={relatedProduct.name}
-                  className="w-full h-48 object-cover mb-2"
-                />
-                <h4 className="text-sm font-semibold">{relatedProduct.name}</h4>
-                <p className="text-sm text-gray-600">
-                  ₹{relatedProduct.salePrice.toFixed(2)}
-                </p>
-              </div>
-            ))}
+          {relatedProducts.slice(0, 4).map((relatedProduct) => (
+            <Link to={`/product/${relatedProduct.id}`} key={relatedProduct.id} className="border p-4 rounded hover:shadow-lg transition-shadow">
+              <img
+                src={relatedProduct.images[0]}
+                alt={relatedProduct.name}
+                className="w-full h-48 object-cover mb-2"
+              />
+              <h4 className="text-sm font-semibold">{relatedProduct.name}</h4>
+              <p className="text-sm text-gray-600">
+                ₹{relatedProduct.salePrice.toFixed(2)}
+              </p>
+            </Link>
+          ))}
         </div>
       </div>
     </div>
@@ -192,5 +240,3 @@ const ProductDetails = () => {
 };
 
 export default ProductDetails;
-
-
