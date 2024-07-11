@@ -1,69 +1,100 @@
 
 
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaChevronDown,
+  FaChevronUp,
+} from "react-icons/fa";
 
 function Categories() {
   const navigate = useNavigate();
-  const categories = [
+  let productCategories = [
     {
-      id: 1,
-      name: "Scented Candles",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      image: "/candle3.jpg",
+        id: 1,
+        categoryName: "Pillar Candles",
+        image: "/Pillar Candles.jpeg",
+        description: "Explore a wide range of elegant home decor items to beautify your living spaces."
     },
     {
-      id: 2,
-      name: "Pillar Candles",
-      description:
-        "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      image: "/candle6.jpg",
+        id: 2,
+        categoryName: "Scented Candles",
+        image: "/Scented.jpeg",
+        description: "Discover cutting-edge electronics that enhance your lifestyle, from smartphones to smart home devices."
     },
     {
-      id: 3,
-      name: "Tea light candles",
-      description:
-        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      image: "/candle8.jpg",
+        id: 3,
+        categoryName: "Tea light candles",
+        image: "/tea.jpeg",
+        description: "Stay in style with the latest trends in fashion, including clothing, accessories, and footwear."
     },
     {
-      id: 4,
-      name: "Jar Candles",
-      description:
-        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      image: "/candle2.jpg",
+        id: 4,
+        categoryName: "Jar Candles",
+        image: "/jar.jpeg",
+        description: "Immerse yourself in the world of literature with our curated collection of books across genres."
     },
     {
-      id: 5,
-      name: "Aroma Diffusers",
-      description:
-        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      image: "/candle4.jpg",
+        id: 5,
+        categoryName: "Tea light holders",
+        image: "/holders.jpeg",
+        description: "Equip yourself for adventure with high-quality sports gear and outdoor essentials."
     },
+    {
+        id: 6,
+        categoryName: "Aroma Diffusers",
+        image: "/Aroma.jpeg",
+        description: "Enhance your beauty routine with skincare, makeup, and personal care products."
+    },
+    {
+        id: 7,
+        categoryName: "Gift Hampers",
+        image: "/gift.jpeg",
+        description: "Entertain and inspire with a diverse selection of toys and games for all ages."
+    },
+    {
+        id: 8,
+        categoryName: "Wax sachet",
+        image: "/wax.jpeg",
+        description: "Transform your kitchen into a culinary haven with top-quality cookware and dining essentials."
+    }
   ];
 
   return (
-    <div className="container mx-auto py-12 px-4 flex flex-col justify-center items-center bg-orange-50">
+    <div className="container py-12 flex flex-col justify-center items-center bg-orange-50">
       <h2 className="text-3xl font-bold mb-6">Our Categories</h2>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {categories.map((category) => (
-          <div
-            onClick={() => navigate(`/categories/${category.name}`)}
-            key={category.id}
-            className="bg-white hover:bg-gray-100 duration-200 p-4 shadow-md rounded-lg h-96 w-96 cursor-pointer"
-          >
-            <div className="mb-4 w-full h-56">
-              <img
-                src={category.image}
-                alt={category.name}
-                className="rounded-lg bg-cover bg-center h-full w-full"
-              />
-            </div>
-            <div>
-              <h3 className="text-xl font-bold mb-2">{category.name}</h3>
-              <p className="text-gray-600">{category.description}</p>
-            </div>
-          </div>
-        ))}
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        {productCategories.map((category) => (
+      <a
+        key={category.id}
+        href={`/categories/${encodeURIComponent(category.categoryName)}`}
+        className="flex flex-col justify-start items-start gap-3 w-80 h-96 px-4 py-6 bg-white overflow-hidden hover:bg-gray-200 duration-200 rounded-lg"
+      >
+        <div className="w-full h-3/4 overflow-hidden">
+          <img
+            className="bg-cover h-full w-full bg-center rounded-lg hover:scale-105 transition-transform duration-300 transform-gpu"
+            src={category.image}
+            alt={category.categoryName}
+          />
+        </div>
+        <h1 className="text-xl">
+          {category.categoryName}{" "}
+          <FontAwesomeIcon
+            onClick={() => navigate("/collections")}
+            className="cursor-pointer"
+            icon={faArrowRight}
+          />{" "}
+        </h1>
+        <div>
+          <p className="text-gray-500 hover:text-black">{category.description.substring(0, 40)}... 
+          </p>
+        </div>
+      </a>
+    ))}
       </div>
     </div>
   );
