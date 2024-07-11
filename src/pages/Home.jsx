@@ -10,25 +10,28 @@ import {
   FaChevronUp,
 } from "react-icons/fa";
 import { InfiniteMovingCards } from "../components/ui/infinite-moving-cards";
-// import Slider from "../components/Slider";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../store/cartSlice";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Home() {
   const navigate = useNavigate();
   const scrollRef = useRef(null);
   const scrollRef2 = useRef(null);
+  const dispatch = useDispatch();
+  const [productQuantity, setProductQuantity] = useState(1);
 
   const [isMostPopularActive, setIsMostPopularActive] = useState(true);
 
   const [bestSellerAllReviews, setBestSellerAllReviews] = useState(false);
-
-  const [productQuantity, setProductQuantity] = useState(1);
 
   const increaseQuantity = () => {
     setProductQuantity(productQuantity + 1);
   };
 
   const decreaseQuantity = () => {
-    if (productQuantity > 0) setProductQuantity(productQuantity - 1);
+    if (productQuantity > 1) setProductQuantity(productQuantity - 1);
   };
 
   const bestSellerProduct = {
@@ -36,11 +39,11 @@ function Home() {
     name: "AuraDecor Fragrance Rose Heart Shape Tealight (Pack of 10)",
     originalPrice: 199.0,
     salePrice: 99.0,
-    image1: "/candle2.jpg",
-    image2: "/candle4.jpg",
-    image3: "/candle4.jpg",
-    image4: "/candle4.jpg",
-    image5: "/candle4.jpg",
+    images:[ "/candle2.jpg",
+            "/candle4.jpg",
+            "/candle4.jpg",
+            "/candle4.jpg",
+            "/candle4.jpg"],
     description:
       "Inhaling rose fragrance has therapeutic aroma benefits that help fight depression, overcome anxiety, reduce stress and insomnia.",
     features: [
@@ -50,6 +53,7 @@ function Home() {
       "Perfect for Decoration and Gifting",
       "Burn Time: Up to 4 hours each",
     ],
+    availability: true,
     reviews: [
       {
         id: 1,
@@ -132,156 +136,6 @@ function Home() {
     }
   ];
 
-  const mostPopularProducts = [
-    {
-      image1: "/candle8.jpg",
-      image2: "/candle5.jpg",
-      category: "AURA DECOR",
-      name: "AuraDecor Blue Premium Reed Diffuser Gift Set || Aroma Diffuser"
-    },
-    {
-      image1: "/candle8.jpg",
-      image2: "/candle5.jpg",
-      category: "Another Category",
-      name: "Another Popular Product Name"
-    },
-    {
-      image1: "/candle8.jpg",
-      image2: "/candle5.jpg",
-      category: "Popular Category",
-      name: "Popular Product Name 3"
-    },
-    {
-      image1: "/candle8.jpg",
-      image2: "/candle5.jpg",
-      category: "Popular Category",
-      name: "Popular Product Name 4"
-    },
-    {
-      image1: "/candle8.jpg",
-      image2: "/candle5.jpg",
-      category: "Popular Category",
-      name: "Popular Product Name 5"
-    },
-    {
-      image1: "/candle8.jpg",
-      image2: "/candle5.jpg",
-      category: "Popular Category",
-      name: "Popular Product Name 6"
-    },
-    {
-      image1: "/candle8.jpg",
-      image2: "/candle5.jpg",
-      category: "Popular Category",
-      name: "Popular Product Name 7"
-    },
-    {
-      image1: "/candle8.jpg",
-      image2: "/candle5.jpg",
-      category: "Popular Category",
-      name: "Popular Product Name 8"
-    },
-    {
-      image1: "/candle8.jpg",
-      image2: "/candle5.jpg",
-      category: "Popular Category",
-      name: "Popular Product Name 9"
-    },
-    {
-      image1: "/candle8.jpg",
-      image2: "/candle5.jpg",
-      category: "Popular Category",
-      name: "Popular Product Name 10"
-    },
-    {
-      image1: "/candle8.jpg",
-      image2: "/candle5.jpg",
-      category: "Popular Category",
-      name: "Popular Product Name 11"
-    },
-    {
-      image1: "/candle8.jpg",
-      image2: "/candle5.jpg",
-      category: "Popular Category",
-      name: "Popular Product Name 12"
-    },
-  ];
-
-  const newProducts = [
-    {
-      image1: "/candle4.jpg",
-      image2: "/candle3.jpg",
-      category: "AURA DECOR",
-      name: "AuraDecor Blue Premium Reed Diffuser Gift Set || Aroma Diffuser"
-    },
-    {
-      image1: "/candle4.jpg",
-      image2: "/candle3.jpg",
-      category: "Another Category",
-      name: "Another Popular Product Name"
-    },
-    {
-      image1: "/candle4.jpg",
-      image2: "/candle3.jpg",
-      category: "Popular Category",
-      name: "Popular Product Name 3"
-    },
-    {
-      image1: "/candle4.jpg",
-      image2: "/candle3.jpg",
-      category: "Popular Category",
-      name: "Popular Product Name 4"
-    },
-    {
-      image1: "/candle4.jpg",
-      image2: "/candle3.jpg",
-      category: "Popular Category",
-      name: "Popular Product Name 5"
-    },
-    {
-      image1: "/candle4.jpg",
-      image2: "/candle3.jpg",
-      category: "Popular Category",
-      name: "Popular Product Name 6"
-    },
-    {
-      image1: "/candle4.jpg",
-      image2: "/candle3.jpg",
-      category: "Popular Category",
-      name: "Popular Product Name 7"
-    },
-    {
-      image1: "/candle4.jpg",
-      image2: "/candle3.jpg",
-      category: "Popular Category",
-      name: "Popular Product Name 8"
-    },
-    {
-      image1: "/candle4.jpg",
-      image2: "/candle3.jpg",
-      category: "Popular Category",
-      name: "Popular Product Name 9"
-    },
-    {
-      image1: "/candle4.jpg",
-      image2: "/candle3.jpg",
-      category: "Popular Category",
-      name: "Popular Product Name 10"
-    },
-    {
-      image1: "/candle4.jpg",
-      image2: "/candle3.jpg",
-      category: "Popular Category",
-      name: "Popular Product Name 11"
-    },
-    {
-      image1: "/candle4.jpg",
-      image2: "/candle3.jpg",
-      category: "Popular Category",
-      name: "Popular Product Name 12"
-    },
-  ];
-
   useEffect(() => {
     setScrollIndex(0);
   }, [isMostPopularActive]);
@@ -336,6 +190,20 @@ function Home() {
   useEffect(() => {
     scrollToIndex2();
   }, [scrollIndex2]);
+
+  const handleAddToCart = () => {
+    const obj = {...bestSellerProduct, quantity: productQuantity}
+    dispatch(addToCart({"product": obj}));
+    toast.success('Added to Cart', {
+      position: "top-right",
+      autoClose: 3000,  
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
 
   return (
     <div className="w-full h-full text-black">
@@ -712,7 +580,7 @@ function Home() {
           <div className="lg:flex px-5">
             <div className="lg:w-1/2  flex flex-col justify-start items-center gap-2">
               <img
-                src={bestSellerProduct.image1}
+                src={bestSellerProduct.images[0]}
                 alt={bestSellerProduct.name}
                 className="w-full rounded-xl  h-96 object-cover bg-center transform transition-transform duration-300"
               />
@@ -730,32 +598,32 @@ function Home() {
                   style={{ overflow: "hidden" }}
                 >
                   <img
-                        src={bestSellerProduct.image2}
+                        src={bestSellerProduct.images[1]}
                         alt={bestSellerProduct.name}
                         className=" h-72 w-72  object-cover transform transition-transform duration-300 rounded-xl"
                       />
                       <img
-                        src={bestSellerProduct.image3}
+                        src={bestSellerProduct.images[2]}
                         alt={bestSellerProduct.name}
                         className="w-72 h-72 object-cover transform transition-transform duration-300 rounded-xl"
                       />
                       <img
-                        src={bestSellerProduct.image4}
+                        src={bestSellerProduct.images[3]}
                         alt={bestSellerProduct.name}
                         className="w-72 h-72 object-cover transform transition-transform duration-300 rounded-xl"
                       />
                       <img
-                        src={bestSellerProduct.image5}
+                        src={bestSellerProduct.images[4]}
                         alt={bestSellerProduct.name}
                         className="w-72 h-72 object-cover transform transition-transform duration-300 rounded-xl"
                       />
                       <img
-                        src={bestSellerProduct.image5}
+                        src={bestSellerProduct.images[4]}
                         alt={bestSellerProduct.name}
                         className="w-72 h-72 object-cover transform transition-transform duration-300 rounded-xl"
                       />
                       <img
-                        src={bestSellerProduct.image5}
+                        src={bestSellerProduct.images[4]}
                         alt={bestSellerProduct.name}
                         className="w-72 h-72 object-cover transform transition-transform duration-300 rounded-xl"
                       />
@@ -781,25 +649,18 @@ function Home() {
                 ))}
               </ul>
             </div>
-            <div className="flex justify-between items-center gap-3  border border-black w-36 mb-4">
-              <div
-                onClick={decreaseQuantity}
-                className="border-r border-black text-center  px-4 py-2"
-              >
-                -
-              </div>
-              <div className="py-2 px-2">{productQuantity}</div>
-              <div
-                onClick={increaseQuantity}
-                className="border-l border-black text-center px-4 py-2"
-              >
-                +
+            <div className="flex items-center mb-4">
+              <div className="mr-4">Quantity:</div>
+              <div className="flex border border-gray-300 rounded">
+                <button onClick={decreaseQuantity} className="px-3 py-1 bg-gray-100">-</button>
+                <div className="px-3 py-1">{productQuantity}</div>
+                <button onClick={increaseQuantity} className="px-3 py-1 bg-gray-100">+</button>
               </div>
             </div>
             <div className="flex mb-4 gap-2">
 
               <button
-                onClick={() => navigate("#")}
+                onClick={() => handleAddToCart()}
                 className="relative rounded-lg border-2 inline-flex items-center justify-start px-6 py-2 overflow-hidden font-medium transition-all bg-orange-500 hover:bg-orange-500 hover:border-orange-500 group"
               >
                 <span className="w-40 h-40 rounded rotate-[-40deg] bg-white absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>
@@ -808,7 +669,7 @@ function Home() {
                 </span>
               </button>
               <button
-                onClick={() => navigate("#")}
+                onClick={() => navigate(`/product/${bestSellerProduct.id}/payment`, {state: bestSellerProduct})}
                 className="relative rounded-lg border-2 border-orange-500 inline-flex items-center justify-start px-6 py-2 overflow-hidden font-medium transition-all bg-white hover:bg-white hover:border-white group"
               >
                 <span className="w-40 h-40 rounded rotate-[-40deg] bg-orange-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>

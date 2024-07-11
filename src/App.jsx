@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { ContactUs, NavBar } from "./components";
 
 import Login from "./pages/login";
@@ -12,10 +13,12 @@ import Categories from "./pages/Categories_Component/Categories";
 import CategoryProducts from "./pages/Categories_Component/Category1";
 import Cart from "./pages/Cart";
 import PaymentPage from "./pages/PaymentPage";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 
 function App() {
   return (
-    <>
+    <Provider store={store}>
       <BrowserRouter>
         <NavBar />
         <Routes>
@@ -36,7 +39,7 @@ function App() {
             element={<CategoryProducts />}
           />
           <Route path="product/:productId" element={<ProductDetails />} />
-          <Route path="/payment" element={<PaymentPage />} />
+          <Route path="product/:product/payment" element={<PaymentPage />} />
           <Route path="contact-us" element={<ContactUs />} />
 
           <Route path="cart" element={<Cart />} />
@@ -46,7 +49,8 @@ function App() {
         <Footer />
         {/* <Outlet /> */}
       </div>
-    </>
+      <ToastContainer/>
+    </Provider>
   );
 }
 
