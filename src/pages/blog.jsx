@@ -45,21 +45,23 @@ const blogPosts = [
 
 const Blog = () => {
   return (
-    <div className="container mx-auto w-[60%] px-6 lg:px-8 py-8 bg-orange-50">
-      {blogPosts.map(post => (
-        <div key={post.id} className="bg-white shadow-md rounded-lg overflow-hidden mb-8">
-          <img 
-            src={post.image} 
-            alt={post.title} 
-            className="w-full max-h-10px px-40  object-cover transform transition-transform duration-300 hover:scale-105"
-          />
-          <div className="p-6">
-            <h2 className="text-2xl font-semibold mb-4 text-orange-600">{post.title}</h2>
-            <div className="text-gray-500 text-sm mb-6">{post.date}</div>
-            <div className="prose prose-lg" dangerouslySetInnerHTML={{ __html: post.content }}></div>
-          </div>
-        </div>
-      ))}
+    <div className="container flex justify-center items-center w-full px-6 lg:px-8 py-8 bg-orange-50">
+      <div className="w-2/3">
+          {blogPosts.map(post => (
+            <div key={post.id} className="bg-white py-10 px-32 shadow-md rounded-xl overflow-hidden mb-8">
+              <img 
+                src={post.image} 
+                alt={post.title} 
+                className="w-full mb-3 max-h-10px rounded-xl  object-cover"
+              />
+              <div className="">
+                <h2 className="text-2xl font-semibold mb-4 text-orange-600">{post.title}</h2>
+                <div className="text-gray-500 text-sm mb-6">{post.date}</div>
+                <div className="prose prose-lg" dangerouslySetInnerHTML={{ __html: post.content }}></div>
+              </div>
+            </div>
+          ))}
+      </div>
     </div>
   );
 };
