@@ -30,7 +30,7 @@ function NavBar() {
   };
 
   return (
-    <div className="w-full h-20 bg-gradient-to-b  from-orange-50 to-orange-50 flex flex-wrap justify-around items-center z-10">
+    <div className="w-full h-20 bg-gradient-to-b  from-orange-50 to-orange-50 flex flex-wrap justify-between items-center px-24 z-10">
       <a href="/">
         {" "}
         <div className="flex flex-wrap text-lg justify-center items-center">Logo</div>

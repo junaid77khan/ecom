@@ -5,11 +5,10 @@ export const bestSellerProduct = {
     name: "AuraDecor Fragrance Rose Heart Shape Tealight (Pack of 10)",
     originalPrice: 199.0,
     salePrice: 99.0,
-    image1: "/candle2.jpg",
-    image2: "/candle4.jpg",
-    image3: "/candle4.jpg",
-    image4: "/candle4.jpg",
-    image5: "/candle4.jpg",
+    images: ["/candle2.jpg",
+            "/candle4.jpg",
+            "/candle4.jpg",
+            "/candle4.jpg"],
     description:
       "Inhaling rose fragrance has therapeutic aroma benefits that help fight depression, overcome anxiety, reduce stress and insomnia.",
     features: [
@@ -259,27 +258,27 @@ export const bestSellerProduct = {
     },
   ];
 
-
   export const testimonials = [
     {
       quote:
-        "Offer a diverse range of high-quality candles, including pillar candles, scented candles, tea lights, and decorative candles, ensuring there's something for every taste and occasion.",
+        "Offer a diverse range of high-quality candles and decorative candles, ensuring there's something for every taste and occasion.",
       title: "Premium Candles",
     },
     {
       quote:
-        "Offer a diverse range of high-quality candles, including pillar candles, scented candles, tea lights, and decorative candles, ensuring there's something for every taste and occasion.",
-      title: "Premium Candles",
+        "Their candles create a warm, inviting ambiance that enhances any space. With a variety of scents and styles, they're perfect for any occasion.",
+      title: "Inviting Ambiance",
     },
     {
       quote:
-        "Offer a diverse range of high-quality candles, including pillar candles, scented candles, tea lights, and decorative candles, ensuring there's something for every taste and occasion.",
-      title: "Premium Candles",
+        "Experience candles that blend luxury and affordability seamlessly. Their elegant designs and long-lasting scents elevate any room effortlessly.",
+      title: "Luxury on a Budget",
     },
     {
       quote:
-        "Offer a diverse range of high-quality candles, including pillar candles, scented candles, tea lights, and decorative candles, ensuring there's something for every taste and occasion.",
-      title: "Premium Candles",
+        "Explore a wide array of candles that promise exceptional quality and craftsmanship. Each candle is a testament to their dedication to excellence.",
+      title: "Crafted with Excellence",
     },
-  ];
+];
+
   

@@ -1,7 +1,7 @@
 
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../store/cartSlice";
 import { toast } from 'react-toastify';
@@ -37,8 +37,33 @@ const products = [
       { name: "Diffuser Volume", value: "100ml" }
     ],
     reviews: [
-      { id: 1, user: "John Doe", rating: 5, comment: "Amazing product! The fragrance is wonderful and lasts long." },
-      { id: 2, user: "Jane Smith", rating: 4, comment: "Beautiful design and great scent, but the burning time could be longer." }
+      {
+        id: 1,
+        user: "John Doe",
+        rating: 5,
+        comment: "Amazing product! The fragrance is wonderful and lasts long.",
+      },
+      {
+        id: 2,
+        user: "Jane Smith",
+        rating: 4,
+        comment:
+          "Beautiful design and great scent, but the burning time could be longer.",
+      },
+      {
+        id: 3,
+        user: "Jane Smith",
+        rating: 4,
+        comment:
+          "Beautiful design and great scent, but the burning time could be longer.",
+      },
+      {
+        id: 4,
+        user: "Jane Smith",
+        rating: 4,
+        comment:
+          "Beautiful design and great scent, but the burning time could be longer.",
+      },
     ]
   },
   {
@@ -47,7 +72,7 @@ const products = [
     name: "Lavender Dream Candle",
     originalPrice: 499.0,
     salePrice: 349.0,
-    images: ["/candle4.jpg"],
+    images: ["/candle4.jpg", "/candle5.jpg", "/candle6.jpg"],
     description: "Experience the soothing aroma of lavender with our Lavender Dream Candle.",
     rating: 4.5,
     availability: true,
@@ -63,7 +88,33 @@ const products = [
       { name: "Weight", value: "8 oz" }
     ],
     reviews: [
-      { id: 1, user: "Emma Watson", rating: 5, comment: "The perfect candle to unwind after a long day." }
+      {
+        id: 1,
+        user: "John Doe",
+        rating: 5,
+        comment: "Amazing product! The fragrance is wonderful and lasts long.",
+      },
+      {
+        id: 2,
+        user: "Jane Smith",
+        rating: 4,
+        comment:
+          "Beautiful design and great scent, but the burning time could be longer.",
+      },
+      {
+        id: 3,
+        user: "Jane Smith",
+        rating: 4,
+        comment:
+          "Beautiful design and great scent, but the burning time could be longer.",
+      },
+      {
+        id: 4,
+        user: "Jane Smith",
+        rating: 4,
+        comment:
+          "Beautiful design and great scent, but the burning time could be longer.",
+      },
     ]
   },
   {
@@ -88,7 +139,135 @@ const products = [
       { name: "Duration", value: "Up to 3 months" }
     ],
     reviews: [
-      { id: 1, user: "Oliver Green", rating: 4, comment: "Fresh scent that's not overpowering. Love it!" }
+      {
+        id: 1,
+        user: "John Doe",
+        rating: 5,
+        comment: "Amazing product! The fragrance is wonderful and lasts long.",
+      },
+      {
+        id: 2,
+        user: "Jane Smith",
+        rating: 4,
+        comment:
+          "Beautiful design and great scent, but the burning time could be longer.",
+      },
+      {
+        id: 3,
+        user: "Jane Smith",
+        rating: 4,
+        comment:
+          "Beautiful design and great scent, but the burning time could be longer.",
+      },
+      {
+        id: 4,
+        user: "Jane Smith",
+        rating: 4,
+        comment:
+          "Beautiful design and great scent, but the burning time could be longer.",
+      },
+    ]
+  },
+  {
+    id: 4,
+    category: "Reed Diffusers",
+    name: "Citrus Burst",
+    originalPrice: 699.0,
+    salePrice: 549.0,
+    images: ["/candle5.jpg"],
+    rating: 4.5,
+    availability: false,
+    description: "Fill your home with the refreshing scent of citrus with our Citrus Burst Reed Diffuser.",
+    features: [
+      "Long-lasting fragrance for up to 3 months",
+      "Natural rattan reeds",
+      "Pet-friendly and eco-friendly formula",
+      "Elegant glass bottle design"
+    ],
+    specifications: [
+      { name: "Volume", value: "200ml" },
+      { name: "Fragrance", value: "Citrus Blend" },
+      { name: "Duration", value: "Up to 3 months" }
+    ],
+    reviews: [
+      {
+        id: 1,
+        user: "John Doe",
+        rating: 5,
+        comment: "Amazing product! The fragrance is wonderful and lasts long.",
+      },
+      {
+        id: 2,
+        user: "Jane Smith",
+        rating: 4,
+        comment:
+          "Beautiful design and great scent, but the burning time could be longer.",
+      },
+      {
+        id: 3,
+        user: "Jane Smith",
+        rating: 4,
+        comment:
+          "Beautiful design and great scent, but the burning time could be longer.",
+      },
+      {
+        id: 4,
+        user: "Jane Smith",
+        rating: 4,
+        comment:
+          "Beautiful design and great scent, but the burning time could be longer.",
+      },
+    ]
+  },
+  {
+    id: 5,
+    category: "Scented Candles",
+    name: "Lavender Dream Candle Stand",
+    originalPrice: 499.0,
+    salePrice: 349.0,
+    images: ["/candle6.jpg", "/candle7.jpg", "/candle5.jpg"],
+    description: "Experience the soothing aroma of lavender with our Lavender Dream Candle.",
+    rating: 4.5,
+    availability: true,
+    features: [
+      "100% natural soy wax",
+      "Cotton wick for clean burning",
+      "30-hour burn time",
+      "Handcrafted in small batches"
+    ],
+    specifications: [
+      { name: "Burn Time", value: "30 hours" },
+      { name: "Fragrance", value: "Lavender" },
+      { name: "Weight", value: "8 oz" }
+    ],
+    reviews: [
+      {
+        id: 1,
+        user: "John Doe",
+        rating: 5,
+        comment: "Amazing product! The fragrance is wonderful and lasts long.",
+      },
+      {
+        id: 2,
+        user: "Jane Smith",
+        rating: 4,
+        comment:
+          "Beautiful design and great scent, but the burning time could be longer.",
+      },
+      {
+        id: 3,
+        user: "Jane Smith",
+        rating: 4,
+        comment:
+          "Beautiful design and great scent, but the burning time could be longer.",
+      },
+      {
+        id: 4,
+        user: "Jane Smith",
+        rating: 4,
+        comment:
+          "Beautiful design and great scent, but the burning time could be longer.",
+      },
     ]
   },
 ];
@@ -97,6 +276,7 @@ const ProductDetails = () => {
   const { productId } = useParams();
   const [productQuantity, setProductQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [allReviews, setAllReviews] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -114,18 +294,6 @@ const ProductDetails = () => {
 
   const decreaseQuantity = () => {
     if (productQuantity > 1) setProductQuantity(productQuantity - 1);
-  };
-
-  const nextImage = () => {
-    setCurrentImageIndex((prevIndex) => 
-      (prevIndex + 1) % product.images.length
-    );
-  };
-
-  const prevImage = () => {
-    setCurrentImageIndex((prevIndex) => 
-      (prevIndex - 1 + product.images.length) % product.images.length
-    );
   };
 
   const handleAddToCart = () => {
@@ -152,20 +320,8 @@ const ProductDetails = () => {
               <img
                 src={product.images[currentImageIndex]}
                 alt={product.name}
-                className="w-full h-96 object-cover"
+                className="w-full h-96 object-cover rounded-xl"
               />
-              <button 
-                onClick={prevImage}
-                className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 p-2 rounded-full"
-              >
-                <FaChevronLeft />
-              </button>
-              <button 
-                onClick={nextImage}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 p-2 rounded-full"
-              >
-                <FaChevronRight />
-              </button>
             </div>
             <div className="flex mt-4 overflow-x-auto">
               {product.images.map((img, index) => (
@@ -173,7 +329,7 @@ const ProductDetails = () => {
                   key={index}
                   src={img}
                   alt={`${product.name} - Image ${index + 1}`}
-                  className={`w-20 h-20 object-cover mx-2 cursor-pointer ${
+                  className={`w-72 h-72 rounded-xl object-cover mx-2 cursor-pointer ${
                     currentImageIndex === index ? "border-2 border-orange-500" : ""
                   }`}
                   onClick={() => setCurrentImageIndex(index)}
@@ -183,6 +339,9 @@ const ProductDetails = () => {
           </div>
           <div className="lg:w-1/2 p-4">
             <h2 className="text-3xl font-semibold mb-4">{product.name}</h2>
+            <div className="text-yellow-500">
+              {"★".repeat(product.rating)}
+            </div>        
             <div className="mb-4">
               <span className="text-2xl font-bold text-orange-500">₹{product.salePrice.toFixed(2)}</span>
               <span className="text-lg text-gray-500 line-through ml-2">₹{product.originalPrice.toFixed(2)}</span>
@@ -242,18 +401,83 @@ const ProductDetails = () => {
         </div>
       </div>
       <div className="mt-12">
-        <h3 className="text-2xl font-semibold mb-4">Customer Reviews</h3>
-        {product.reviews.map((review) => (
-          <div key={review.id} className="border-t border-gray-300 pt-4 mt-4">
-            <div className="flex items-center mb-2">
-              <div className="text-lg font-bold text-gray-800 mr-2">{review.user}</div>
-              <div className="text-yellow-500">
-                {Array(review.rating).fill("★").join("")}
+      {product.reviews.length > 0 && (
+            <div className="px-5">
+              <div>
+                <div className="">
+                  <h3 className="text-xl font-semibold text-red-600 mb-2">
+                    Customer Reviews:
+                  </h3>
+                </div>
               </div>
+              {!allReviews && (
+                <div className="ease-linear duration-200">
+                  <div className="border-t border-gray-300 pt-4 mt-4">
+                    <div className="flex items-center mb-2">
+                      <div className="text-lg font-bold text-gray-800 mr-2">
+                        {product?.reviews[0]?.user}
+                      </div>
+                      <div className="text-yellow-500">
+                        {Array(product?.reviews[0]?.rating)
+                          .fill("★")
+                          .join("")}
+                      </div>
+                    </div>
+                    <p className="text-gray-700">
+                      {product?.reviews[0]?.comment}
+                    </p>
+                  </div>
+                  <div className="border-t border-gray-300 pt-4 mt-4">
+                    <div className="flex items-center mb-2">
+                      <div className="text-lg font-bold text-gray-800 mr-2">
+                        {product?.reviews[1]?.user}
+                      </div>
+                      <div className="text-yellow-500">
+                        {Array(product?.reviews[1]?.rating)
+                          .fill("★")
+                          .join("")}
+                      </div>
+                    </div>
+                    <p className="text-gray-700">
+                      {product?.reviews[1]?.comment}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => setAllReviews(true)}
+                    className="flex justify-center items-center w-full "
+                  >
+                    <FaChevronDown className="text-2xl" />
+                  </button>
+                </div>
+              )}
+              {allReviews && (
+                <div className="ease-out duration-300">
+                  {product.reviews.map((review) => (
+                    <div
+                      key={review.id}
+                      className="border-t border-gray-300 pt-4 mt-4"
+                    >
+                      <div className="flex items-center mb-2">
+                        <div className="text-lg font-bold text-gray-800 mr-2">
+                          {review.user}
+                        </div>
+                        <div className="text-yellow-500">
+                          {Array(review.rating).fill("★").join("")}
+                        </div>
+                      </div>
+                      <p className="text-gray-700">{review.comment}</p>
+                    </div>
+                  ))}
+                  <button
+                    onClick={() => setAllReviews(false)}
+                    className="flex justify-center items-center w-full "
+                  >
+                    <FaChevronUp className="text-2xl" />
+                  </button>
+                </div>
+              )}
             </div>
-            <p className="text-gray-700">{review.comment}</p>
-          </div>
-        ))}
+          )}
       </div>
       <div className="mt-12">
         <h3 className="text-2xl font-semibold mb-4">Related Products</h3>
