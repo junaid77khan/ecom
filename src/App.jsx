@@ -63,12 +63,12 @@ function App() {
 
 export default App;
 
-const BlogList = ({ posts }) => {
-  return (
-    <div>
-      {posts.map(post => (
-        <BlogPost key={post.id} post={post} />
-      ))}
-    </div>
-  );
-};
+// const BlogList = ({ posts }) => {
+//   return (
+//     <div>
+//       {posts.map(post => (
+//         <BlogPost key={post.id} post={post} />
+//       ))}
+//     </div>
+//   );
+// };

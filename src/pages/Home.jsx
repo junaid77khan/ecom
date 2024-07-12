@@ -10,10 +10,6 @@ import {
   FaChevronUp,
 } from "react-icons/fa";
 import { InfiniteMovingCards } from "../components/ui/infinite-moving-cards";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../store/cartSlice";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import {
   bestSellerProduct,
   productCategories,
@@ -42,8 +38,6 @@ function Home() {
   const navigate = useNavigate();
   const scrollRef = useRef(null);
   const scrollRef2 = useRef(null);
-  const dispatch = useDispatch();
-  const [productQuantity, setProductQuantity] = useState(1);
 
   const [isMostPopularActive, setIsMostPopularActive] = useState(true);
 
@@ -60,110 +54,6 @@ function Home() {
   };
 
   const decreaseQuantity = () => {
-    if (productQuantity > 1) setProductQuantity(productQuantity - 1);
-  };
-
-  const bestSellerProduct = {
-    id: 1,
-    name: "AuraDecor Fragrance Rose Heart Shape Tealight (Pack of 10)",
-    originalPrice: 199.0,
-    salePrice: 99.0,
-    images:[ "/candle2.jpg",
-            "/candle4.jpg",
-            "/candle4.jpg",
-            "/candle4.jpg",
-            "/candle4.jpg"],
-    description:
-      "Inhaling rose fragrance has therapeutic aroma benefits that help fight depression, overcome anxiety, reduce stress and insomnia.",
-    features: [
-      "Set of 10 Tealight Candles",
-      "Rose Fragrance",
-      "Heart Shape",
-      "Perfect for Decoration and Gifting",
-      "Burn Time: Up to 4 hours each",
-    ],
-    availability: true,
-    reviews: [
-      {
-        id: 1,
-        user: "John Doe",
-        rating: 5,
-        comment: "Amazing product! The fragrance is wonderful and lasts long.",
-      },
-      {
-        id: 2,
-        user: "Jane Smith",
-        rating: 4,
-        comment:
-          "Beautiful design and great scent, but the burning time could be longer.",
-      },
-      {
-        id: 3,
-        user: "Jane Smith",
-        rating: 4,
-        comment:
-          "Beautiful design and great scent, but the burning time could be longer.",
-      },
-      {
-        id: 4,
-        user: "Jane Smith",
-        rating: 4,
-        comment:
-          "Beautiful design and great scent, but the burning time could be longer.",
-      },
-    ],
-  };
-
-  let productCategories = [
-    {
-        id: 1,
-        categoryName: "Pillar Candles",
-        image: "/Pillar Candles.jpeg",
-        description: "Explore a wide range of elegant home decor items to beautify your living spaces."
-    },
-    {
-        id: 2,
-        categoryName: "Scented Candles",
-        image: "/Scented.jpeg",
-        description: "Discover cutting-edge electronics that enhance your lifestyle, from smartphones to smart home devices."
-    },
-    {
-        id: 3,
-        categoryName: "Tea light candles",
-        image: "/tea.jpeg",
-        description: "Stay in style with the latest trends in fashion, including clothing, accessories, and footwear."
-    },
-    {
-        id: 4,
-        categoryName: "Jar Candles",
-        image: "/jar.jpeg",
-        description: "Immerse yourself in the world of literature with our curated collection of books across genres."
-    },
-    {
-        id: 5,
-        categoryName: "Tea light holders",
-        image: "/holders.jpeg",
-        description: "Equip yourself for adventure with high-quality sports gear and outdoor essentials."
-    },
-    {
-        id: 6,
-        categoryName: "Aroma Diffusers",
-        image: "/Aroma.jpeg",
-        description: "Enhance your beauty routine with skincare, makeup, and personal care products."
-    },
-    {
-        id: 7,
-        categoryName: "Gift Hampers",
-        image: "/gift.jpeg",
-        description: "Entertain and inspire with a diverse selection of toys and games for all ages."
-    },
-    {
-        id: 8,
-        categoryName: "Wax sachet",
-        image: "/wax.jpeg",
-        description: "Transform your kitchen into a culinary haven with top-quality cookware and dining essentials."
-    }
-  ];
     if (productQuantity > 0) {
       setProductQuantity(productQuantity - 1);
       setActiveButton("decrease");
@@ -226,30 +116,9 @@ function Home() {
     scrollToIndex2();
   }, [scrollIndex2]);
 
-  const handleAddToCart = () => {
-    const obj = {...bestSellerProduct, quantity: productQuantity}
-    dispatch(addToCart({"product": obj}));
-    toast.success('Added to Cart', {
-      position: "top-right",
-      autoClose: 3000,  
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  }
-
   return (
     <div className="w-full h-full text-black ">
       <div className=" relative">
-        {/* <div className="h-full  w-full">
-          <img
-            className="bg-cover bg-center brightness-75 w-screen h-full "
-            src="/herof 1.jpg"
-          />
-        </div> */}
-
         <ImagesSlider className="h-[35rem]" images={images}>
           <motion.div
             initial={{
@@ -271,10 +140,7 @@ function Home() {
                 Discover a sensory experience with our unique decors
               </span>
             </motion.p>
-            {/* <button className="px-4 py-2 backdrop-blur-sm border bg-emerald-300/10 border-emerald-500/20 text-white mx-auto text-center rounded-full relative mt-4">
-              <span>Join now →</span>
-              <div className="absolute inset-x-0  h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-emerald-500 to-transparent" />
-            </button> */}
+
             <button
               onClick={() => navigate("/categories")}
               className="relative rounded-full border-2 border-orange-500 inline-flex items-center justify-start px-12 py-4 overflow-hidden font-medium transition-all bg-white hover:bg-white group"
@@ -286,24 +152,6 @@ function Home() {
             </button>
           </motion.div>
         </ImagesSlider>
-
-        {/* <div className=" inset-0 flex items-center justify-center absolute">
-          <div className="text-white text-center">
-            <h1 className="text-5xl font-bold">Light Your Way to Relaxation</h1>
-            <h3 className="text-xl py-2 pb-8">
-            Find your perfect ambiance with our soothing candlelight.
-            </h3>
-            <button
-              onClick={() => navigate("/categories")}
-              className="relative rounded-full border-2 border-orange-500 inline-flex items-center justify-start px-12 py-4 overflow-hidden font-medium transition-all bg-white hover:bg-white group"
-            >
-              <span className="w-36 h-36 border-6 border-orange-700 rounded rotate-[-40deg] bg-orange-600 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>
-              <span className="relative w-full text-center text-xl text-orange-500 transition-colors duration-300 ease-in-out group-hover:text-white">
-                Shop
-              </span>
-            </button>
-          </div>
-        </div> */}
       </div>
 
       <div className="h-full py-10 px-24 w-full bg-gradient-to-b from-orange-50 to-orange-100">
@@ -479,7 +327,7 @@ function Home() {
           <div className="lg:flex px-5">
             <div className="lg:w-1/2  flex flex-col justify-start items-center gap-2">
               <img
-                src={bestSellerProduct.images[0]}
+                src={bestSellerProduct.image1}
                 alt={bestSellerProduct.name}
                 className="w-full rounded-xl  h-96 object-cover bg-center transform transition-transform duration-300"
               />
@@ -497,34 +345,6 @@ function Home() {
                   style={{ overflow: "hidden" }}
                 >
                   <img
-                        alt={bestSellerProduct.name}
-                        className=" h-72 w-72  object-cover transform transition-transform duration-300 rounded-xl"
-                      />
-                      <img
-                        src={bestSellerProduct.images[2]}
-                        alt={bestSellerProduct.name}
-                        className="w-72 h-72 object-cover transform transition-transform duration-300 rounded-xl"
-                      />
-                      <img
-                        src={bestSellerProduct.images[3]}
-                        alt={bestSellerProduct.name}
-                        className="w-72 h-72 object-cover transform transition-transform duration-300 rounded-xl"
-                      />
-                      <img
-                        src={bestSellerProduct.images[4]}
-                        alt={bestSellerProduct.name}
-                        className="w-72 h-72 object-cover transform transition-transform duration-300 rounded-xl"
-                      />
-                      <img
-                        src={bestSellerProduct.images[4]}
-                        alt={bestSellerProduct.name}
-                        className="w-72 h-72 object-cover transform transition-transform duration-300 rounded-xl"
-                      />
-                      <img
-                        src={bestSellerProduct.images[4]}
-                        alt={bestSellerProduct.name}
-                        className="w-72 h-72 object-cover transform transition-transform duration-300 rounded-xl"
-                      />
                     src={bestSellerProduct.image2}
                     alt={bestSellerProduct.name}
                     className=" h-72 w-72  object-cover transform transition-transform duration-300 rounded-xl"
@@ -565,23 +385,6 @@ function Home() {
             </div>
 
             <div className="lg:w-1/2 p-4">
-            <h2 className="text-3xl font-semibold mb-4">{bestSellerProduct.name}</h2>
-            {/* ... (existing price display) */}
-            <p className="text-gray-700 mb-4">{bestSellerProduct.description}</p>
-            <div className="mb-4">
-              <h3 className="text-xl font-semibold mb-2">Features:</h3>
-              <ul className="list-disc list-inside text-gray-700">
-                {bestSellerProduct.features.map((feature, index) => (
-                  <li key={index}>{feature}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="flex items-center mb-4">
-              <div className="mr-4">Quantity:</div>
-              <div className="flex border border-gray-300 rounded">
-                <button onClick={decreaseQuantity} className="px-3 py-1 bg-gray-100">-</button>
-                <div className="px-3 py-1">{productQuantity}</div>
-                <button onClick={increaseQuantity} className="px-3 py-1 bg-gray-100">+</button>
               <h2 className="text-3xl font-semibold mb-4">
                 {bestSellerProduct.name}
               </h2>
@@ -598,44 +401,6 @@ function Home() {
                 </ul>
               </div>
 
-              <button
-                onClick={() => handleAddToCart()}
-                className="relative rounded-lg border-2 inline-flex items-center justify-start px-6 py-2 overflow-hidden font-medium transition-all bg-orange-500 hover:bg-orange-500 hover:border-orange-500 group"
-              >
-                <span className="w-40 h-40 rounded rotate-[-40deg] bg-white absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>
-                <span className="relative w-full text-center text-md text-white transition-colors duration-300 ease-in-out group-hover:text-orange-500">
-                  Add to cart
-                </span>
-              </button>
-              <button
-                onClick={() => navigate(`/product/${bestSellerProduct.id}/payment`, {state: bestSellerProduct})}
-                className="relative rounded-lg border-2 border-orange-500 inline-flex items-center justify-start px-6 py-2 overflow-hidden font-medium transition-all bg-white hover:bg-white hover:border-white group"
-              >
-                <span className="w-40 h-40 rounded rotate-[-40deg] bg-orange-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>
-                <span className="relative w-full text-center text-md text-orange-500 transition-colors duration-300 ease-in-out group-hover:text-white">
-                  Buy now
-                </span>
-              </button>
-            </div>
-            {/* ... (existing quantity selector and buttons) */}
-            <div className="mt-6">
-              <h3 className="text-xl font-semibold mb-2">Specifications:</h3>
-              <table className="w-full border-collapse">
-                <tbody>
-                  <tr className="border-b">
-                    <td className="py-2 font-semibold">Capacity:</td>
-                    <td className="py-2">500 ml</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-2 font-semibold">Power:</td>
-                    <td className="py-2">24W</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="py-2 font-semibold">Weight:</td>
-                    <td className="py-2">1.2 kg</td>
-                  </tr>
-                </tbody>
-              </table>
               <div className="flex justify-between items-center gap-3 border border-black w-36 mb-4">
                 <button
                   onClick={decreaseQuantity}
