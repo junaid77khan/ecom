@@ -3,6 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useRef, useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../store/cartSlice";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   FaChevronLeft,
   FaChevronRight,
@@ -22,22 +26,15 @@ import { motion } from "framer-motion";
 import { ImagesSlider } from "../components/ui/images-slider";
 
 const images = [
-  // "https://images.unsplash.com/photo-1485433592409-9018e83a1f0d?q=80&w=1814&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1513098501832-1afb01e28d17?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  // "https://images.unsplash.com/photo-1532595891845-74d041c17ddc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1601045616457-a587336a68c7?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1646562292873-83220733c161?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1574772049929-254bdd983ccc?q=80&w=1930&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  // "https://images.unsplash.com/photo-1579361746421-2ad18b45263b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1481271134264-c373cb29cf60?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1614028261899-4ba4ee015374?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1644920694573-273677c3731a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  '/banner1.jpg',
+  '/banner2.jpg',
+  '/banner3.jpg'
 ];
 
 function Home() {
   const navigate = useNavigate();
   const scrollRef = useRef(null);
-  const scrollRef2 = useRef(null);
+  const dispatch = useDispatch();
 
   const [isMostPopularActive, setIsMostPopularActive] = useState(true);
 
@@ -61,12 +58,25 @@ function Home() {
     }
   };
 
+  const handleAddToCart = () => {
+    const obj = {...bestSellerProduct, quantity: productQuantity}
+    dispatch(addToCart({"product": obj}));
+    toast.success('Added to cart', {
+      position: "top-right",
+      autoClose: 3000,  
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
   useEffect(() => {
     setScrollIndex(0);
   }, [isMostPopularActive]);
 
   const [scrollIndex, setScrollIndex] = useState(0);
-  const [scrollIndex2, setScrollIndex2] = useState(0);
 
   const scrollBy = (direction) => {
     const productWidth = scrollRef.current.firstChild.clientWidth;
@@ -80,18 +90,6 @@ function Home() {
     }
   };
 
-  const scrollBy2 = (direction) => {
-    const productWidth = scrollRef2.current.firstChild.clientWidth;
-    const maxScrollIndex =
-      Math.floor(scrollRef2.current.scrollWidth / productWidth) - 1;
-
-    if (direction === "left") {
-      setScrollIndex2((prevIndex) => Math.max(prevIndex - 1, 0));
-    } else {
-      setScrollIndex2((prevIndex) => Math.min(prevIndex + 1, maxScrollIndex));
-    }
-  };
-
   const scrollToIndex = () => {
     const productWidth = scrollRef.current.firstChild.clientWidth + 20;
     scrollRef.current.scrollTo({
@@ -100,26 +98,14 @@ function Home() {
     });
   };
 
-  const scrollToIndex2 = () => {
-    const productWidth = scrollRef2.current.firstChild.clientWidth + 20;
-    scrollRef2.current.scrollTo({
-      left: productWidth * scrollIndex2,
-      behavior: "smooth",
-    });
-  };
-
   useEffect(() => {
     scrollToIndex();
   }, [scrollIndex]);
 
-  useEffect(() => {
-    scrollToIndex2();
-  }, [scrollIndex2]);
-
   return (
     <div className="w-full h-full text-black ">
       <div className=" relative">
-        <ImagesSlider className="h-[35rem]" images={images}>
+        <ImagesSlider className="h-[40rem]" images={images}>
           <motion.div
             initial={{
               opacity: 0,
@@ -154,19 +140,19 @@ function Home() {
         </ImagesSlider>
       </div>
 
-      <div className="h-full py-10 px-24 w-full bg-gradient-to-b from-orange-50 to-orange-100">
+      <div className="h-full py-10 px-24 w-full bg-gradient-to-b from-orange-100 to-orange-50">
         <h1 className="text-6xl text-black font-semibold">Our Categories</h1>
 
         <div className="w-full flex justify-end items-center mt-10">
-          <button
+          {productCategories.length > 0  && <button
             onClick={() => navigate("/categories")}
-            className="border hover:bg-gray-200 transition-200 border-gray-200 bg-white px-8 py-3"
+            className={`border hover:bg-gray-200 transition-200 border-gray-200 bg-white px-8 py-3 `}
           >
             View All
-          </button>
+          </button>}
         </div>
         <div className="flex flex-wrap justify-center items-center gap-10 py-10  mt-5">
-          {productCategories.length === 0 && <div>No Categories Available</div>}
+          {productCategories.length === 0 && <div className="text-2xl">No Categories Available</div>}
           {productCategories.length > 0 &&
             productCategories.map((category) => (
               <a
@@ -327,60 +313,32 @@ function Home() {
           <div className="lg:flex px-5">
             <div className="lg:w-1/2  flex flex-col justify-start items-center gap-2">
               <img
-                src={bestSellerProduct.image1}
+                src={bestSellerProduct.images[0]}
                 alt={bestSellerProduct.name}
                 className="w-full rounded-xl  h-96 object-cover bg-center transform transition-transform duration-300"
               />
 
               <div className="relative overflow-x-hidden">
-                <button
-                  onClick={() => scrollBy2("left")}
-                  className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md z-10"
-                >
-                  <FaChevronLeft />
-                </button>
                 <div
-                  ref={scrollRef2}
                   className="flex gap-5 py-5 px-3"
                   style={{ overflow: "hidden" }}
                 >
                   <img
-                    src={bestSellerProduct.image2}
+                    src={bestSellerProduct.images[1]}
                     alt={bestSellerProduct.name}
                     className=" h-72 w-72  object-cover transform transition-transform duration-300 rounded-xl"
                   />
                   <img
-                    src={bestSellerProduct.image3}
+                    src={bestSellerProduct.images[2]}
                     alt={bestSellerProduct.name}
                     className="w-72 h-72 object-cover transform transition-transform duration-300 rounded-xl"
                   />
                   <img
-                    src={bestSellerProduct.image4}
-                    alt={bestSellerProduct.name}
-                    className="w-72 h-72 object-cover transform transition-transform duration-300 rounded-xl"
-                  />
-                  <img
-                    src={bestSellerProduct.image5}
-                    alt={bestSellerProduct.name}
-                    className="w-72 h-72 object-cover transform transition-transform duration-300 rounded-xl"
-                  />
-                  <img
-                    src={bestSellerProduct.image5}
-                    alt={bestSellerProduct.name}
-                    className="w-72 h-72 object-cover transform transition-transform duration-300 rounded-xl"
-                  />
-                  <img
-                    src={bestSellerProduct.image5}
+                    src={bestSellerProduct.images[3]}
                     alt={bestSellerProduct.name}
                     className="w-72 h-72 object-cover transform transition-transform duration-300 rounded-xl"
                   />
                 </div>
-                <button
-                  onClick={() => scrollBy2("right")}
-                  className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md z-10"
-                >
-                  <FaChevronRight />
-                </button>
               </div>
             </div>
 
@@ -401,45 +359,35 @@ function Home() {
                 </ul>
               </div>
 
-              <div className="flex justify-between items-center gap-3 border border-black w-36 mb-4">
-                <button
-                  onClick={decreaseQuantity}
-                  className={`border-r border-black text-center px-4 py-2 ${
-                    activeButton === "decrease" ? "bg-orange-400" : ""
-                  }`}
-                >
-                  -
-                </button>
-                <div className="py-2 px-2">{productQuantity}</div>
-                <button
-                  onClick={increaseQuantity}
-                  className={`border-l border-black text-center px-4 py-2 ${
-                    activeButton === "increase" ? "bg-orange-400" : ""
-                  }`}
-                >
-                  +
-                </button>
+              <div className="flex items-center mb-4">
+                <div className="mr-4">Quantity:</div>
+                <div className="flex border border-gray-300 rounded">
+                  <button onClick={decreaseQuantity} className="px-3 py-1 bg-gray-100">-</button>
+                  <div className="px-3 py-1">{productQuantity}</div>
+                  <button onClick={increaseQuantity} className="px-3 py-1 bg-gray-100">+</button>
+                </div>
               </div>
               <div className="flex mb-4 gap-2">
-                <button
-                  onClick={() => navigate("#")}
-                  className="relative rounded-lg border-2 inline-flex items-center justify-start px-6 py-2 overflow-hidden font-medium transition-all bg-orange-500 hover:bg-orange-500 hover:border-orange-500 group"
-                >
-                  <span className="w-40 h-40 rounded rotate-[-40deg] bg-white absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>
-                  <span className="relative w-full text-center text-md text-white transition-colors duration-300 ease-in-out group-hover:text-orange-500">
-                    Add to cart
-                  </span>
-                </button>
-                <button
-                  onClick={() => navigate("#")}
-                  className="relative rounded-lg border-2 border-orange-500 inline-flex items-center justify-start px-6 py-2 overflow-hidden font-medium transition-all bg-white hover:bg-white hover:border-white group"
-                >
-                  <span className="w-40 h-40 rounded rotate-[-40deg] bg-orange-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>
-                  <span className="relative w-full text-center text-md text-orange-500 transition-colors duration-300 ease-in-out group-hover:text-white">
-                    Buy now
-                  </span>
-                </button>
-              </div>
+
+              <button
+                onClick={handleAddToCart}
+                className="relative rounded-lg border-2 inline-flex items-center justify-start px-6 py-2 overflow-hidden font-medium transition-all bg-orange-500 hover:bg-orange-500 hover:border-orange-500 group"
+              >
+                <span className="w-40 h-40 rounded rotate-[-40deg] bg-white absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>
+                <span className="relative w-full text-center text-md text-white transition-colors duration-300 ease-in-out group-hover:text-orange-500">
+                  Add to cart
+                </span>
+              </button>
+              <button
+                onClick={() => navigate(`/product/${bestSellerProduct.id}/payment`, {state: bestSellerProduct})}
+                className="relative rounded-lg border-2 border-orange-500 inline-flex items-center justify-start px-6 py-2 overflow-hidden font-medium transition-all bg-white hover:bg-white hover:border-white group"
+              >
+                <span className="w-40 h-40 rounded rotate-[-40deg] bg-orange-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>
+                <span className="relative w-full text-center text-md text-orange-500 transition-colors duration-300 ease-in-out group-hover:text-white">
+                  Buy now
+                </span>
+              </button>
+            </div>
               {/* ... (existing quantity selector and buttons) */}
               <div className="mt-6">
                 <h3 className="text-xl font-semibold mb-2">Specifications:</h3>
