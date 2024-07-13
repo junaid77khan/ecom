@@ -1,9 +1,11 @@
+/* eslint-disable react/prop-types */
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/cartSlice";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { showPopup } from "../../store/popupSlice";
+// import { toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 
 const StarRating = ({ rating }) => {
   const fullStars = Math.floor(rating);
@@ -26,7 +28,7 @@ const StarRating = ({ rating }) => {
 const CategoryProducts = () => {
   const { categoryName } = useParams();
   const navigate = useNavigate();
-  const [availabilityFilter, setAvailabilityFilter] = useState("all");
+  // const [availabilityFilter, setAvailabilityFilter] = useState("all");
   const [priceRangeOption, setPriceRangeOption] = useState("all");
   const [sortBy, setSortBy] = useState("default");
   const dispatch = useDispatch();
@@ -95,19 +97,21 @@ const CategoryProducts = () => {
     return a.name.localeCompare(b.name);
   });
 
-  const handleAddToCart = (product) => {
-    const obj = {...product, quantity: 1}
-    dispatch(addToCart({"product": obj}));
-    toast.success('Added to cart', {
-      position: "top-right",
-      autoClose: 3000,  
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  }
+ 
+    
+
+  const handleAddToCart = (product, quantity) => {
+    const { id, category, name, description, images, salePrice, rating, availability } = product;
+    const obj = { id, category, name, description, images, salePrice, rating, availability, quantity };
+    dispatch(addToCart({ product: obj }));
+    dispatch(showPopup(obj));
+  };
+
+  // const handleAddToCart = (product) => {
+  //   const obj = { ...product, quantity: 1 };
+  //   dispatch(addToCart({ product: obj }));
+  //   dispatch(showPopup(obj));
+  // };
 
   return (
     <div className="container mx-auto py-12 px-3 flex flex-col justify-center items-center bg-orange-50">
@@ -178,3 +182,6 @@ const CategoryProducts = () => {
 };
 
 export default CategoryProducts;
+CategoryProducts.js
+
+

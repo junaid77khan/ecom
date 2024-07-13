@@ -12,8 +12,24 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import SearchFilter from './SearchFilter';
 import { useState } from "react";
 
+
+
+import { useSelector, useDispatch } from 'react-redux';
+import { closePopup } from '../store/popupSlice';
+import CartPopup from '../components/CartPopup';
+
 function NavBar() {
   // const navigate = useNavigate();
+
+
+  const popup = useSelector((state) => state.popup);
+  const dispatch = useDispatch();
+
+  const handleClosePopup = () => {
+    dispatch(closePopup());
+  };
+
+
   const location = useLocation();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const products = [
@@ -122,6 +138,7 @@ function NavBar() {
         </li>
       </ul>
       {isSearchOpen && <SearchFilter products={products} onClose={handleCloseSearch} />}
+      {popup.isVisible && <CartPopup product={popup.product} onClose={handleClosePopup} />}
 
     </div>
   );
