@@ -19,6 +19,7 @@ import { store } from "./store/store";
 import BlogPost from "./pages/BlogPost";
 import BlogRead from "./pages/BlogRead";
 import CheckoutPage from "./pages/Checkout";
+import { NotFound } from "./pages/Notfound";
 
 
 function App() {
@@ -52,7 +53,10 @@ function App() {
           <Route path="contact-us" element={<ContactUs />} />
 
           <Route path="cart" element={<Cart />} />
+          <Route path="/*" element={<NotFound />} />
+
         </Routes>
+
       </BrowserRouter>
       <div>
         <Footer />

@@ -16,3 +16,8 @@
   .animate-star-particles {
     animation: starParticles 1s ease-in-out infinite;
   }
+
+  body {
+    overflow-x: hidden;
+  }
+  
