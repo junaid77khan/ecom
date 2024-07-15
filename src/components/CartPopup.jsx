@@ -14,7 +14,7 @@ const PopupCart = ({ product }) => {
   }
 
   return (
-    <div className="fixed w-[20rem] top-16 right-10 bg-white p-4 shadow-lg rounded-xl animate-fade-in animate-jump">
+    <div className="fixed w-[20rem] top-16 right-10 bg-white p-4 shadow-lg rounded-xl animate-jump z-10">
       <div className="relative">
         <button
           onClick={() => dispatch(closePopup())}
@@ -36,7 +36,10 @@ const PopupCart = ({ product }) => {
         </div>
         <div className="flex flex-col justify-between mt-4">
           <button
-            onClick={() => navigate(`/cart`)}
+            onClick={() => {
+              dispatch(closePopup())
+              navigate(`/cart`)
+            }}
             className="relative my-2 rounded-lg border-2 border-orange-500 inline-flex items-center justify-start px-6 py-2 overflow-hidden font-medium transition-all bg-white hover:bg-white hover:border-white group"
           >
             <span className="w-40 h-40 rounded rotate-[-40deg] bg-orange-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>
@@ -45,7 +48,10 @@ const PopupCart = ({ product }) => {
             </span>
           </button>
           <button
-            onClick={() => navigate(`/checkout`)}
+            onClick={() => {
+              dispatch(closePopup())
+              navigate(`/checkout`, {state: product})
+            }}
             className="relative rounded-lg border-2 inline-flex items-center justify-start px-6 py-2 overflow-hidden font-medium transition-all bg-orange-500 hover:bg-orange-500 hover:border-orange-500 group"
           >
             <span className="w-40 h-40 rounded rotate-[-40deg] bg-white absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>

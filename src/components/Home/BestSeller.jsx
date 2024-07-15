@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../../store/cartSlice";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { bestSellerProduct } from "../../data/HomeData";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/cartSlice";
+import { showPopup } from "../../store/popupSlice";
+import PopupCart from "../CartPopup";
 
 const BestSeller = () => {
   const navigate = useNavigate();
@@ -32,6 +34,7 @@ const BestSeller = () => {
   const handleAddToCart = () => {
     const obj = { ...bestSellerProduct, quantity: productQuantity };
     dispatch(addToCart({ product: obj }));
+    dispatch(PopupCart(obj));
   };
   return (
     // <div className="h-full w-full py-10 px-24 bg-orange-50">
@@ -322,7 +325,7 @@ const BestSeller = () => {
               </button>
               <button
                 onClick={() =>
-                  navigate(`/product/${bestSellerProduct.id}/checkout`, {
+                  navigate(`/checkout`, {
                     state: bestSellerProduct,
                   })
                 }

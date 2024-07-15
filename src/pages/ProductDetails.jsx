@@ -4,7 +4,7 @@ import { useState } from "react";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../store/cartSlice";
-// import { showPopup } from "../store/popupSlice";
+import { showPopup } from "../store/popupSlice";
 // import { toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
 
@@ -300,6 +300,7 @@ const ProductDetails = () => {
   const handleAddToCart = () => {
     const obj = {...product, quantity: productQuantity}
     dispatch(addToCart({"product": obj}));
+    dispatch(showPopup(obj));
     // toast.success('Added to cart', {
     //   position: "top-right",
     //   autoClose: 3000,  
@@ -381,7 +382,7 @@ const ProductDetails = () => {
               </button>
               <button
 
-                onClick={() => navigate(`/product/${productId}/payment`, {state: product})}
+                onClick={() => navigate(`/checkout`, {state: product})}
                 className="relative rounded-lg border-2 border-orange-500 inline-flex items-center justify-start md:px-6 lg:px-5 px-4 py-2 overflow-hidden font-medium transition-all bg-white hover:bg-white hover:border-white group"
               >
                 <span className="w-40 h-40 rounded rotate-[-40deg] bg-orange-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>
