@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import { ToastContainer } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 import { posts } from './data/Blog-Data';
 
 import { ContactUs, NavBar } from "./components";
@@ -14,11 +14,12 @@ import Home from "./pages/Home";
 import Categories from "./pages/Categories_Component/Categories";
 import CategoryProducts from "./pages/Categories_Component/Category1";
 import Cart from "./pages/Cart";
-import PaymentPage from "./pages/PaymentPage";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import BlogPost from "./pages/BlogPost";
 import BlogRead from "./pages/BlogRead";
+import CheckoutPage from "./pages/Checkout";
+import { NotFound } from "./pages/Notfound";
 
 
 function App() {
@@ -46,17 +47,22 @@ function App() {
             element={<CategoryProducts />}
           />
           <Route path="product/:productId" element={<ProductDetails />} />
-          <Route path="product/:product/payment" element={<PaymentPage />} />
+          <Route path="product/:product/checkout" element={<CheckoutPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+
           <Route path="contact-us" element={<ContactUs />} />
 
           <Route path="cart" element={<Cart />} />
+          <Route path="/*" element={<NotFound />} />
+
         </Routes>
+
       </BrowserRouter>
       <div>
         <Footer />
         {/* <Outlet /> */}
       </div>
-      <ToastContainer/>
+      {/* <ToastContainer/> */}
     </Provider>
   );
 }

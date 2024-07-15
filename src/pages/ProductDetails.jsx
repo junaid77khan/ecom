@@ -4,8 +4,9 @@ import { useState } from "react";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../store/cartSlice";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import { showPopup } from "../store/popupSlice";
+// import { toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 
 const products = [
   {
@@ -299,18 +300,22 @@ const ProductDetails = () => {
   const handleAddToCart = () => {
     const obj = {...product, quantity: productQuantity}
     dispatch(addToCart({"product": obj}));
-    toast.success('Added to cart', {
-      position: "top-right",
-      autoClose: 3000,  
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
+    // toast.success('Added to cart', {
+    //   position: "top-right",
+    //   autoClose: 3000,  
+    //   hideProgressBar: false,
+    //   closeOnClick: true,
+    //   pauseOnHover: true,
+    //   draggable: true,
+    //   progress: undefined,
+    // });
   };
 
-
+  // const handleAddToCart = (product) => {
+  //   const obj = { ...product, quantity: 1 };
+  //   dispatch(addToCart({ product: obj }));
+  //   dispatch(showPopup(obj));
+  // };
   return (
     <div className=" mx-auto lg:px-4 px-2 py-8 bg-orange-50">
       <div className="bg-white py-7 shadow-md rounded-lg overflow-hidden">
@@ -375,6 +380,7 @@ const ProductDetails = () => {
                 </span>
               </button>
               <button
+
                 onClick={() => navigate(`/product/${productId}/payment`, {state: product})}
                 className="relative rounded-lg border-2 border-orange-500 inline-flex items-center justify-start md:px-6 lg:px-5 px-4 py-2 overflow-hidden font-medium transition-all bg-white hover:bg-white hover:border-white group"
               >
