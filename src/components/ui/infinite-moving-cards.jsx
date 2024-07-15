@@ -72,23 +72,23 @@ export const InfiniteMovingCards = ({
       >
         {items.map((item, ) => (
           <li
-            className="w-[350px] h-60 max-w-full relative rounded-2xl border border-b-0 flex-shrink-0 border-orange-950 px-8 py-6 md:w-[450px]"
+            className="lg:w-[350px] w-[320px] h-full max-w-full relative rounded-2xl border border-b-0 flex-shrink-0 border-orange-950 px-8 py-4"
             style={{
               background:
                 "linear-gradient(180deg, var(--orange-600), var(--orange-700)",
             }}
             key={item.name}
           >
-            <blockquote>
+            <blockquote className="h-full">
               <div
                 aria-hidden="true"
                 className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
               ></div>
-              <span className="relative z-20 text-lg leading-[1.6] text-white font-normal">
+              <span className="relative z-20 lg:text-md text-sm leading-[1.6] text-white font-normal">
                 {item.quote}
               </span>
               <div className="relative z-20 mt-6 flex flex-row items-center">
-                  <span className="text-2xl flex justify-center items-center leading-[1.6] text-white font-normal">
+                  <span className="lg:text-2xl text-lg flex justify-center items-center leading-[1.6] text-white font-normal">
                     {item.title}
                   </span>
               </div>

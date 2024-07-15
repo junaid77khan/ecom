@@ -71,9 +71,9 @@ function Cart() {
             <h1 className='md:text-4xl text-2xl lg:mb-14 mb-7'>Your Cart</h1>
             {
                 cartProducts && cartProducts.length === 0 && (
-                    <div>
-                    <p>Your cart is empty</p>
-                    <button onClick={() => navigate("/category")}>Continue Shopping</button>
+                    <div className='flex flex-col justify-center items-center'>
+                    <p className='text-xl mb-2'>Cart is empty</p>
+                    <button className='text-sm text-orange-500 font-bold border-b-2 border-orange-500 hover:border-orange-600 hover:text-orange-600' onClick={() => navigate("/categories")}>Continue Shopping</button>
                     </div>
                 )
             }

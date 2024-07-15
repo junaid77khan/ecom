@@ -77,17 +77,7 @@ const HomeCategories = () => {
         Our Categories
       </h1>
 
-      <div className="w-full flex justify-end items-center mt-10">
-        {productCategories.length > 0 && (
-          <button
-            onClick={() => navigate("/categories")}
-            className="border hover:bg-gray-200 transition-200 border-gray-200 bg-white px-4 py-2 sm:px-8 sm:py-3"
-          >
-            View All
-          </button>
-        )}
-      </div>
-      <div className="flex flex-wrap justify-center items-center gap-5 sm:gap-10 py-10 mt-5">
+      <div className="flex flex-wrap justify-center items-center gap-5 sm:gap-10 py-10 mt-4">
         {productCategories.length === 0 && (
           <div className="text-xl sm:text-2xl">No Categories Available</div>
         )}
@@ -98,7 +88,7 @@ const HomeCategories = () => {
               href={`/categories/${encodeURIComponent(
                 category.categoryName
               )}`}
-              className="flex flex-col justify-start items-start gap-3 w-64 sm:w-72 h-80 sm:h-96 px-4 py-6 bg-white overflow-hidden hover:bg-gray-200 duration-200 rounded-lg"
+              className="flex flex-col justify-start items-start gap-3 w-72 sm:w-72 h-80 sm:h-96 px-4 py-6 bg-white overflow-hidden hover:bg-gray-200 duration-200 rounded-lg"
             >
               <div className="w-full h-3/4 overflow-hidden">
                 <img
@@ -122,6 +112,17 @@ const HomeCategories = () => {
               </div>
             </a>
           ))}
+      </div>
+
+      <div className="w-full flex justify-end items-center">
+        {productCategories.length > 0 && (
+          <button
+            onClick={() => navigate("/categories")}
+            className="border hover:bg-gray-200 transition-200 border-gray-200 bg-white px-4 py-2 sm:px-8 sm:py-3"
+          >
+            View All
+          </button>
+        )}
       </div>
     </div>
   );
