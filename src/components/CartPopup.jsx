@@ -14,7 +14,7 @@ const PopupCart = ({ product }) => {
   }
 
   return (
-    <div className="fixed w-[20rem] top-16 right-10 bg-white p-4 shadow-lg rounded-xl animate-jump z-10">
+    <div className="fixed w-[20rem] top-16 md:right-10 bg-white p-4 shadow-lg rounded-xl animate-jump z-50">
       <div className="relative">
         <button
           onClick={() => dispatch(closePopup())}
@@ -23,7 +23,7 @@ const PopupCart = ({ product }) => {
           <IoCloseOutline />
         </button>
         <h4 className="text-lg  ">✓ Item added to your cart</h4>
-        <div className="flex justify-around">
+        <div className="flex justify-around gap-2">
           <img
             src={product.images[0]}
             alt={product.name}
