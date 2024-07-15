@@ -61,7 +61,7 @@ function FeaturedCandles() {
           </button>
         </div>
       </div>
-      <div className="flex justify-center items-center lg:gap-8 md:gap-7 gap-3 overflow-x-hidden mt-4">
+      <div className="flex justify-center items-center lg:gap-8 md:gap-7 gap-0 overflow-x-hidden mt-4">
         <button
           onClick={() => scrollBy("left")}
           className=" bg-white rounded-full p-2 shadow-md z-10"
