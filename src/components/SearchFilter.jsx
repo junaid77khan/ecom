@@ -15,7 +15,7 @@ const SearchFilter = ({ products, onClose }) => {
   );
 
   return (
-      <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50">
+      <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50 px-3">
           <motion.div
             initial={{
               opacity: 0,
@@ -28,10 +28,10 @@ const SearchFilter = ({ products, onClose }) => {
             transition={{
               duration: 0.2,
             }}
-          className="bg-orange-50 bg-opacity-70 p-9 rounded-lg shadow-lg w-1/2 relative"
+          className="bg-orange-50 bg-opacity-70 md:p-9 p-6 rounded-lg shadow-lg md:w-1/2 w-full relative"
           >
           <button
-            className="absolute right-3 top-3 text-xl text-orange-500 hover:text-orange-700"
+            className="absolute md:right-3 md:top-3 right-1 top-1 text-xl text-orange-500 hover:text-orange-700"
             onClick={onClose}
           >
             <IoMdCloseCircle className="w-6 h-6" />
@@ -41,13 +41,13 @@ const SearchFilter = ({ products, onClose }) => {
             placeholder="Search for products..."
             value={searchTerm}
             onChange={handleSearch}
-            className="w-full p-2 rounded-lg mb-4 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            className="w-full md:p-2 p-1 rounded-lg md:mb-4 mb-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
           />
           <ul>
             {filteredProducts.map((product) => (
               <li
                 key={product.id}
-                className="text-gray-800 py-2 border-b border-gray-300 last:border-b-0"
+                className="text-gray-800 md:text-md text-sm py-2 border-b border-gray-300 last:border-b-0"
               >
                 {product.name}
               </li>

@@ -66,13 +66,13 @@ function Categories() {
 
   return (
     <div className="container py-12 flex flex-col justify-center items-center bg-orange-50">
-      <h2 className="text-3xl font-bold mb-6">Our Categories</h2>
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      <h2 className="lg:text-3xl text-2xl font-bold mb-6 text-start">Categories</h2>
+      <div className="flex flex-wrap justify-center items-center lg:gap-8 gap-4">
         {productCategories.map((category) => (
       <a
         key={category.id}
         href={`/categories/${encodeURIComponent(category.categoryName)}`}
-        className="flex flex-col justify-start items-start gap-3 w-80 h-96 px-4 py-6 bg-white overflow-hidden hover:bg-gray-200 duration-200 rounded-lg"
+        className="flex flex-col justify-center items-start gap-3 lg:w-80 lg:h-96 w-72 h-80 lg:px-6 px-4 py-6 bg-white overflow-hidden hover:bg-gray-200 duration-200 rounded-lg"
       >
         <div className="w-full h-3/4 overflow-hidden">
           <img
@@ -81,7 +81,7 @@ function Categories() {
             alt={category.categoryName}
           />
         </div>
-        <h1 className="text-xl">
+        <h1 className="text-lg lg:text-xl">
           {category.categoryName}{" "}
           <FontAwesomeIcon
             onClick={() => navigate("/collections")}
@@ -90,7 +90,7 @@ function Categories() {
           />{" "}
         </h1>
         <div>
-          <p className="text-gray-500 hover:text-black">{category.description.substring(0, 40)}... 
+          <p className="text-gray-500 text-sm lg:text-md hover:text-black">{category.description.substring(0,80)}... 
           </p>
         </div>
       </a>
