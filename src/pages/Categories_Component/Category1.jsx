@@ -98,11 +98,9 @@ const CategoryProducts = () => {
   });
 
  
-    
-
   const handleAddToCart = (product, quantity) => {
     const { id, category, name, description, images, salePrice, rating, availability } = product;
-    const obj = { id, category, name, description, images, salePrice, rating, availability, quantity };
+    const obj = { id, category, name, description, images, salePrice, rating, availability, quantity:1 };
     dispatch(addToCart({ product: obj }));
     dispatch(showPopup(obj));
   };
