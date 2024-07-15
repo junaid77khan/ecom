@@ -115,19 +115,19 @@ const CategoryProducts = () => {
 
   return (
     <div className="container mx-auto py-12 px-3 flex flex-col justify-center items-center bg-orange-50">
-      <h2 className="text-3xl font-bold mb-6">{categoryName}</h2>
+      <h2 className="lg:text-3xl text-2xl font-bold mb-6">{categoryName}</h2>
       <div className="flex gap-4 mb-6">
         <select
-          className="border border-gray-300 rounded-md p-2"
+          className="border border-gray-300 rounded-md p-1 md:p-2 md:text-md text-sm"
           value={priceRangeOption}
           onChange={(e) => setPriceRangeOption(e.target.value)}
         >
-          <option value="all">All Prices</option>
+          <option className="text-black" value="all">All Prices</option>
           <option value="affordable">0 - 500 ₹</option>
           <option value="midRange">500 - 1000 ₹</option>
         </select>
         <select
-          className="border border-gray-300 rounded-md p-2"
+          className="border border-gray-300 rounded-md p-1 md:p-2 md:text-md text-sm"
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value)}
         >
@@ -137,18 +137,18 @@ const CategoryProducts = () => {
           <option value="price-high-to-low">Price: High to Low</option>
         </select>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+      <div className="flex flex-wrap justify-center items-center lg:gap-8 gap-4">
         {sortedProducts.map((product) => (
           <div
             key={product.id}
-            className="bg-white hover:bg-gray-100 duration-200 p-6 shadow-md rounded-lg h-full w-80 px-3 cursor-pointer"
+            className="bg-white hover:bg-gray-100 duration-200 lg:px-6 px-4 py-6 shadow-md rounded-lg h-full md:w-80 w-72 cursor-pointer"
           >
             <img
               src={product.images[0]}
               alt={product.name}
-              className="rounded-lg mb-2 w-full h-56"
+              className="rounded-lg mb-2 w-full md:h-56 h-52"
             />
-            <h3 className="text-xl font-bold mb-2">{product.name}</h3>
+            <h3 className="md:text-xl text-lg font-bold mb-2">{product.name}</h3>
             <p className="text-gray-600 mb-2">{product.description}</p>
             <div className="flex items-center justify-between mb-2">
               <span className="font-bold">₹{product.salePrice}</span>
@@ -157,19 +157,19 @@ const CategoryProducts = () => {
             <div className="flex justify-between items-center">
                 <button
                   onClick={() => handleAddToCart(product)}
-                  className="relative rounded-lg border-2 inline-flex items-center justify-start px-6 py-2 overflow-hidden font-medium transition-all bg-orange-500 hover:bg-orange-500 hover:border-orange-500 group"
+                  className="relative rounded-lg border-2 inline-flex items-center justify-start md:px-6 lg:px-5 px-4 py-2 overflow-hidden font-medium transition-all bg-orange-500 hover:bg-orange-500 hover:border-orange-500 group"
                 >
                   <span className="w-40 h-40 rounded rotate-[-40deg] bg-white absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>
-                  <span className="relative w-full text-center text-md text-white transition-colors duration-300 ease-in-out group-hover:text-orange-500">
+                  <span className="relative w-full text-center lg:text-md text-sm  text-white transition-colors duration-300 ease-in-out group-hover:text-orange-500">
                     Add to cart
                   </span>
                 </button>
                 <button
                    onClick={() => navigate(`/product/${product.id}`)}
-                  className="relative rounded-lg border-2 border-orange-500 inline-flex items-center justify-start px-6 py-2 overflow-hidden font-medium transition-all bg-white hover:bg-white hover:border-white group"
+                  className="relative rounded-lg border-2 border-orange-500 inline-flex items-center justify-start  md:px-6 lg:px-5 px-4 py-2 overflow-hidden font-medium transition-all bg-white hover:bg-white hover:border-white group"
                 >
                   <span className="w-40 h-40 rounded rotate-[-40deg] bg-orange-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>
-                  <span onClick={() => navigate(`/product/${product.id}`)} className="relative w-full text-center text-md text-orange-500 transition-colors duration-300 ease-in-out group-hover:text-white">
+                  <span onClick={() => navigate(`/product/${product.id}`)} className="relative w-full text-center lg:text-md text-sm text-orange-500 transition-colors duration-300 ease-in-out group-hover:text-white">
                     View
                   </span>
                 </button>

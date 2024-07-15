@@ -2,12 +2,12 @@ import { GlobeDemo } from "../components/GlobeDemo";
 
 const ContactUs = () => {
   return (
-    <div className="w-full h-full  bg-orange-50 flex flex-col md:flex-row justify-around">
-      <div className="w-full md:w-3/5  flex justify-center">
+    <div className="w-full bg-orange-50 flex flex-col md:flex-row justify-around">
+      <div className="w-full md:w-3/5 hidden lg:flex justify-center">
         <GlobeDemo />
       </div>
-      <div className="shadow-2xl rounded mt-4 mx-8 w-full md:w-2/5 px-4 py-5  h-screen sm:p-6">
-        <h2 className="text-3xl font-bold text-gray-800 mb-6">Contact Us</h2>
+      <div className="shadow-2xl rounded mt-4 lg:mx-8  w-full md:w-2/5 px-8 py-5 h-full lg:h-screen">
+        <h2 className="lg:text-3xl text-2xl font-bold text-gray-800 mb-6">Contact Us</h2>
         <form>
           <div className="mb-4">
             <label
@@ -54,7 +54,7 @@ const ContactUs = () => {
           <div className="mt-6">
             <button
               type="submit"
-              className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+              className="inline-flex items-center lg:px-6 px-3 lg:py-3 py-2 border border-transparent text-base font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
             >
               Send Message
             </button>

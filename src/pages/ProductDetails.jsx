@@ -317,15 +317,15 @@ const ProductDetails = () => {
   //   dispatch(showPopup(obj));
   // };
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="bg-white shadow-md rounded-lg overflow-hidden">
+    <div className=" mx-auto lg:px-4 px-2 py-8 bg-orange-50">
+      <div className="bg-white py-7 shadow-md rounded-lg overflow-hidden">
         <div className="lg:flex">
-          <div className="lg:w-1/2 p-4">
-            <div className="relative">
+          <div className="lg:w-1/2 lg:p-4 p-2">
+            <div className="relative px-6 lg:px-2">
               <img
                 src={product.images[currentImageIndex]}
                 alt={product.name}
-                className="w-full h-96 object-cover rounded-xl"
+                className="w-full lg:h-96 h-80 object-cover rounded-xl"
               />
             </div>
             <div className="flex mt-4 overflow-x-auto">
@@ -334,7 +334,7 @@ const ProductDetails = () => {
                   key={index}
                   src={img}
                   alt={`${product.name} - Image ${index + 1}`}
-                  className={`w-72 h-72 rounded-xl object-cover mx-2 cursor-pointer ${
+                  className={`lg:w-56 w-40 lg:h-56 h-40 rounded-xl object-cover mx-2 cursor-pointer ${
                     currentImageIndex === index ? "border-2 border-orange-500" : ""
                   }`}
                   onClick={() => setCurrentImageIndex(index)}
@@ -343,26 +343,26 @@ const ProductDetails = () => {
             </div>
           </div>
           <div className="lg:w-1/2 p-4">
-            <h2 className="text-3xl font-semibold mb-4">{product.name}</h2>
+            <h2 className="lg:text-3xl text-2xl font-semibold lg:mb-4">{product.name}</h2>
             <div className="text-yellow-500">
               {"★".repeat(product.rating)}
             </div>        
             <div className="mb-4">
-              <span className="text-2xl font-bold text-orange-500">₹{product.salePrice.toFixed(2)}</span>
-              <span className="text-lg text-gray-500 line-through ml-2">₹{product.originalPrice.toFixed(2)}</span>
+              <span className="lg:text-2xl text-lg font-bold text-orange-500">₹{product.salePrice.toFixed(2)}</span>
+              <span className="lg:text-lg text-md text-gray-500 line-through ml-2">₹{product.originalPrice.toFixed(2)}</span>
             </div>
             <p className="text-gray-700 mb-4">{product.description}</p>
             <div className="mb-4">
-              <h3 className="text-xl font-semibold mb-2">Features:</h3>
-              <ul className="list-disc list-inside text-gray-700">
+              <h3 className="lg:text-xl text-lg font-semibold mb-2">Features:</h3>
+              <ul className="list-disc list-inside lg:text-md text-sm text-gray-700">
                 {product.features.map((feature, index) => (
-                  <li key={index}>{feature}</li>
+                  <li className="mt-2" key={index}>{feature}</li>
                 ))}
               </ul>
             </div>
             <div className="flex items-center mb-4">
-              <div className="mr-4">Quantity:</div>
-              <div className="flex border border-gray-300 rounded">
+              <div className="mr-4 font-bold">Quantity:</div>
+              <div className="flex border border-gray-300 rounded text-md">
                 <button onClick={decreaseQuantity} className="px-3 py-1 bg-gray-100">-</button>
                 <div className="px-3 py-1">{productQuantity}</div>
                 <button onClick={increaseQuantity} className="px-3 py-1 bg-gray-100">+</button>
@@ -372,29 +372,30 @@ const ProductDetails = () => {
 
               <button
                 onClick={handleAddToCart}
-                className="relative rounded-lg border-2 inline-flex items-center justify-start px-6 py-2 overflow-hidden font-medium transition-all bg-orange-500 hover:bg-orange-500 hover:border-orange-500 group"
+                className="relative rounded-lg border-2 inline-flex items-center justify-start md:px-6 lg:px-5 px-4 py-2 overflow-hidden font-medium transition-all bg-orange-500 hover:bg-orange-500 hover:border-orange-500 group"
               >
                 <span className="w-40 h-40 rounded rotate-[-40deg] bg-white absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>
-                <span className="relative w-full text-center text-md text-white transition-colors duration-300 ease-in-out group-hover:text-orange-500">
+                <span className="relative w-full text-center lg:text-md text-sm text-white transition-colors duration-300 ease-in-out group-hover:text-orange-500">
                   Add to cart
                 </span>
               </button>
               <button
-                onClick={() => navigate(`/product/${productId}/checkout`, {state: product})}
-                className="relative rounded-lg border-2 border-orange-500 inline-flex items-center justify-start px-6 py-2 overflow-hidden font-medium transition-all bg-white hover:bg-white hover:border-white group"
+
+                onClick={() => navigate(`/product/${productId}/payment`, {state: product})}
+                className="relative rounded-lg border-2 border-orange-500 inline-flex items-center justify-start md:px-6 lg:px-5 px-4 py-2 overflow-hidden font-medium transition-all bg-white hover:bg-white hover:border-white group"
               >
                 <span className="w-40 h-40 rounded rotate-[-40deg] bg-orange-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>
-                <span className="relative w-full text-center text-md text-orange-500 transition-colors duration-300 ease-in-out group-hover:text-white">
+                <span className="relative w-full text-center lg:text-md text-sm text-orange-500 transition-colors duration-300 ease-in-out group-hover:text-white">
                   Buy now
                 </span>
               </button>
             </div>
             <div className="mt-6">
-              <h3 className="text-xl font-semibold mb-2">Specifications:</h3>
+              <h3 className="lg:text-xl text-lg font-semibold mb-2">Specifications:</h3>
               <table className="w-full border-collapse">
                 <tbody>
                   {product.specifications.map((spec, index) => (
-                    <tr key={index} className="border-b">
+                    <tr key={index} className="border-b lg:text-md text-sm">
                       <td className="py-2 font-semibold">{spec.name}:</td>
                       <td className="py-2">{spec.value}</td>
                     </tr>
@@ -405,12 +406,12 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
-      <div className="mt-12">
+      <div className="mt-12 ">
       {product.reviews.length > 0 && (
             <div className="px-5">
               <div>
                 <div className="">
-                  <h3 className="text-xl font-semibold text-red-600 mb-2">
+                  <h3 className="lg:text-xl text-lg font-semibold text-red-600 mb-2">
                     Customer Reviews:
                   </h3>
                 </div>
@@ -419,7 +420,7 @@ const ProductDetails = () => {
                 <div className="ease-linear duration-200">
                   <div className="border-t border-gray-300 pt-4 mt-4">
                     <div className="flex items-center mb-2">
-                      <div className="text-lg font-bold text-gray-800 mr-2">
+                      <div className="lg:text-lg text-md font-bold text-gray-800 mr-2">
                         {product?.reviews[0]?.user}
                       </div>
                       <div className="text-yellow-500">
@@ -428,13 +429,13 @@ const ProductDetails = () => {
                           .join("")}
                       </div>
                     </div>
-                    <p className="text-gray-700">
+                    <p className="text-gray-700 lg:text-md text-sm">
                       {product?.reviews[0]?.comment}
                     </p>
                   </div>
                   <div className="border-t border-gray-300 pt-4 mt-4">
                     <div className="flex items-center mb-2">
-                      <div className="text-lg font-bold text-gray-800 mr-2">
+                      <div className="lg:text-lg text-md font-bold text-gray-800 mr-2">
                         {product?.reviews[1]?.user}
                       </div>
                       <div className="text-yellow-500">
@@ -443,7 +444,7 @@ const ProductDetails = () => {
                           .join("")}
                       </div>
                     </div>
-                    <p className="text-gray-700">
+                    <p className="text-gray-700 lg:text-md text-sm">
                       {product?.reviews[1]?.comment}
                     </p>
                   </div>
@@ -451,7 +452,7 @@ const ProductDetails = () => {
                     onClick={() => setAllReviews(true)}
                     className="flex justify-center items-center w-full "
                   >
-                    <FaChevronDown className="text-2xl" />
+                    <FaChevronDown className="lg:text-2xl text-md" />
                   </button>
                 </div>
               )}
@@ -463,21 +464,21 @@ const ProductDetails = () => {
                       className="border-t border-gray-300 pt-4 mt-4"
                     >
                       <div className="flex items-center mb-2">
-                        <div className="text-lg font-bold text-gray-800 mr-2">
+                        <div className="lg:text-lg text-md font-bold text-gray-800 mr-2">
                           {review.user}
                         </div>
                         <div className="text-yellow-500">
                           {Array(review.rating).fill("★").join("")}
                         </div>
                       </div>
-                      <p className="text-gray-700">{review.comment}</p>
+                      <p className="text-gray-700 lg:text-md text-sm">{review.comment}</p>
                     </div>
                   ))}
                   <button
                     onClick={() => setAllReviews(false)}
                     className="flex justify-center items-center w-full "
                   >
-                    <FaChevronUp className="text-2xl" />
+                    <FaChevronUp className="lg:text-2xl text-md" />
                   </button>
                 </div>
               )}
@@ -485,21 +486,40 @@ const ProductDetails = () => {
           )}
       </div>
       <div className="mt-12">
-        <h3 className="text-2xl font-semibold mb-4">Related Products</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <h3 className="lg:text-2xl text-lg font-semibold mb-4">Related Products</h3>
+        <div className="flex flex-wrap mt-4  gap-4">
           {relatedProducts.slice(0, 4).map((relatedProduct) => (
-            <Link to={`/product/${relatedProduct.id}`} key={relatedProduct.id} className="border p-4 rounded hover:shadow-lg transition-shadow">
+            <Link to={`/product/${relatedProduct.id}`} key={relatedProduct.id} className="lg:w-64 w-64 lg:h-72 h-72 py-4 px-2 flex flex-col items-center bg-white  rounded-sm object-cover cursor-pointer">
               <img
                 src={relatedProduct.images[0]}
                 alt={relatedProduct.name}
-                className="w-full h-48 object-cover mb-2"
+                className="h-3/4 w-11/12 rounded-sm"
               />
-              <h4 className="text-sm font-semibold">{relatedProduct.name}</h4>
-              <p className="text-sm text-gray-600">
-                ₹{relatedProduct.salePrice.toFixed(2)}
-              </p>
+              <div className=" w-full mt-2 px-2">
+                <h4 className="text-sm font-semibold">{relatedProduct.name}</h4>
+                <p className="text-sm text-gray-600">
+                  ₹{relatedProduct.salePrice.toFixed(2)}
+                </p>
+              </div>
             </Link>
           ))}
+
+          {relatedProducts.slice(0, 4).map((relatedProduct) => (
+            <Link to={`/product/${relatedProduct.id}`} key={relatedProduct.id} className="lg:w-64 w-64 lg:h-72 h-72 py-4 px-2 flex flex-col items-center bg-white  rounded-sm object-cover cursor-pointer">
+              <img
+                src={relatedProduct.images[0]}
+                alt={relatedProduct.name}
+                className="h-3/4 w-11/12 rounded-sm"
+              />
+              <div className=" w-full mt-2 px-2">
+                <h4 className="text-sm font-semibold">{relatedProduct.name}</h4>
+                <p className="text-sm text-gray-600">
+                  ₹{relatedProduct.salePrice.toFixed(2)}
+                </p>
+              </div>
+            </Link>
+          ))}
+          
         </div>
       </div>
     </div>

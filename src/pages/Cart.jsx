@@ -67,8 +67,8 @@ function Cart() {
       
 
     return (
-        <div className='px-40 py-5 w-full bg-orange-50'>
-            <h1 className='text-4xl mb-14'>Your Cart</h1>
+        <div className='md:px-40 px-5 py-5 w-full bg-orange-50'>
+            <h1 className='md:text-4xl text-2xl lg:mb-14 mb-7'>Your Cart</h1>
             {
                 cartProducts && cartProducts.length === 0 && (
                     <div>
@@ -79,31 +79,33 @@ function Cart() {
             }
             {
                 cartProducts?.length > 0 &&
-                <div className='flex flex-col justify-center items-center'>
+                <div className='flex flex-col justify-center w-full items-center'>
                     {cartProducts?.map(product => (
-                        <div key={product.id} className="border border-gray-300 w-full flex justify-between items-center px-8 py-5 my-3">
-                            <div className="flex justify-center items-center gap-5">
-                            <img className='w-24 h-24' src={product.images ? product.images[0] : ''} alt={product.name} />
-                                <div>
-                                    <p>{product.name}</p>
-                                    <p>Price: ${product.salePrice}</p>
-                                    <p>Rating: {product.rating}</p>
-                                    <p>Availability: {product.availability ? <span className='text-green-500'>In stock</span> : <span className='text-red-500'>Out of stock</span>}</p>
-                                </div>
-                            </div>
-                            <div className="flex justify-between items-center gap-5 px-5 py-2">
-                                <div className="flex items-center mb-4">
-                                    <div className="mr-4">Quantity:</div>
-                                    <div className="flex border border-gray-300 rounded">
-                                        <button onClick={() => decreaseProductQuantity(product.id)} className="px-3 py-1 bg-white">-</button>
-                                        <div className="px-3 py-1 bg-white">{product.quantity}</div>
-                                        <button onClick={() => increaseProductQuantity(product.id)} className="px-3 py-1 bg-white">+</button>
+                        <div key={product.id} className="border border-gray-300 bg-white rounded-lg w-full flex justify-start gap-5 items-start px-8 py-5 my-3">
+                            <img className='w-24 md:h-24 h-20 rounded-lg' src={product.images ? product.images[0] : ''} alt={product.name} />
+                            <div className="flex md:flex-row flex-col justify-between w-full items-start md:gap-5 gap-1 ">
+                                    <div className=' '>
+                                        <p className='md:text-lg text-sm'>{product.name}</p>
+                                        <p className='md:text-lg text-sm'>₹ {product.salePrice}</p>
+                                        <p className='md:text-md text-xs'>{product.availability ? <span className='text-green-500'>In stock</span> : <span className='text-red-500'>Out of stock</span>}</p>
                                     </div>
-                                </div>
-                                <FontAwesomeIcon onClick={() => deleteProductFromCart(product.id)} icon={faTrash}/>
-                                <div className=''>
-                                    Total: ${(product.salePrice*product.quantity).toFixed(2)} 
-                                </div>
+                                    <div className="flex justify-center items-center mb-4">
+                                        <div className='flex flex-col gap-1'>
+                                            <div className='flex justify-center items-center gap-4'>
+                                                <div className='md:text-lg text-sm'>Quantity:</div>
+                                                <div className="flex border border-gray-300 rounded">
+                                                    <button onClick={() => decreaseProductQuantity(product.id)} className="px-3 py-1 md:text-lg text-sm bg-white">-</button>
+                                                    <div className="px-3 py-1 bg-white md:text-lg text-sm">{product.quantity}</div>
+                                                    <button onClick={() => increaseProductQuantity(product.id)} className="px-3 py-1 md:text-lg text-sm bg-white">+</button>
+                                                </div>
+                                                <FontAwesomeIcon className='md:text-lg text-sm' onClick={() => deleteProductFromCart(product.id)} icon={faTrash}/>
+                                            </div>
+                                            <div className='md:text-lg text-sm'>
+                                                Total: ₹ {(product.salePrice*product.quantity).toFixed(2)} 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
                             </div>
                         </div>
                     ))}
