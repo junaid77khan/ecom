@@ -1,10 +1,10 @@
-import { GlobeDemo } from "../components/GlobeDemo";
+// import { GlobeDemo } from "../components/GlobeDemo";
 
 const ContactUs = () => {
   return (
     <div className="w-full bg-orange-50 flex flex-col md:flex-row justify-around">
       <div className="w-full md:w-3/5 hidden lg:flex justify-center">
-        <GlobeDemo />
+        {/* <GlobeDemo /> */}
       </div>
       <div className="shadow-2xl rounded mt-4 lg:mx-8  w-full md:w-2/5 px-8 py-5 h-full lg:h-screen">
         <h2 className="lg:text-3xl text-2xl font-bold text-gray-800 mb-6">Contact Us</h2>
