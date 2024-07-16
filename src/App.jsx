@@ -20,6 +20,7 @@ import BlogPost from "./pages/BlogPost";
 import BlogRead from "./pages/BlogRead";
 import CheckoutPage from "./pages/Checkout";
 import { NotFound } from "./pages/Notfound";
+import AddCategory from "./components/AddCategory";
 
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
 
           <Route path="cart" element={<Cart />} />
           <Route path="/*" element={<NotFound />} />
+          <Route path="/add-category" element={<AddCategory/>} />
 
         </Routes>
 
