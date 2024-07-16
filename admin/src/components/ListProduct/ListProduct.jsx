@@ -1,15 +1,38 @@
 /* eslint-disable react/prop-types */
 
-import { useState } from "react";
-import { useNavigat } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { faTrash, faEdit, faE } from '@fortawesome/free-solid-svg-icons';
 
-const ListProduct = ({ products }) => {
-    // const navigate = useNavigate();
-    // const[allProducts,setAllProducts] = useState([]);
+const ListProduct = () => {
+    const navigate = useNavigate();
+    const[products,setProducts] = useState([]);
+    useEffect(() => {
+      const fetchProducts = async() => {
+        const response = await fetch(`http://localhost:8000/api/v1/product/all-products`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        });
+  
+        const dataFromServer = await response.json();
+  
+        if(!dataFromServer.success) {
+          navigate("/error")
+        }
+        setProducts(dataFromServer.data);
+      }
+  
+      fetchProducts();
+    }, [])
 
   const handleAddProduct = () => {
     navigate('/addproduct');
   };
+
   return (
     <div className="container w-[60%] mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">
@@ -19,41 +42,38 @@ const ListProduct = ({ products }) => {
       </div>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white">
-          <thead>
+          <thead className="border-b-2 border-gray-300">
             <tr>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600 tracking-wider">Picture</th>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600 tracking-wider">Name</th>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600 tracking-wider">Category</th>
+              <th className="px-6 py-3  text-left text-sm font-semibold text-gray-600 tracking-wider">Image</th>
+              <th className="px-6 py-3  text-left text-sm font-semibold text-gray-600 tracking-wider">Name</th>
+              <th className="px-6 py-3  text-left text-sm font-semibold text-gray-600 tracking-wider">Description</th>
+              <th className="px-6 py-3  text-left text-sm font-semibold text-gray-600 tracking-wider">Category</th>
+              <th className="px-6 py-3  text-left text-sm font-semibold text-gray-600 tracking-wider">Price</th>
 
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600 tracking-wider">OldPrice</th>
-
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600 tracking-wider">NewPrice</th>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600 tracking-wider">Stock</th>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600 tracking-wider">Status</th>
-              <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-600 tracking-wider">Remove</th>
+              <th className="px-6 py-3  text-left text-sm font-semibold text-gray-600 tracking-wider">Stock</th>
+              <th className="px-6 py-3  text-left text-sm font-semibold text-gray-600 tracking-wider">Units sold</th>
 
             </tr>
           </thead>
           <tbody>
             {products.map((product) => (
-              <tr key={product.id}>
-                <td className="px-6 py-4 border-b border-gray-300">
-                  <img src={product.image} alt={product.name} className="w-12 h-12 rounded-full" />
+              <tr key={product._id} className="border-b border-gray-300">
+                <td className="px-6 py-4 ">
+                  <img src={product.images[0]} alt={product.name} className="w-12 h-12 rounded-full" />
                 </td>
-                <td className="px-6 py-4 border-b border-gray-300">{product.name}</td>
-                <td className="px-6 py-4 border-b border-gray-300">{product.price}</td>
-                <td className="px-6 py-4 border-b border-gray-300">{product.stock}</td>
-                <td className="px-6 py-4 border-b border-gray-300">
-                  <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${product.status === 'Active' ? 'bg-orange-100 text-orange-800' : 'bg-red-100 text-red-800'}`}>
-                    {product.status}
-                  </span>
-                </td>
-                <td className="px-6 py-4 border-b border-gray-300">
-                  <button className="text-orange-600 hover:text-orange-900 mr-4">
-                    <i className="fas fa-edit"></i>
+                <td className="px-6 py-4 ">{product.name}</td>
+                <td className="px-6 py-4 ">{product.description}</td>
+                <td className="px-6 py-4 ">{product.categoryId.name}</td>
+                <td className="px-6 py-4 ">{product.price}</td>
+                <td className="px-6 py-4 ">{product.stock}</td>
+                <td className="px-6 py-4 ">{product.unitsSold}</td>
+                
+                <td className="px-6 py-4 flex gap-2">
+                  <button className="text-green-600 hover:text-green-900 mr-4">
+                    <FontAwesomeIcon icon={faEdit}/>
                   </button>
                   <button className="text-red-600 hover:text-red-900">
-                    <i className="fas fa-trash"></i>
+                    <FontAwesomeIcon icon={faTrash}/>
                   </button>
                 </td>
               </tr>

@@ -475,38 +475,42 @@ const ProductDetails = () => {
       
       <div className="mt-12">
         <h3 className="lg:text-2xl text-lg font-semibold mb-4">Related Products</h3>
-        <div className="flex flex-wrap mt-4  gap-4">
-          {relatedProducts.slice(0, 4).map((relatedProduct) => (
-            <Link to={`/product/${relatedProduct.id}`} key={relatedProduct.id} className="lg:w-64 w-64 lg:h-72 h-72 py-4 px-2 flex flex-col items-center bg-white  rounded-sm object-cover cursor-pointer">
-              <img
-                src={relatedProduct.images[0]}
-                alt={relatedProduct.name}
-                className="h-3/4 w-11/12 rounded-sm"
-              />
-              <div className=" w-full mt-2 px-2">
-                <h4 className="text-sm font-semibold">{relatedProduct.name}</h4>
-                <p className="text-sm text-gray-600">
-                  ₹{relatedProduct.salePrice.toFixed(2)}
-                </p>
-              </div>
-            </Link>
-          ))}
+        <div className="flex flex-wrap justify-center md:justify-start mt-4  gap-4">
+         {relatedProducts.map((product) => (
+          <div
+            key={product.id}
+            className="bg-white hover:bg-gray-100 duration-200 lg:px-6 px-4 py-6 shadow-md rounded-lg md:w-80 h-90 w-72 cursor-pointer"
+            onClick={() => navigate(`/product/${product.id}`)}
+          >
+            <img
+              src={product.images[0]}
+              alt={product.name}
+              className="rounded-lg mb-2 w-full md:h-56 h-52"
+            />
+            <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
+            <div className="flex items-center justify-between mb-2">
+              <span className="">₹{product.salePrice}</span>
+            </div>
+          </div>
+        ))}
 
-          {relatedProducts.slice(0, 4).map((relatedProduct) => (
-            <Link to={`/product/${relatedProduct.id}`} key={relatedProduct.id} className="lg:w-64 w-64 lg:h-72 h-72 py-4 px-2 flex flex-col items-center bg-white  rounded-sm object-cover cursor-pointer">
-              <img
-                src={relatedProduct.images[0]}
-                alt={relatedProduct.name}
-                className="h-3/4 w-11/12 rounded-sm"
-              />
-              <div className=" w-full mt-2 px-2">
-                <h4 className="text-sm font-semibold">{relatedProduct.name}</h4>
-                <p className="text-sm text-gray-600">
-                  ₹{relatedProduct.salePrice.toFixed(2)}
-                </p>
-              </div>
-            </Link>
-          ))}
+        {relatedProducts.map((product) => (
+          <div
+            key={product.id}
+            className="bg-white hover:bg-gray-100 duration-200 lg:px-6 px-4 py-6 shadow-md rounded-lg md:w-80 h-90 w-72 cursor-pointer"
+            onClick={() => navigate(`/product/${product.id}`)}
+          >
+            <img
+              src={product.images[0]}
+              alt={product.name}
+              className="rounded-lg mb-2 w-full md:h-56 h-52"
+            />
+            <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
+            <div className="flex items-center justify-between mb-2">
+              <span className="">₹{product.salePrice}</span>
+            </div>
+          </div>
+        ))}
           
         </div>
       </div>

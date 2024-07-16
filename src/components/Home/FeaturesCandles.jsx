@@ -42,7 +42,6 @@ function FeaturedCandles() {
       setNewItems(dataFromServer.data);
     } catch (error) {
       console.error("Error fetching featured products:", error);
-      // Handle error appropriately, e.g., show error message
     }
   }, []);
 
@@ -122,11 +121,11 @@ function FeaturedCandles() {
         </button>
         <div
           ref={scrollRef}
-          className="flex gap-4 py-5 px-0 overflow-x-auto"
+          className="flex gap-4 py-5 px-0 overflow-y-scroll no-scrollbar"
           style={{
             scrollSnapType: "x mandatory",
-            willChange: "transform", // Optimize for smoother scrolling
-            overflowY: "hidden", // Ensure no vertical scroll bar
+            willChange: "transform", 
+            overflowY: "hidden", 
           }}
         >
           {isMostPopularActive

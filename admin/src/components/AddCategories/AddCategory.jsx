@@ -1,8 +1,11 @@
 import { useState } from "react";
-// import upload_area from "../../../public/candle1.jpg";
+import upload_area from "../../../public/image.png";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddCategory = () => {
   const [image, setImage] = useState(null);
+  const[loading, setLoading] = useState(false);
   const [categoryDetails, setCategoryDetails] = useState({
     name: "",
     description: "",
@@ -22,27 +25,48 @@ const AddCategory = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let responseData;
-
+    setLoading(true);
     let formData = new FormData();
     formData.append("name", categoryDetails.name);
     formData.append("description", categoryDetails.description);
     formData.append("image", image);
 
-    console.log(image);
-
-    let response = await fetch("http://localhost:8000/api/v1/category/add-category", {
+    try {
+      let response = await fetch("http://localhost:8000/api/v1/category/add-category", {
         method: "POST",
         body: formData,
       });
 
-    response = await response.json();
+      let data = await response.json();
 
-    console.log(response);
+      
+
+      if (data.success) {
+        console.log(data);
+        toast.success("Category added successfully!");
+        setCategoryDetails({
+          name: "",
+          description: "",
+          image: null,
+        });
+      } else {
+        toast.error("Failed to add category. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error adding category:", error);
+      toast.error("An error occurred. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="p-4 w-[50%] mt-12 mx-auto bg-white rounded-md shadow-md">
+      {loading && (
+        <div className="fixed top-0 left-0 right-0 bottom-0 bg-gray-900 opacity-75 flex justify-center items-center z-50">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
+        </div>
+      )}
       <h2 className="text-xl font-semibold mb-4">Add Category</h2>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-3 mb-3">
@@ -69,7 +93,6 @@ const AddCategory = () => {
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-indigo-500 focus:ring-indigo-500"
             />
           </div>
-          {/* -------------------------------------------------- */}
           <div>
             <label
               htmlFor="file-input"
@@ -77,7 +100,7 @@ const AddCategory = () => {
             >
               Category Picture
               <img
-                src={image ? URL.createObjectURL(image) : "/candle1.jpg"}
+                src={image ? URL.createObjectURL(image) : upload_area}
                 className="h-36 w-36 rounded-lg"
                 alt=""
               />
@@ -91,7 +114,6 @@ const AddCategory = () => {
               className="mt-1 block border border-gray-300 rounded-md shadow-sm p-1 focus:border-indigo-500 focus:ring-indigo-500"
             />
           </div>
-          {/* ---------------------------------------- */}
         </div>
         <div className="mt-4 flex justify-end">
           <button
@@ -102,16 +124,6 @@ const AddCategory = () => {
           </button>
         </div>
       </form>
-      {/* <div className="mt-4">
-        <button
-          onClick={() => {
-            handleSubmit;
-          }}
-          className="px-4 py-2 bg-gray-300 text-black rounded-md hover:bg-gray-400"
-        >
-          All Categories
-        </button>
-      </div> */}
     </div>
   );
 };

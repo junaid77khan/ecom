@@ -54,7 +54,7 @@ const BestSeller = () => {
                 className="w-full lg:h-96 h-80 object-cover rounded-xl"
               />
             </div>
-            <div className="flex mt-4 overflow-x-auto">
+            <div className="flex mt-4 overflow-x-auto no-scrollbar">
               {bestSellerProduct.images.map((img, index) => (
                 <img
                   key={index}

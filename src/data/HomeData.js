@@ -1,14 +1,21 @@
 // src/data.js
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { 
+  faFire,
+  faStar,
+  faGem,
+  faAward
+} from '@fortawesome/free-solid-svg-icons';
 
 export const bestSellerProduct = {
     id: 1,
     name: "AuraDecor Fragrance Rose Heart Shape Tealight (Pack of 10) AuraDecor Fragrance Rose Heart Shape Tealight (Pack of 10)",
     originalPrice: 199.0,
     salePrice: 99.0,
-    images: ["/candle2.jpg",
-            "/candle3.jpg",
-            "/candle3.jpg",
-            "/candle3.jpg"],
+    images: [`${import.meta.env.VITE_API_BEST_SELLER1}`,
+            `${import.meta.env.VITE_API_BEST_SELLER2}`,
+            `${import.meta.env.VITE_API_BEST_SELLER3}`, ],
     description:
       "Inhaling rose fragrance has therapeutic aroma benefits that help fight depression, overcome anxiety, reduce stress and insomnia.",
     features: [
@@ -268,22 +275,24 @@ export const bestSellerProduct = {
       quote:
         "Offer a diverse range of high-quality candles and decorative candles, ensuring there's something for every taste and occasion occasion occasion.",
       title: "Premium Candles",
+      icon: faFire,
     },
     {
       quote:
         "Their candles create a warm, inviting ambiance that enhances any space. With a variety of scents and styles, they're perfect for any occasion.",
       title: "Inviting Ambiance",
+      icon: faStar,
     },
     {
       quote:
         "Experience candles that blend luxury and affordability seamlessly. Their elegant designs and long-lasting scents elevate any room effortlessly.",
       title: "Luxury on a Budget",
+      icon: faGem,
     },
     {
       quote:
         "Indulge in candles that seamlessly blend luxury and affordability. Their elegant designs and long-lasting scents effortlessly elevate any room.",
       title: "Crafted with Excellence",
+      icon: faAward,
     },
-];
-
-  
+  ];

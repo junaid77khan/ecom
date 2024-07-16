@@ -2,6 +2,8 @@
 
 import cn from "../../utils/cn";
 import  { useEffect, useState, useRef } from "react";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const InfiniteMovingCards = ({
   items,
@@ -70,27 +72,29 @@ export const InfiniteMovingCards = ({
           pauseOnHover && "hover:[animation-play-state:paused]"
         )}
       >
-        {items.map((item, ) => (
+        {items.map((item, index) => (
           <li
-            className="lg:w-[350px] w-[320px] h-full max-w-full relative rounded-2xl border border-b-0 flex-shrink-0 border-orange-950 px-8 py-4"
+            className="lg:w-[400px] w-[320px] h-full max-w-full relative rounded-2xl border border-b-0 flex-shrink-0 border-orange-950 px-8 py-4"
             style={{
               background:
                 "linear-gradient(180deg, var(--orange-600), var(--orange-700)",
             }}
             key={item.name}
           >
-            <blockquote className="h-full">
+            <blockquote key={index} className="h-full">
               <div
                 aria-hidden="true"
                 className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
               ></div>
               <span className="relative z-20 lg:text-md text-sm leading-[1.6] text-white font-normal">
+                
                 {item.quote}
               </span>
               <div className="relative z-20 mt-6 flex flex-row items-center">
-                  <span className="lg:text-2xl text-lg flex justify-center items-center leading-[1.6] text-white font-normal">
-                    {item.title}
-                  </span>
+                <span className="lg:text-2xl text-lg flex justify-center items-center leading-[1.6] text-white font-normal">
+                 <FontAwesomeIcon icon={item.icon} className="mr-2 lg:text-xl text-lg text-white" />
+                  {item.title}
+                </span>
               </div>
             </blockquote>
           </li>
