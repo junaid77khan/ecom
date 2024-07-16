@@ -1,25 +1,77 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import debounce from "lodash/debounce";
 
 function FeaturedCandles() {
   const [isMostPopularActive, setIsMostPopularActive] = useState(true);
   const scrollRef = useRef(null);
   const [scrollIndex, setScrollIndex] = useState(0);
+  const [mostPopularProducts, setMostPopularProducts] = useState([]);
+  const [newItems, setNewItems] = useState([]);
+
+  const fetchFeaturedProducts = useCallback(async () => {
+    try {
+      let response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/v1/product/most-popular-products`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      let dataFromServer = await response.json();
+      if (!dataFromServer.success) {
+        throw new Error("Failed to fetch most popular products");
+      }
+      setMostPopularProducts(dataFromServer.data);
+
+      response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/v1/product/new-items`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      dataFromServer = await response.json();
+      if (!dataFromServer.success) {
+        throw new Error("Failed to fetch new items");
+      }
+      setNewItems(dataFromServer.data);
+    } catch (error) {
+      console.error("Error fetching featured products:", error);
+      // Handle error appropriately, e.g., show error message
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchFeaturedProducts();
+  }, [fetchFeaturedProducts]);
+
+  const debouncedScrollBy = useCallback(
+    debounce((direction) => {
+      const productWidth = scrollRef.current.firstChild.clientWidth;
+      const maxScrollIndex =
+        Math.floor(scrollRef.current.scrollWidth / productWidth) - 1;
+
+      if (direction === "left") {
+        setScrollIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+      } else {
+        setScrollIndex((prevIndex) => Math.min(prevIndex + 1, maxScrollIndex));
+      }
+    }, 150),
+    []
+  );
 
   const scrollBy = (direction) => {
-    const productWidth = scrollRef.current.firstChild.clientWidth;
-    const maxScrollIndex =
-      Math.floor(scrollRef.current.scrollWidth / productWidth) - 1;
-
-    if (direction === "left") {
-      setScrollIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-    } else {
-      setScrollIndex((prevIndex) => Math.min(prevIndex + 1, maxScrollIndex));
-    }
+    debouncedScrollBy(direction);
   };
+
   const scrollToIndex = () => {
-    const productWidth = scrollRef.current.firstChild.clientWidth + 16;
-    scrollRef.current.scrollTo({
+    const productWidth = scrollRef?.current?.firstChild?.clientWidth + 16;
+    scrollRef?.current?.scrollTo({
       left: productWidth * scrollIndex,
       behavior: "smooth",
     });
@@ -61,7 +113,7 @@ function FeaturedCandles() {
           </button>
         </div>
       </div>
-      <div className="flex justify-center items-center lg:gap-8 md:gap-7 gap-0 overflow-x-hidden mt-4">
+      <div className="flex justify-center items-center lg:gap-8 md:gap-7 gap-0 overflow-x-hidden  mt-4">
         <button
           onClick={() => scrollBy("left")}
           className=" bg-white rounded-full p-2 shadow-md z-10"
@@ -70,67 +122,27 @@ function FeaturedCandles() {
         </button>
         <div
           ref={scrollRef}
-          className="flex gap-4 py-5 px-0 overflow-x-hidden"
-          style={{ scrollSnapType: "x mandatory" }}
+          className="flex gap-4 py-5 px-0 overflow-x-auto"
+          style={{
+            scrollSnapType: "x mandatory",
+            willChange: "transform", // Optimize for smoother scrolling
+            overflowY: "hidden", // Ensure no vertical scroll bar
+          }}
         >
-          {isMostPopularActive &&
-            Array(16)
-              .fill()
-              .map((_, index) => (
-                <div
-                  key={index}
-                  className="flex-shrink-0 lg:w-72 w-64 h-96 px-4 py-5 bg-white rounded-lg shadow-lg hover:bg-gray-100 transition duration-300"
-                >
-                  <div className="relative overflow-hidden w-full h-3/4">
-                    <img
-                      className="w-full h-full object-cover absolute inset-0 rounded-t-lg translate-y-0 hover:translate-y-[-100%] transition-transform duration-500"
-                      src="/candle4.jpg"
-                      alt="Product"
-                    />
-                    <img
-                      className="w-full h-full object-cover rounded-t-lg"
-                      src="/candle2.jpg"
-                      alt="Product"
-                    />
-                  </div>
-                  <div className="p-3 text-center">
-                    <h1 className="text-gray-500 text-sm">AURA DECOR</h1>
-                    <h1 className="text-sm sm:text-md font-semibold">
-                      AuraDecor Blue Premium Reed Diffuser Gift Set || Aroma
-                      Diffuser
-                    </h1>
-                  </div>
-                </div>
-              ))}
-
-          {!isMostPopularActive &&
-            Array(16)
-              .fill()
-              .map((_, index) => (
-                <div
-                  key={index}
-                  className="flex-shrink-0 lg:w-72 w-64 h-96 px-4 py-5 bg-white rounded-lg shadow-lg hover:bg-gray-100 transition duration-300"
-                >
-                  <div className="relative overflow-hidden w-full h-3/4">
-                    <img
-                      className="w-full h-full object-cover absolute inset-0 rounded-t-lg translate-y-0 hover:translate-y-[-100%] transition-transform duration-500"
-                      src="/candle8.jpg"
-                      alt="Product"
-                    />
-                    <img
-                      className="w-full h-full object-cover rounded-t-lg"
-                      src="/candle1.jpg"
-                      alt="Product"
-                    />
-                  </div>
-                  <div className="p-3 text-center">
-                    <h1 className="text-gray-500 text-sm">AURA DECOR</h1>
-                    <h1 className="text-sm sm:text-md font-semibold">
-                      AuraDecor Blue Premium Reed Diffuser Gift Set || Aroma
-                      Diffuser
-                    </h1>
-                  </div>
-                </div>
+          {isMostPopularActive
+            ? mostPopularProducts.map((product) => (
+                <ProductCard
+                  key={product._id}
+                  product={product}
+                  isMostPopularActive={isMostPopularActive}
+                />
+              ))
+            : newItems.map((product) => (
+                <ProductCard
+                  key={product._id}
+                  product={product}
+                  isMostPopularActive={isMostPopularActive}
+                />
               ))}
         </div>
         <button
@@ -139,6 +151,33 @@ function FeaturedCandles() {
         >
           <FaChevronRight />
         </button>
+      </div>
+    </div>
+  );
+}
+
+function ProductCard({ product, isMostPopularActive }) {
+  return (
+    <div className="flex-shrink-0 lg:w-72 w-64 h-96 px-4 py-5 bg-white rounded-lg shadow-lg hover:bg-gray-100 transition duration-300">
+      <div className="relative overflow-hidden w-full h-3/4">
+        <img
+          className="w-full h-full object-cover absolute inset-0 rounded-t-lg translate-y-0 transition-transform duration-500"
+          src={product.images[0]}
+          alt={product.name}
+        />
+        <img
+          className="w-full h-full object-cover rounded-t-lg"
+          src={product.images[1]}
+          alt={product.name}
+        />
+      </div>
+      <div className="p-3 text-center">
+        <h1 className="text-gray-500 text-sm">{product.name}</h1>
+        <h1 className="text-sm sm:text-md font-semibold">
+          {isMostPopularActive
+            ? product.description.substring(0, 40)
+            : product.description}
+        </h1>
       </div>
     </div>
   );

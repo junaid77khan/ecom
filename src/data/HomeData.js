@@ -2,7 +2,7 @@
 
 export const bestSellerProduct = {
     id: 1,
-    name: "AuraDecor Fragrance Rose Heart Shape Tealight (Pack of 10)",
+    name: "AuraDecor Fragrance Rose Heart Shape Tealight (Pack of 10) AuraDecor Fragrance Rose Heart Shape Tealight (Pack of 10)",
     originalPrice: 199.0,
     salePrice: 99.0,
     images: ["/candle2.jpg",
