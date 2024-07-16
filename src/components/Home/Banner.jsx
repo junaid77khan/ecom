@@ -4,7 +4,7 @@ import { ImagesSlider } from "../../components/ui/images-slider";
 import { useNavigate } from "react-router-dom";
 const Banner = () => {
   const navigate = useNavigate();
-  const images = ["/banner1.jpg", "/banner2.jpg", "/banner3.jpg"];
+  const images = [`${import.meta.env.VITE_API_BANNER1}`, `${import.meta.env.VITE_API_BANNER1}`, `${import.meta.env.VITE_API_BANNER1}`];
 
   return (
     <div className=" relative">

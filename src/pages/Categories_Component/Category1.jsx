@@ -139,7 +139,7 @@ const CategoryProducts = () => {
         {sortedProducts.map((product) => (
           <div
             key={product.id}
-            className="bg-white hover:bg-gray-100 duration-200 lg:px-6 px-4 py-6 shadow-md rounded-lg h-full md:w-80 w-72 cursor-pointer"
+            className="bg-white hover:bg-gray-100 duration-200 lg:px-6 px-4 py-6 shadow-md rounded-lg h-90 md:w-80 w-72 cursor-pointer"
           >
             <img
               src={product.images[0]}
