@@ -301,22 +301,8 @@ const ProductDetails = () => {
     const obj = {...product, quantity: productQuantity}
     dispatch(addToCart({"product": obj}));
     dispatch(showPopup(obj));
-    // toast.success('Added to cart', {
-    //   position: "top-right",
-    //   autoClose: 3000,  
-    //   hideProgressBar: false,
-    //   closeOnClick: true,
-    //   pauseOnHover: true,
-    //   draggable: true,
-    //   progress: undefined,
-    // });
   };
 
-  // const handleAddToCart = (product) => {
-  //   const obj = { ...product, quantity: 1 };
-  //   dispatch(addToCart({ product: obj }));
-  //   dispatch(showPopup(obj));
-  // };
   return (
     <div className=" mx-auto lg:px-4 px-2 py-8 bg-orange-50">
       <div className="bg-white py-7 shadow-md rounded-lg overflow-hidden">
@@ -406,8 +392,7 @@ const ProductDetails = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className="mt-12 ">
+        <div className="mt-12 ">
       {product.reviews.length > 0 && (
             <div className="px-5">
               <div>
@@ -486,6 +471,8 @@ const ProductDetails = () => {
             </div>
           )}
       </div>
+      </div>
+      
       <div className="mt-12">
         <h3 className="lg:text-2xl text-lg font-semibold mb-4">Related Products</h3>
         <div className="flex flex-wrap mt-4  gap-4">

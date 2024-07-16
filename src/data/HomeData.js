@@ -6,17 +6,22 @@ export const bestSellerProduct = {
     originalPrice: 199.0,
     salePrice: 99.0,
     images: ["/candle2.jpg",
-            "/candle4.jpg",
-            "/candle4.jpg",
-            "/candle4.jpg"],
+            "/candle3.jpg",
+            "/candle3.jpg",
+            "/candle3.jpg"],
     description:
       "Inhaling rose fragrance has therapeutic aroma benefits that help fight depression, overcome anxiety, reduce stress and insomnia.",
     features: [
-      "Set of 10 Tealight Candles",
-      "Rose Fragrance",
-      "Heart Shape",
-      "Perfect for Decoration and Gifting",
-      "Burn Time: Up to 4 hours each",
+      "Aromatherapy Benefits: Enjoy the calming effects of blue sage and lavender, promoting a sense of well-being and tranquility in your living space.",
+      "Long-lasting Fragrance: The jar candle burns for up to 50 hours, while the reed diffuser oil provides a continuous, soothing aroma of blue sage and lavender.",
+      "High-Quality Packaging: The premium gift box presentation ensures this set is ready to impress, making it an excellent choice for gifting or personal use.",
+      "Perfect Gift for Loved Ones: This luxurious gift set is ideal for birthdays, anniversaries, or any special occasion, offering a touch of elegance and relaxation."
+    ],
+    specifications: [
+      { name: "Candle Burn Time", value: "Up to 50 hours" },
+      { name: "Fragrance", value: "Blue Sage and Lavender" },
+      { name: "Packaging", value: "Premium Gift Box" },
+      { name: "Diffuser Volume", value: "100ml" }
     ],
     reviews: [
       {
@@ -261,7 +266,7 @@ export const bestSellerProduct = {
   export const testimonials = [
     {
       quote:
-        "Offer a diverse range of high-quality candles and decorative candles, ensuring there's something for every taste and occasion.",
+        "Offer a diverse range of high-quality candles and decorative candles, ensuring there's something for every taste and occasion occasion occasion.",
       title: "Premium Candles",
     },
     {
@@ -276,7 +281,7 @@ export const bestSellerProduct = {
     },
     {
       quote:
-        "Explore a wide array of candles that promise exceptional quality and craftsmanship. Each candle is a testament to their dedication to excellence.",
+        "Indulge in candles that seamlessly blend luxury and affordability. Their elegant designs and long-lasting scents effortlessly elevate any room.",
       title: "Crafted with Excellence",
     },
 ];
