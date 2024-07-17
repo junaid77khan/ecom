@@ -21,6 +21,11 @@ import BlogRead from "./pages/BlogRead";
 import CheckoutPage from "./pages/Checkout";
 import { NotFound } from "./pages/Notfound";
 
+import AddCategory from "./components/AddCategory";
+import UserProfile from "./pages/UserProfile";
+import Checkouts from "./pages/payment";
+
+
 
 function App() {
   return (
@@ -54,6 +59,10 @@ function App() {
 
           <Route path="cart" element={<Cart />} />
           <Route path="/*" element={<NotFound />} />
+          <Route path="/add-category" element={<AddCategory/>} />
+          <Route path="/profile" element={<UserProfile/>} />
+          <Route path="/payment" element={<Checkouts/>} />
+
 
         </Routes>
 
