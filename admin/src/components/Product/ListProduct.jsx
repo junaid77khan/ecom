@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { faTrash, faEdit, faE } from '@fortawesome/free-solid-svg-icons';
+import { FaTrash, FaEdit } from "react-icons/fa";
 
 const ListProduct = () => {
     const navigate = useNavigate();
@@ -46,9 +47,9 @@ const ListProduct = () => {
             <tr>
               <th className="px-6 py-3  text-left text-sm font-semibold text-gray-600 tracking-wider">Image</th>
               <th className="px-6 py-3  text-left text-sm font-semibold text-gray-600 tracking-wider">Name</th>
-              <th className="px-6 py-3  text-left text-sm font-semibold text-gray-600 tracking-wider">Description</th>
+              {/* <th className="px-6 py-3  text-left text-sm font-semibold text-gray-600 tracking-wider">Description</th> */}
               <th className="px-6 py-3  text-left text-sm font-semibold text-gray-600 tracking-wider">Category</th>
-              <th className="px-6 py-3  text-left text-sm font-semibold text-gray-600 tracking-wider">Price</th>
+              {/* <th className="px-6 py-3  text-left text-sm font-semibold text-gray-600 tracking-wider">Price</th> */}
 
               <th className="px-6 py-3  text-left text-sm font-semibold text-gray-600 tracking-wider">Stock</th>
               <th className="px-6 py-3  text-left text-sm font-semibold text-gray-600 tracking-wider">Units sold</th>
@@ -59,21 +60,21 @@ const ListProduct = () => {
             {products.map((product) => (
               <tr key={product._id} className="border-b border-gray-300">
                 <td className="px-6 py-4 ">
-                  <img src={product.images[0]} alt={product.name} className="w-12 h-12 rounded-full" />
+                  <img src={product.images[0]} alt={product.name} className="w-10 h-10 rounded-full" />
                 </td>
                 <td className="px-6 py-4 ">{product.name}</td>
-                <td className="px-6 py-4 ">{product.description}</td>
+                {/* <td className="px-6 py-4 ">{product.description}</td> */}
                 <td className="px-6 py-4 ">{product.categoryId.name}</td>
-                <td className="px-6 py-4 ">{product.price}</td>
+                {/* <td className="px-6 py-4 ">{product.price}</td> */}
                 <td className="px-6 py-4 ">{product.stock}</td>
                 <td className="px-6 py-4 ">{product.unitsSold}</td>
                 
                 <td className="px-6 py-4 flex gap-2">
-                  <button className="text-green-600 hover:text-green-900 mr-4">
-                    <FontAwesomeIcon icon={faEdit}/>
+                  <button className="text-gray-600 hover:text-gray-900 mr-4">
+                    <FaEdit/>
                   </button>
-                  <button className="text-red-600 hover:text-red-900">
-                    <FontAwesomeIcon icon={faTrash}/>
+                  <button className="text-gray-600 hover:text-gray-900">
+                    <FaTrash/>
                   </button>
                 </td>
               </tr>

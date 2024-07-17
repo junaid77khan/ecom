@@ -2,20 +2,13 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const AddProduct = () => {
+const ProductForm = (props) => {
+  const {productData} = props;
   const [images, setImages] = useState([null, null, null]);
   const [categories, setCategories] = useState([]);
   const[loading, setLoading] = useState(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState("");
-  const [productDetails, setProductDetails] = useState({
-    name: "",
-    description: "",
-    features: [],
-    specifications: [],
-    price: 0,
-    stock: 0,
-    category: {},
-  });
+  const [productDetails, setProductDetails] = useState(productData);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -121,7 +114,8 @@ const AddProduct = () => {
       const formData = new FormData();
       formData.append("name", productDetails.name);
       formData.append("description", productDetails.description);
-      formData.append("price", parseFloat(productDetails.price));
+      formData.append("actualPrice", parseFloat(productDetails.actualPrice));
+      formData.append("salePrice", parseFloat(productDetails.salePrice));
       formData.append("stock", parseInt(productDetails.stock));
       formData.append("categoryId", selectedCategoryId);
 
@@ -166,7 +160,8 @@ const AddProduct = () => {
         description: "",
         features: [],
         specifications: [],
-        price: 0,
+        actualPrice: 0,
+        salePrice: 0,
         stock: 0,
         category: {},
       });
@@ -186,7 +181,6 @@ const AddProduct = () => {
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
         </div>
       )}
-      <h2 className="text-xl font-semibold mb-4">Add Product</h2>
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
@@ -216,12 +210,25 @@ const AddProduct = () => {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">
-              Price
+              actualPrice
             </label>
             <input
               type="number"
-              name="price"
-              value={productDetails.price}
+              name="actualPrice"
+              value={productDetails.actualPrice}
+              onChange={handleChange}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-indigo-500 focus:ring-indigo-500"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              salePrice
+            </label>
+            <input
+              type="number"
+              name="salePrice"
+              value={productDetails.salePrice}
               onChange={handleChange}
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-indigo-500 focus:ring-indigo-500"
               required
@@ -375,4 +382,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default ProductForm;

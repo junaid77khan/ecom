@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import { Sidebar } from "../../components/sidebar";
-import ListProduct from "../../components/ListProduct/ListProduct";
-import AddProduct from "../../components/AddProducts/AddProduct";
-import AddCategory from "../../components/AddCategories/AddCategory";
-import ListCategory from "../../components/ListCategory/ListCategory";
+import ListProduct from "../../components/Product/ListProduct";
+import AddProduct from "../../components/Product/AddProduct";
+import AddCategory from "../../components/Category/AddCategory";
+import ListCategory from "../../components/Category/ListCategory";
 
 const Admin = () => {
   return (
