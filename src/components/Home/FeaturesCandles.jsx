@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import debounce from "lodash/debounce";
+import { useNavigate } from "react-router-dom";
 
 function FeaturedCandles() {
   const [isMostPopularActive, setIsMostPopularActive] = useState(true);
@@ -156,11 +157,12 @@ function FeaturedCandles() {
 }
 
 function ProductCard({ product, isMostPopularActive }) {
+  const navigate = useNavigate();
   return (
-    <div className="flex-shrink-0 lg:w-72 w-64 h-96 px-4 py-5 bg-white rounded-lg shadow-lg hover:bg-gray-100 transition duration-300">
-      <div className="relative overflow-hidden w-full h-3/4">
+    <div onClick={() => navigate(`/product/${product._id}`)} className="flex-shrink-0 lg:w-72 w-64 h-96 px-4 py-5 bg-white rounded-lg shadow-lg hover:bg-gray-100 transition duration-300">
+      <div className="relative overflow-hidden w-full h-2/3">
         <img
-          className="w-full h-full object-cover absolute inset-0 rounded-t-lg translate-y-0 transition-transform duration-500"
+          className="w-full h-full object-cover absolute inset-0 rounded-t-lg translate-y-0 hover:translate-y-full transition-transform duration-500"
           src={product.images[0]}
           alt={product.name}
         />
@@ -170,12 +172,10 @@ function ProductCard({ product, isMostPopularActive }) {
           alt={product.name}
         />
       </div>
-      <div className="p-3 text-center">
-        <h1 className="text-gray-500 text-sm">{product.name}</h1>
-        <h1 className="text-sm sm:text-md font-semibold">
-          {isMostPopularActive
-            ? product.description.substring(0, 40)
-            : product.description}
+      <div className="w-full flex flex-col">
+        <h1 className=" text-lg p-1">{product.name}</h1>
+        <h1 className="text-md text-gray-500">
+          {product.description.substring(0, 40)}
         </h1>
       </div>
     </div>
