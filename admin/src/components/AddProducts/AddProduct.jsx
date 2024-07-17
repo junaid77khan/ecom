@@ -1,22 +1,23 @@
 import { useState, useEffect } from "react";
-import upload_area from "../../../public/image.png";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddProduct = () => {
-  const [images, setImages] = useState([null, null, null]); // State to store 3 images
+  const [images, setImages] = useState([null, null, null]);
   const [categories, setCategories] = useState([]);
+  const[loading, setLoading] = useState(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState("");
   const [productDetails, setProductDetails] = useState({
     name: "",
     description: "",
-    features: [], // Array of strings
-    specifications: [], // Array of objects { name: string, value: string }
+    features: [],
+    specifications: [],
     price: 0,
     stock: 0,
     category: {},
   });
 
   useEffect(() => {
-    // Fetch categories from backend and update state
     const fetchCategories = async () => {
       try {
         const response = await fetch(
@@ -35,26 +36,21 @@ const AddProduct = () => {
     fetchCategories();
   }, []);
 
-  const handleImage = (e, index) => {
-    const newImages = [...images];
-    newImages[index] = e.target.files[0];
-    setImages(newImages);
-  };
-
   const handleChange = (e) => {
-    if (e.target.name === "category") {
+    const { name, value } = e.target;
+    if (name === "category") {
       const selectedCategory = categories.find(
-        (category) => category._id === e.target.value
+        (category) => category._id === value
       );
       setProductDetails({
         ...productDetails,
-        category: selectedCategory,
+        category: selectedCategory || {},
       });
-      setSelectedCategoryId(e.target.value); // Update selectedCategoryId state
+      setSelectedCategoryId(value);
     } else {
       setProductDetails({
         ...productDetails,
-        [e.target.name]: e.target.value,
+        [name]: value,
       });
     }
   };
@@ -112,24 +108,27 @@ const AddProduct = () => {
     });
   };
 
+  const handleImage = (e, index) => {
+    const newImages = [...images];
+    newImages[index] = e.target.files[0];
+    setImages(newImages);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const formData = new FormData();
-
-      // Append product details
       formData.append("name", productDetails.name);
       formData.append("description", productDetails.description);
       formData.append("price", parseFloat(productDetails.price));
       formData.append("stock", parseInt(productDetails.stock));
       formData.append("categoryId", selectedCategoryId);
 
-      // Append features
       productDetails.features.forEach((feature, index) => {
         formData.append(`features[${index}]`, feature);
       });
 
-      // Append specifications
       productDetails.specifications.forEach((specification, index) => {
         formData.append(
           `specifications[${index}][name]`,
@@ -141,7 +140,6 @@ const AddProduct = () => {
         );
       });
 
-      // Append images
       images.forEach((image, index) => {
         if (image) {
           formData.append(`image${index + 1}`, image);
@@ -158,11 +156,11 @@ const AddProduct = () => {
       const addProductData = await addProductResponse.json();
 
       if (!addProductResponse.ok || !addProductData.success) {
+        toast.error("Failed to add product. Please try again.");
         throw new Error("Failed to add product");
       }
 
-      alert("Product added successfully!");
-      // Reset form after successful submission
+      toast.success("Product added successfully!");
       setProductDetails({
         name: "",
         description: "",
@@ -170,17 +168,24 @@ const AddProduct = () => {
         specifications: [],
         price: 0,
         stock: 0,
-        category: "",
+        category: {},
       });
       setImages([null, null, null]);
     } catch (error) {
       console.error("Error adding product:", error);
       alert("Failed to add product");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="p-4 w-[50%] mt-12 mx-auto bg-white rounded-md shadow-md">
+      {loading && (
+        <div className="fixed top-0 left-0 right-0 bottom-0 bg-gray-900 opacity-75 flex justify-center items-center z-50">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
+        </div>
+      )}
       <h2 className="text-xl font-semibold mb-4">Add Product</h2>
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -240,20 +245,19 @@ const AddProduct = () => {
               Select Category
             </label>
             <select
-  name="category"
-  value={productDetails.category._id} // Use category ID as value
-  onChange={handleChange}
-  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-indigo-500 focus:ring-indigo-500"
-  required
->
-  <option value="">Select</option>
-  {categories &&
-    categories.map((category) => (
-      <option key={category._id} value={category._id}>
-        {category.name}
-      </option>
-    ))}
-</select>
+              name="category"
+              value={selectedCategoryId}
+              onChange={handleChange}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-indigo-500 focus:ring-indigo-500"
+              required
+            >
+              <option value="">Select</option>
+              {categories.map((category) => (
+                <option key={category._id} value={category._id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="col-span-2">
             <label className="block text-sm font-medium text-gray-700">
@@ -261,13 +265,14 @@ const AddProduct = () => {
             </label>
             {productDetails.features.map((feature, index) => (
               <div key={index} className="flex items-center gap-2">
-                <input
-                  type="text"
-                  value={feature}
-                  onChange={(e) => handleFeaturesChange(e, index)}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-indigo-500 focus:ring-indigo-500"
-                  required
-                />
+              <input
+                type="text"
+                name={`features[${index}]`}
+                value={feature}
+                onChange={(e) => handleFeaturesChange(e, index)}
+                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-indigo-500 focus:ring-indigo-500"
+                required
+              />
                 <button
                   type="button"
                   onClick={() => handleRemoveFeature(index)}
@@ -291,26 +296,25 @@ const AddProduct = () => {
             </label>
             {productDetails.specifications.map((specification, index) => (
               <div key={index} className="grid grid-cols-2 gap-2">
-                <input
-                  type="text"
-                  placeholder="Name"
-                  value={specification.name}
-                  onChange={(e) =>
-                    handleSpecificationChange(e, index, "name")
-                  }
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-indigo-500 focus:ring-indigo-500"
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder="Value"
-                  value={specification.value}
-                  onChange={(e) =>
-                    handleSpecificationChange(e, index, "value")
-                  }
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-indigo-500 focus:ring-indigo-500"
-                  required
-                />
+              <input
+                type="text"
+                name={`specifications[${index}][name]`}
+                value={specification.name}
+                onChange={(e) => handleSpecificationChange(e, index, 'name')}
+                placeholder="Name"
+                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-indigo-500 focus:ring-indigo-500"
+                required
+              />
+              <input
+                type="text"
+                name={`specifications[${index}][value]`}
+                value={specification.value}
+                onChange={(e) => handleSpecificationChange(e, index, 'value')}
+                placeholder="Value"
+                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-indigo-500 focus:ring-indigo-500"
+                required
+              />
+
                 <button
                   type="button"
                   onClick={() => handleRemoveSpecification(index)}
@@ -335,7 +339,7 @@ const AddProduct = () => {
             >
               Product Pictures
               <div className="flex gap-4 mt-2">
-                {images.map((image, index) => (
+                {images.map((_, index) => (
                   <div key={index}>
                     <input
                       type="file"
