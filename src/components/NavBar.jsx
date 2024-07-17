@@ -57,7 +57,7 @@ function NavBar() {
         <a href="/">
           <div className="flex flex-wrap text-lg justify-center items-center">
             <img
-              src="/logo1.png "
+              src={import.meta.env.VITE_API_LOGO}
               className="h-16 w-36 sm:h-20 sm:w-48  lg:h-20 lg:w-60"
             ></img>
           </div>

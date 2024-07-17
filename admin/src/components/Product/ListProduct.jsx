@@ -11,23 +11,27 @@ const ListProduct = () => {
     const navigate = useNavigate();
     const[products,setProducts] = useState([]);
     useEffect(() => {
-      const fetchProducts = async() => {
-        const response = await fetch(`http://localhost:8000/api/v1/product/all-products`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-        });
-  
-        const dataFromServer = await response.json();
-  
-        if(!dataFromServer.success) {
-          navigate("/error")
+      try {
+        const fetchProducts = async() => {
+          const response = await fetch(`http://localhost:8000/api/v1/product/all-products`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+          });
+    
+          const dataFromServer = await response.json();
+    
+          if(!dataFromServer.success) {
+            navigate("/error")
+          }
+          setProducts(dataFromServer.data);
         }
-        setProducts(dataFromServer.data);
+    
+        fetchProducts();
+      } catch (error) {
+        console.log("Error fetching products data", error);
       }
-  
-      fetchProducts();
     }, [])
 
   const handleAddProduct = () => {
@@ -57,7 +61,7 @@ const ListProduct = () => {
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => (
+            {products?.length > 0 && products?.map((product) => (
               <tr key={product._id} className="border-b border-gray-300">
                 <td className="px-6 py-4 ">
                   <img src={product.images[0]} alt={product.name} className="w-10 h-10 rounded-full" />

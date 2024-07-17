@@ -10,59 +10,31 @@ import {
   FaChevronDown,
   FaChevronUp,
 } from "react-icons/fa";
+import { useState, useEffect } from "react";
 
 function Categories() {
   const navigate = useNavigate();
-  let productCategories = [
-    {
-        id: 1,
-        categoryName: "Pillar Candles",
-        image: "/Pillar Candles.jpeg",
-        description: "Explore a wide range of elegant home decor items to beautify your living spaces."
-    },
-    {
-        id: 2,
-        categoryName: "Scented Candles",
-        image: "/Scented.jpeg",
-        description: "Discover cutting-edge electronics that enhance your lifestyle, from smartphones to smart home devices."
-    },
-    {
-        id: 3,
-        categoryName: "Tea light candles",
-        image: "/tea.jpeg",
-        description: "Stay in style with the latest trends in fashion, including clothing, accessories, and footwear."
-    },
-    {
-        id: 4,
-        categoryName: "Jar Candles",
-        image: "/jar.jpeg",
-        description: "Immerse yourself in the world of literature with our curated collection of books across genres."
-    },
-    {
-        id: 5,
-        categoryName: "Tea light holders",
-        image: "/holders.jpeg",
-        description: "Equip yourself for adventure with high-quality sports gear and outdoor essentials."
-    },
-    {
-        id: 6,
-        categoryName: "Aroma Diffusers",
-        image: "/Aroma.jpeg",
-        description: "Enhance your beauty routine with skincare, makeup, and personal care products."
-    },
-    {
-        id: 7,
-        categoryName: "Gift Hampers",
-        image: "/gift.jpeg",
-        description: "Entertain and inspire with a diverse selection of toys and games for all ages."
-    },
-    {
-        id: 8,
-        categoryName: "Wax sachet",
-        image: "/wax.jpeg",
-        description: "Transform your kitchen into a culinary haven with top-quality cookware and dining essentials."
+  const[productCategories, setProductCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchProductCategories = async() => {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/category/all-categories`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      });
+
+      const dataFromServer = await response.json();
+
+      if(!dataFromServer.success) {
+        navigate("/error")
+      }
+      setProductCategories(dataFromServer.data);
     }
-  ];
+
+    fetchProductCategories();
+  }, [])
 
   return (
     <div className="container py-12 flex flex-col justify-center items-center bg-orange-50">
@@ -70,21 +42,20 @@ function Categories() {
       <div className="flex flex-wrap justify-center items-center lg:gap-8 gap-4">
         {productCategories.map((category) => (
       <a
-        key={category.id}
-        href={`/categories/${encodeURIComponent(category.categoryName)}`}
+        key={category._id}
+        href={`/categories/${category._id}/${category.name}`}
         className="flex flex-col justify-center items-start gap-3 lg:w-80 lg:h-96 w-72 h-80 lg:px-6 px-4 py-6 bg-white overflow-hidden hover:bg-gray-200 duration-200 rounded-lg"
       >
         <div className="w-full h-3/4 overflow-hidden">
           <img
             className="bg-cover h-full w-full bg-center rounded-lg hover:scale-105 transition-transform duration-300 transform-gpu"
             src={category.image}
-            alt={category.categoryName}
+            alt={category.name}
           />
         </div>
         <h1 className="text-lg lg:text-xl">
-          {category.categoryName}{" "}
+          {category.name}{" "}
           <FontAwesomeIcon
-            onClick={() => navigate("/collections")}
             className="cursor-pointer"
             icon={faArrowRight}
           />{" "}

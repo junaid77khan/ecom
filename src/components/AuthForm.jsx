@@ -72,7 +72,7 @@ const AuthForm = ({ isLogin, handleSubmit, email, setEmail, password, setPasswor
           <div className="flex-1 bg-orange-100 text-center hidden lg:flex items-center justify-center">
         <div
           className=" w-full h-full bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url('/login.jpg')` }}
+          style={{ backgroundImage: `url(${import.meta.env.VITE_API_LOG_SIGN_IMAGE})` }}
         ></div>
       </div>
     </div>

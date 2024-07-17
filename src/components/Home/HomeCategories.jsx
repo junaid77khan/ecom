@@ -40,11 +40,9 @@ const HomeCategories = () => {
         )}
         {productCategories?.length > 0 &&
           productCategories?.map((category) => (
-            <a
+            <div
               key={category._id}
-              href={`/categories/${encodeURIComponent(
-                category.name
-              )}`}
+              onClick={() => navigate(`/categories/${category._id}/${category.name}`)}
               className="flex flex-col justify-start items-start gap-3 w-72 sm:w-72 h-80 sm:h-96 px-4 py-6 bg-white overflow-hidden hover:bg-gray-200 duration-200 rounded-lg"
             >
               <div className="w-full h-3/4 overflow-hidden">
@@ -57,7 +55,6 @@ const HomeCategories = () => {
               <h1 className="text-lg sm:text-xl">
                 {category.name}{" "}
                 <FontAwesomeIcon
-                  onClick={() => navigate("/collections")}
                   className="cursor-pointer"
                   icon={faArrowRight}
                 />{" "}
@@ -67,7 +64,7 @@ const HomeCategories = () => {
                   {category.description.substring(0, 40)}...
                 </p>
               </div>
-            </a>
+            </div>
           ))}
       </div>
 

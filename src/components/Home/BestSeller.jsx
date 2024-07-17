@@ -1,18 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { bestSellerProduct } from "../../data/HomeData";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../store/cartSlice";
 import { showPopup } from "../../store/popupSlice";
+// import { fetchBestSellerProduct } from "../../store/productSlice";
 
 const BestSeller = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [allReviews, setAllReviews] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
+  const[bestSellerProduct, setBestSellerProduct] = useState({});
   const [productQuantity, setProductQuantity] = useState(1);
 
   const [activeButton, setActiveButton] = useState("");
@@ -36,6 +37,31 @@ const BestSeller = () => {
     dispatch(addToCart({ "product": obj }));
     dispatch(showPopup(obj));
   };
+
+  useEffect(() => {
+    try {
+      const fetchBestSellerProduct = async() => {
+          let response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/product/best-seller`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+          });
+    
+          response = await response.json();
+    
+          if(!response.success) {
+            console.log("Error fetching best seller data");
+          }
+          setBestSellerProduct(response.data[0]);
+      }
+      fetchBestSellerProduct();
+      console.log(bestSellerProduct);
+      } catch (error) {
+          console.log("Error fetching product data", error);
+      }
+  }, [])
+  
   return (
 
       <div className=" mx-auto lg:px-24 px-2 py-8 bg-orange-50">
@@ -49,17 +75,17 @@ const BestSeller = () => {
           <div className="lg:w-1/2 lg:p-4 p-2">
             <div className="relative px-6 lg:px-2">
               <img
-                src={bestSellerProduct.images[currentImageIndex]}
-                alt={bestSellerProduct.name}
+                src={bestSellerProduct?.images && bestSellerProduct?.images[currentImageIndex]}
+                alt={bestSellerProduct?.name}
                 className="w-full lg:h-96 h-80 object-cover rounded-xl"
               />
             </div>
             <div className="flex mt-4 overflow-x-auto no-scrollbar">
-              {bestSellerProduct.images.map((img, index) => (
+              {bestSellerProduct?.images &&  bestSellerProduct?.images.map((img, index) => (
                 <img
                   key={index}
                   src={img}
-                  alt={`${bestSellerProduct.name} - Image ${index + 1}`}
+                  alt={`${bestSellerProduct?.name} - Image ${index + 1}`}
                   className={`lg:w-56 w-40 lg:h-56 h-40 rounded-xl object-cover mx-2 cursor-pointer ${
                     currentImageIndex === index ? "border-2 border-orange-500" : ""
                   }`}
@@ -69,19 +95,19 @@ const BestSeller = () => {
             </div>
           </div>
           <div className="lg:w-1/2 p-4">
-            <h2 className="lg:text-3xl text-2xl font-semibold lg:mb-4">{bestSellerProduct.name}</h2>
+            <h2 className="lg:text-3xl text-2xl font-semibold lg:mb-4">{bestSellerProduct?.name}</h2>
             <div className="text-yellow-500">
-              {"★".repeat(bestSellerProduct.rating)}
+              {"★".repeat(bestSellerProduct?.rating)}
             </div>        
             <div className="mb-4">
-              <span className="lg:text-2xl text-lg font-bold text-orange-500">₹{bestSellerProduct.salePrice.toFixed(2)}</span>
-              <span className="lg:text-lg text-md text-gray-500 line-through ml-2">₹{bestSellerProduct.originalPrice.toFixed(2)}</span>
+              <span className="lg:text-2xl text-lg font-bold text-orange-500">₹{bestSellerProduct?.salePrice && bestSellerProduct?.salePrice.toFixed(2)}</span>
+              <span className="lg:text-lg text-md text-gray-500 line-through ml-2">₹{bestSellerProduct?.actualPrice && bestSellerProduct?.actualPrice.toFixed(2)}</span>
             </div>
-            <p className="text-gray-700 mb-4">{bestSellerProduct.description}</p>
+            <p className="text-gray-700 mb-4">{bestSellerProduct?.description}</p>
             <div className="mb-4">
               <h3 className="lg:text-xl text-lg font-semibold mb-2">Features:</h3>
               <ul className="list-disc list-inside lg:text-md text-sm text-gray-700">
-                {bestSellerProduct.features.map((feature, index) => (
+                {bestSellerProduct?.features && bestSellerProduct?.features.map((feature, index) => (
                   <li className="mt-2" key={index}>{feature}</li>
                 ))}
               </ul>
@@ -120,7 +146,7 @@ const BestSeller = () => {
               <h3 className="lg:text-xl text-lg font-semibold mb-2">Specifications:</h3>
               <table className="w-full border-collapse">
                 <tbody>
-                  {bestSellerProduct.specifications.map((spec, index) => (
+                  {bestSellerProduct?.specifications && bestSellerProduct?.specifications.map((spec, index) => (
                     <tr key={index} className="border-b lg:text-md text-sm">
                       <td className="py-2 font-semibold">{spec.name}:</td>
                       <td className="py-2">{spec.value}</td>
@@ -132,7 +158,7 @@ const BestSeller = () => {
           </div>
         </div>
         <div className="mt-12 ">
-      {bestSellerProduct.reviews.length > 0 && (
+      {bestSellerProduct?.reviews && bestSellerProduct?.reviews.length > 0 && (
             <div className="px-5">
               <div>
                 <div className="">
@@ -183,7 +209,7 @@ const BestSeller = () => {
               )}
               {allReviews && (
                 <div className="ease-out duration-300">
-                  {bestSellerProduct.reviews.map((review) => (
+                  {bestSellerProduct?.reviews.map((review) => (
                     <div
                       key={review.id}
                       className="border-t border-gray-300 pt-4 mt-4"
