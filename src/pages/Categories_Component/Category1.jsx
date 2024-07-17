@@ -137,7 +137,7 @@ const CategoryProducts = () => {
         </select>
       </div>
       <div className="flex flex-wrap justify-center items-center lg:gap-8 gap-4">
-        {Array.isArray(products) && products.length === 0 &&  products?.map((product) => (
+        {Array.isArray(products) &&  products?.map((product) => (
           <div
             key={product._id}
             className="bg-white hover:bg-gray-100 duration-200 lg:px-6 px-4 py-6 shadow-md rounded-lg h-90 md:w-80 w-72 cursor-pointer"
