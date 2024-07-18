@@ -1,8 +1,10 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const ProductForm = (props) => {
+  
   const {productData} = props;
   const [images, setImages] = useState([null, null, null]);
   const [categories, setCategories] = useState([]);

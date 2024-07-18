@@ -1,11 +1,11 @@
-import { NavBar } from "./components/Navbar";
+// import { NavBar } from "./components/Navbar";
 import Admin from "./pages/Admin/Admin";
 
 function App() {
   return (
     <>
       <div>
-        <NavBar />
+        {/* <NavBar /> */}
         <Admin />
       </div>
     </>
