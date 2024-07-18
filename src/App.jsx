@@ -47,7 +47,7 @@ function App() {
             path="categories/:categoryId/:categoryName"
             element={<CategoryProducts />}
           />
-          <Route path="product/:productId" element={<ProductDetails />} />
+          <Route path="product/:productId" element={<ProductDetails key={location.pathname} />} />
           <Route path="product/:product/checkout" element={<CheckoutPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
 

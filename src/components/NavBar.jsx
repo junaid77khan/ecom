@@ -1,15 +1,14 @@
 
 import { useState } from "react";
-import {
-  faUser,
-  faSearch,
-  faBagShopping,
-  faBars,
-  faTimes,
-} from "@fortawesome/free-solid-svg-icons";
+import { 
+  FaUser, 
+  FaSearch, 
+  FaShoppingBag, 
+  FaBars, 
+  FaTimes 
+} from "react-icons/fa";
 import { NavLink, useLocation } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "@fortawesome/fontawesome-svg-core/styles.css";
+
 
 import SearchFilter from "./SearchFilter";
 import { useSelector, useDispatch } from "react-redux";
@@ -52,7 +51,7 @@ function NavBar() {
           onClick={toggleSidebar}
           className="block lg:hidden duration-200 hover:text-orange-400 mr-4"
         >
-          <FontAwesomeIcon className="text-xl" icon={faBars} />
+          <FaBars className="text-xl" />
         </button>
         <a href="/">
           <div className="flex flex-wrap text-lg justify-center items-center">
@@ -127,7 +126,7 @@ function NavBar() {
             onClick={handleSearchClick}
             className="block duration-200 hover:text-orange-400"
           >
-            <FontAwesomeIcon className="md:text-xl text-md" icon={faSearch} />
+            <FaSearch className="md:text-xl text-md" />
           </button>
         </li>
         <li>
@@ -141,7 +140,7 @@ function NavBar() {
               }`
             }
           >
-            <FontAwesomeIcon className="md:text-xl text-md" icon={faUser} />
+           <FaUser className="md:text-xl text-md" />
           </NavLink>
         </li>
         <li>
@@ -153,7 +152,7 @@ function NavBar() {
               }`
             }
           >
-            <FontAwesomeIcon className="md:text-xl text-md" icon={faBagShopping} />
+            <FaShoppingBag className="md:text-xl text-md" />
           </NavLink>
         </li>
       </ul>
@@ -179,7 +178,7 @@ function NavBar() {
             onClick={toggleSidebar}
             className="block duration-200 hover:text-orange-400"
           >
-            <FontAwesomeIcon className="text-xl" icon={faTimes} />
+            <FaTimes className="text-xl" />
           </button>
         </div>
         <ul className="flex flex-col items-start p-4">

@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-// import { productCategories } from "../../data/HomeData";
+import { FaArrowRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -54,10 +53,7 @@ const HomeCategories = () => {
               </div>
               <h1 className="text-lg sm:text-xl">
                 {category.name}{" "}
-                <FontAwesomeIcon
-                  className="cursor-pointer"
-                  icon={faArrowRight}
-                />{" "}
+                <FaArrowRight className="inline" />{" "}
               </h1>
               <div>
                 <p className="text-gray-500 hover:text-black">

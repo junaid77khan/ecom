@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "@fortawesome/fontawesome-svg-core/styles.css";
+import { FaTrash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeFromCart, increaseQuantity, decreaseQuantity } from '../store/cartSlice';
@@ -98,7 +96,7 @@ function Cart() {
                                                     <div className="px-3 py-1 bg-white md:text-md text-sm">{product.quantity}</div>
                                                     <button onClick={() => increaseProductQuantity(product.id)} className="px-3 py-1 md:text-md text-sm bg-white">+</button>
                                                 </div>
-                                                <FontAwesomeIcon className='md:text-md text-sm' onClick={() => deleteProductFromCart(product.id)} icon={faTrash}/>
+                                                <FaTrash className='md:text-md text-sm' onClick={() => deleteProductFromCart(product.id)} />
                                             </div>
                                             <div className='md:text-md text-sm'>
                                                 Total: ₹ {(product.salePrice*product.quantity).toFixed(2)} 

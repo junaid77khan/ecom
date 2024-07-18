@@ -6,7 +6,6 @@ import { Country, State, City } from "country-state-city";
 
 const CheckoutPage = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const product = location.state;
   const [productQuantity, setProductQuantity] = useState(1);

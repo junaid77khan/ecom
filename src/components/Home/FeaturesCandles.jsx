@@ -1,12 +1,10 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import debounce from "lodash/debounce";
 import { useNavigate } from "react-router-dom";
 
 function FeaturedCandles() {
   const [isMostPopularActive, setIsMostPopularActive] = useState(true);
   const scrollRef = useRef(null);
-  const [scrollIndex, setScrollIndex] = useState(0);
   const [mostPopularProducts, setMostPopularProducts] = useState([]);
   const [newItems, setNewItems] = useState([]);
 
@@ -50,36 +48,14 @@ function FeaturedCandles() {
     fetchFeaturedProducts();
   }, [fetchFeaturedProducts]);
 
-  const debouncedScrollBy = useCallback(
-    debounce((direction) => {
-      const productWidth = scrollRef.current.firstChild.clientWidth;
-      const maxScrollIndex =
-        Math.floor(scrollRef.current.scrollWidth / productWidth) - 1;
-
-      if (direction === "left") {
-        setScrollIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-      } else {
-        setScrollIndex((prevIndex) => Math.min(prevIndex + 1, maxScrollIndex));
-      }
-    }, 150),
-    []
-  );
-
   const scrollBy = (direction) => {
-    debouncedScrollBy(direction);
+    const scrollAmount = scrollRef.current.clientWidth;
+    if (direction === "left") {
+      scrollRef.current.scrollLeft -= scrollAmount;
+    } else {
+      scrollRef.current.scrollLeft += scrollAmount;
+    }
   };
-
-  const scrollToIndex = () => {
-    const productWidth = scrollRef?.current?.firstChild?.clientWidth + 16;
-    scrollRef?.current?.scrollTo({
-      left: productWidth * scrollIndex,
-      behavior: "smooth",
-    });
-  };
-
-  useEffect(() => {
-    scrollToIndex();
-  }, [scrollIndex]);
 
   return (
     <div className="h-full py-5 px-4 lg:px-24 bg-orange-50">
@@ -113,20 +89,19 @@ function FeaturedCandles() {
           </button>
         </div>
       </div>
-      <div className="flex justify-center items-center lg:gap-8 md:gap-7 gap-0 overflow-x-hidden  mt-4">
+      <div className="flex justify-center items-center lg:gap-8 md:gap-7 gap-0 overflow-x-hidden mt-4">
         <button
           onClick={() => scrollBy("left")}
-          className=" bg-white rounded-full p-2 shadow-md z-10"
+          className="bg-white rounded-full p-2 shadow-md z-10"
         >
           <FaChevronLeft />
         </button>
         <div
           ref={scrollRef}
-          className="flex gap-4 py-5 px-0 overflow-y-scroll no-scrollbar"
+          className="flex gap-4 py-5 px-0 overflow-x-scroll no-scrollbar"
           style={{
             scrollSnapType: "x mandatory",
-            willChange: "transform", 
-            overflowY: "hidden", 
+            scrollBehavior: "smooth",
           }}
         >
           {isMostPopularActive
@@ -147,7 +122,7 @@ function FeaturedCandles() {
         </div>
         <button
           onClick={() => scrollBy("right")}
-          className=" bg-white rounded-full p-2 shadow-md z-10"
+          className="bg-white rounded-full p-2 shadow-md z-10"
         >
           <FaChevronRight />
         </button>
@@ -173,7 +148,7 @@ function ProductCard({ product, isMostPopularActive }) {
         />
       </div>
       <div className="w-full flex flex-col">
-        <h1 className=" text-lg p-1">{product.name}</h1>
+        <h1 className="text-lg p-1">{product.name}</h1>
         <h1 className="text-md text-gray-500">
           {product.description.substring(0, 40)}
         </h1>
