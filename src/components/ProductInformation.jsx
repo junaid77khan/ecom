@@ -11,6 +11,26 @@ const ProductInformation = (props) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const[userStatus, setUserStatus] = useState(false);
+
+    useEffect(() => {
+      const checkUserStatus = async () => {
+          try {
+              let expiry = JSON.parse(localStorage.getItem("accessToken"));
+              if(expiry && new Date().getTime() < expiry) {
+                  setUserStatus(true);
+              } else {
+                  setUserStatus(false);                        
+              }    
+          } catch (error) {
+              console.error('Error checking user status:', error);
+              dispatch(logout());
+              setUserStatus(false); 
+          }
+      };
+  
+      checkUserStatus();
+    }, []);
 
     const increaseQuantity = () => {
         setProductQuantity(productQuantity + 1);
@@ -21,9 +41,13 @@ const ProductInformation = (props) => {
       };
     
       const handleAddToCart = () => {
-        const obj = {...product, quantity: productQuantity}
-        dispatch(addToCart({"product": obj}));
-        dispatch(showPopup(obj));
+        if(userStatus) {
+          const obj = {...product, quantity: productQuantity}
+          dispatch(addToCart({"product": obj}));
+          dispatch(showPopup(obj));
+        } else {
+          navigate("/signin")
+        }
       }
     return (
         <div className="lg:flex">
@@ -86,7 +110,13 @@ const ProductInformation = (props) => {
             </button>
             <button
 
-              onClick={() => navigate(`/checkout`, {state: product})}
+              onClick={() => {
+                if(userStatus) {
+                  navigate(`/checkout`, {state: product})
+                } else {
+                  navigate('/signin');
+                }
+              }}
               className="relative rounded-lg border-2 border-orange-500 inline-flex items-center justify-start md:px-6 lg:px-5 px-4 py-2 overflow-hidden font-medium transition-all bg-white hover:bg-white hover:border-white group"
             >
               <span className="w-40 h-40 rounded rotate-[-40deg] bg-orange-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>

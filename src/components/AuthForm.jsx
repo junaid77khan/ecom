@@ -1,14 +1,18 @@
 import { Link } from 'react-router-dom';
 
 // eslint-disable-next-line react/prop-types
-const AuthForm = ({ isLogin, handleSubmit, email, setEmail, password, setPassword, username, setUsername, error }) => (
-  <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
+const AuthForm = ({ isLogin, handleSubmit, email, setEmail, password, setPassword, username, setUsername, error, loading }) => {
+  
+  
+  return (<div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
     <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
       <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
-        {/* <div>
-          <img src="https://storage.googleapis.com/devitary-image-host.appspot.com/15846435184459982716-LogoMakr_7POjrN.png" className="w-32 mx-auto" alt="Logo" />
-        </div> */}
-        <div className="mt-12 flex flex-col items-center">
+        {loading ? (
+          <div className="fixed top-0 left-0 right-0 bottom-0 bg-gray-900 opacity-75 flex justify-center items-center z-50">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
+        </div>
+        ) : (
+          <div className="mt-12 flex flex-col items-center">
           <h1 className="text-2xl xl:text-3xl font-extrabold">{isLogin ? 'Login' : 'Sign up'}</h1>
           <div className="w-full flex-1 mt-8">
             <form onSubmit={handleSubmit} className="mx-auto max-w-xs">
@@ -53,17 +57,19 @@ const AuthForm = ({ isLogin, handleSubmit, email, setEmail, password, setPasswor
               <p className="mt-6 text-xs text-gray-600 text-center">
                 {isLogin ? (
                   <span>
-                    Don&apos;t have an account? <Link to="/register" className="border-b border-gray-500 border-dotted">Sign up</Link>
+                    Don&apos;t have an account? <Link to="/signup" className="border-b border-gray-500 border-dotted">Sign up</Link>
                   </span>
                 ) : (
                   <span>
-                    Already have an account? <Link to="/login" className="border-b border-gray-500 border-dotted">Login</Link>
+                    Already have an account? <Link to="/signin" className="border-b border-gray-500 border-dotted">Login</Link>
                   </span>
                 )}
               </p>
             </form>
           </div>
         </div>
+        )}
+        
       </div>
       {/* <div className="flex-1 bg-orange-100 text-center hidden lg:flex">
         <div className="m-12 xl:m-16 w-full  bg-contain bg-center bg-no-repeat" style={{ backgroundImage: `url('../public/login.jpg')` }}>
@@ -76,7 +82,7 @@ const AuthForm = ({ isLogin, handleSubmit, email, setEmail, password, setPasswor
         ></div>
       </div>
     </div>
-  </div>
-);
+  </div>)
+}
 
 export default AuthForm;

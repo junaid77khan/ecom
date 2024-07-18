@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useRef, useEffect} from "react";
 import { 
   FaUser, 
   FaSearch, 
@@ -7,13 +7,12 @@ import {
   FaBars, 
   FaTimes 
 } from "react-icons/fa";
-import { NavLink, useLocation } from "react-router-dom";
-
-
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import SearchFilter from "./SearchFilter";
 import { useSelector, useDispatch } from "react-redux";
 import { closePopup } from "../store/popupSlice";
 import CartPopup from "../components/CartPopup";
+import { ProfileDropDown } from "./ProfileDropDown";
 
 function NavBar() {
   const popup = useSelector((state) => state.popup);
@@ -26,6 +25,26 @@ function NavBar() {
   const location = useLocation();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setIsDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
   const products = [
     { id: 1, name: "Product 1" },
     { id: 2, name: "Product 2" },
@@ -124,24 +143,23 @@ function NavBar() {
         <li>
           <button
             onClick={handleSearchClick}
-            className="block duration-200 hover:text-orange-400"
+            className="block duration-200 "
           >
-            <FaSearch className="md:text-xl text-md" />
+            <FaSearch className="md:text-xl text-md text-gray-500 hover:text-orange-400" />
           </button>
         </li>
-        <li>
-          <NavLink
-            to={"/login"}
-            className={({ isActive }) =>
-              `block duration-200 hover:text-orange-400 ${
-                isActive || location.pathname === "/register"
-                  ? "text-orange-500"
-                  : "text-gray-500"
-              }`
-            }
-          >
-           <FaUser className="md:text-xl text-md" />
-          </NavLink>
+        <li ref={dropdownRef}>
+          <div className="relative">
+            <button
+              onClick={toggleDropdown}
+              className="block duration-200 relative"
+            >
+              <FaUser className={`md:text-xl text-md text-gray-500 ${isDropdownOpen ? 'text-orange-500' : 'text-gray-500'} hover:text-orange-400`} />
+            </button>
+            {isDropdownOpen && (
+              <ProfileDropDown setIsDropdownOpen={setIsDropdownOpen} />
+            )}
+          </div>
         </li>
         <li>
           <NavLink
@@ -169,11 +187,6 @@ function NavBar() {
         }`}
       >
         <div className="flex justify-between items-center p-4">
-          <a href="/">
-            <div className="flex flex-wrap text-lg justify-center items-center">
-              Logo
-            </div>
-          </a>
           <button
             onClick={toggleSidebar}
             className="block duration-200 hover:text-orange-400"
@@ -243,19 +256,6 @@ function NavBar() {
             </NavLink>
           </li>
         </ul>
-        {/* <div className="mt-auto p-4 t-0 w-full"> 
-          <NavLink
-            to={"/login"}
-            className={({ isActive }) =>
-              `block duration-200 hover:text-orange-400 ${
-                (isActive || location.pathname === "/register") ? "text-orange-500" : "text-gray-500"
-              }`
-            }
-            onClick={toggleSidebar}
-          >
-            <FontAwesomeIcon className="text-xl" icon={faUser} /> Login
-          </NavLink>
-        </div> */}
       </div>
     </div>
   );

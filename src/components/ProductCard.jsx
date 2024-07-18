@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { showPopup } from "../store/popupSlice";
 import { addToCart } from "../store/cartSlice";
 import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 
 const ProductStarRating = ({ rating }) => {
     const fullStars = Math.floor(rating);
@@ -30,12 +31,37 @@ const ProductCard = (props) => {
     const {product}=props;
     const {check}=props;
     const dispatch = useDispatch();
+    const[userStatus, setUserStatus] = useState(false);
+
+    useEffect(() => {
+      const checkUserStatus = async () => {
+          try {
+              let expiry = JSON.parse(localStorage.getItem("accessToken"));
+              if(expiry && new Date().getTime() < expiry) {
+                  setUserStatus(true);
+              } else {
+                  setUserStatus(false);                        
+              }    
+          } catch (error) {
+              console.error('Error checking user status:', error);
+              dispatch(logout());
+              setUserStatus(false); 
+          }
+      };
+  
+      checkUserStatus();
+    }, []);
+  
 
     const handleAddToCart = (product) => {
-        const { id, category, name, description, images, salePrice, actualPrice, rating, availability } = product;
-        const obj = { id, category, name, description, images, salePrice, rating, availability, quantity: 1 };
-        dispatch(addToCart({ product: obj }));
-        dispatch(showPopup(obj));
+        if(userStatus) {
+          const { id, category, name, description, images, salePrice, actualPrice, rating, availability } = product;
+          const obj = { id, category, name, description, images, salePrice, rating, availability, quantity: 1 };
+          dispatch(addToCart({ product: obj }));
+          dispatch(showPopup(obj));
+        } else {
+          navigate("/signin")
+        }
       };
     return (
         <div
