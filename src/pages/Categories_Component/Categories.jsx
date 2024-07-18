@@ -1,14 +1,8 @@
 
 
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "@fortawesome/fontawesome-svg-core/styles.css";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import {
-  FaChevronLeft,
-  FaChevronRight,
-  FaChevronDown,
-  FaChevronUp,
+  FaArrowRight
 } from "react-icons/fa";
 import { useState, useEffect } from "react";
 
@@ -54,11 +48,8 @@ function Categories() {
           />
         </div>
         <h1 className="text-lg lg:text-xl">
-          {category.name}{" "}
-          <FontAwesomeIcon
-            className="cursor-pointer"
-            icon={faArrowRight}
-          />{" "}
+          {category.name}{" "}<FaArrowRight className="cursor-pointer inline" />{" "}
+          
         </h1>
         <div>
           <p className="text-gray-500 text-sm lg:text-md hover:text-black">{category.description.substring(0,80)}... 

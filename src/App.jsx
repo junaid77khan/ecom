@@ -21,10 +21,6 @@ import BlogRead from "./pages/BlogRead";
 import CheckoutPage from "./pages/Checkout";
 import { NotFound } from "./pages/Notfound";
 
-import AddCategory from "./components/AddCategory";
-import UserProfile from "./pages/UserProfile";
-import Checkouts from "./pages/payment";
-
 
 
 function App() {
@@ -51,7 +47,7 @@ function App() {
             path="categories/:categoryId/:categoryName"
             element={<CategoryProducts />}
           />
-          <Route path="product/:productId" element={<ProductDetails />} />
+          <Route path="product/:productId" element={<ProductDetails key={location.pathname} />} />
           <Route path="product/:product/checkout" element={<CheckoutPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
 
@@ -59,9 +55,6 @@ function App() {
 
           <Route path="cart" element={<Cart />} />
           <Route path="/*" element={<NotFound />} />
-          <Route path="/add-category" element={<AddCategory/>} />
-          <Route path="/profile" element={<UserProfile/>} />
-          <Route path="/payment" element={<Checkouts/>} />
 
 
         </Routes>
