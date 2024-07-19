@@ -45,12 +45,14 @@ const ProductDetails = () => {
     if(userStatus) {
       setReviewLoading(true);
       try {
+        const token = JSON.parse(localStorage.getItem("Access Token"));
         let response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/review/add-review`, {
           method: 'POST',
           mode: "cors",
           credentials: "include",
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
           },
           body: JSON.stringify({
             productId: product._id,

@@ -61,12 +61,14 @@ const ProductCard = (props) => {
         setLoading(true);
         try {
           const productId = product._id;
+          const token = JSON.parse(localStorage.getItem("Access Token"));
           let response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/cart/add-cart-product/${productId}`, {
             method: 'POST',
             mode: "cors",
             credentials: "include",
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({
               quantity: 1

@@ -45,12 +45,14 @@ const BestSeller = () => {
       let data = {
         "productId": productId
       }
+      const token = JSON.parse(localStorage.getItem("Access Token"));
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/review/get-product-reviews`, {
         method: 'POST',
         mode: 'cors',
         credentials: 'include',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(
             data

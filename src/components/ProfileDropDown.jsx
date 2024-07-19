@@ -6,7 +6,8 @@ import { setTokenWithExpiry } from "../store/accessToken";
 import { useDispatch } from "react-redux";
 
 export const ProfileDropDown = (props) => {
-    const [userStatus, setUserStatus] = useState(null); 
+    const [userStatus, setUserStatus] = useState(null);
+    const[isAdmin, setIsAdmin] = useState(false); 
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {setIsDropdownOpen} = props
@@ -18,24 +19,31 @@ export const ProfileDropDown = (props) => {
                 if(expiry && new Date().getTime() < expiry) {
                     setUserStatus(true);
                 } else {
+                  const token = JSON.parse(localStorage.getItem("Access Token"));
                     const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/users/verification`, {
                         method: 'GET',
                         mode: 'cors',  
                         credentials: 'include',
                         headers: {
                             'Content-Type': 'application/json',
-                            'Accept': 'application/json'
+                            'Accept': 'application/json',
+                            'Authorization': `Bearer ${token}`
                         },
                     });
     
                     if (response.ok) {
                         const jsonResponse = await response.json();
                         if(jsonResponse.data.isAuthenticated) {
-                            dispatch(setTokenWithExpiry({ttl: 30000}));
+                            dispatch(setTokenWithExpiry({ttl: 432000000}));
                             setUserStatus(true);
                         } else {
                             setUserStatus(false);
                         }
+                        if(jsonResponse.data.isAdmin) {
+                          setIsAdmin(true);
+                      } else {
+                        setIsAdmin(false);
+                      }
                     } else {
                         dispatch(logout());
                         setUserStatus(false);
@@ -87,6 +95,15 @@ export const ProfileDropDown = (props) => {
             className="inline px-4 py-2 text-sm text-start text-gray-800 hover:bg-orange-50 w-full"
           >
             Edit account
+          </button>
+        }
+        {
+          userStatus && isAdmin &&
+          <button
+            onClick={() => handleMenuItemClick("/admin")}
+            className="inline px-4 py-2 text-sm text-start text-gray-800 hover:bg-orange-50 w-full"
+          >
+            Admin panel
           </button>
         }
         {

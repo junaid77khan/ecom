@@ -31,12 +31,14 @@ function Cart() {
 
     const handleDelete =async (productId) => {
         try {
+            const token = JSON.parse(localStorage.getItem("Access Token"));
             let response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/cart/remove-cart-product/${productId}`, {
                 method: 'GET',
                 mode: "cors",
                 credentials: "include",
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
             });
 
@@ -60,12 +62,14 @@ function Cart() {
                 setLoading(true); // Start loading
 
                 try {
+                    const token = JSON.parse(localStorage.getItem("Access Token"));
                     let response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/cart/cart-products`, {
                         method: 'GET',
                         mode: "cors",
                         credentials: "include",
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
                         },
                     });
 
