@@ -47,20 +47,21 @@ const ProductDetails = () => {
       try {
         let response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/product/add-review`, {
           method: 'POST',
+          mode: "cors",
+          credentials: "include",
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
             productId: product._id,
-            userId: "6695758673b5d0e6adeb5cc0",
             rating,
             review,
           }),
         });
 
-        if (!response.success) {
+        if (!response.ok) {
           toast.error("Failed to add review. Please try again.");
-          throw new Error('Failed to fetch products');
+          throw new Error('Failed to add review');
         }
 
         response = await response.json();
@@ -79,23 +80,21 @@ const ProductDetails = () => {
   }
 
   const Rating = () => {
-  
     const handleStarClick = (starNumber) => {
+      console.log("Clicked");
       setRating(starNumber);
     };
   
     return (
-      <div className='mt-2'>
-        <div className='text-2xl'>
-          {[1, 2, 3, 4, 5].map((starNumber) => (
-            <Star
-              key={starNumber}
-              filled={starNumber <= rating}
-              onClick={() => handleStarClick(starNumber)}
-            />
-          ))}
-        </div>
-      </div>
+      <div className='text-3xl'>
+      {[1, 2, 3, 4, 5].map((starNumber) => (
+        <Star
+          key={starNumber}
+          onClick={() => handleStarClick(starNumber)}
+          filled={starNumber <= rating}
+        />
+      ))}
+    </div>
     );
   };
   
@@ -193,7 +192,7 @@ const ProductDetails = () => {
             <div className="mt-12 flex flex-col md:flex-row gap-4 justify-between items-start">
                 <div className="px-5 w-full md:w-1/3 ">
                   <h1 className="lg:text-xl text-md font-semibold text-red-600">Add your review</h1>
-                  <Rating initalRating={rating} onRatingChange={handleRatingChange} />
+                  <Rating />
                     <textarea className="border border-gray-200 bg-gray-200 rounded-lg p-2 outline-none resize-none w-full h-32" placeholder="Write your review" value={review} onChange={(e) => setReview(e.target.value)}/>
                     <div className="flex gap-2">
                       <button
