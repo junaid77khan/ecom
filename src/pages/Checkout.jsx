@@ -21,6 +21,24 @@ const CheckoutPage = () => {
   const cities = selectedState ? City.getCitiesOfState(selectedCountry, selectedState) : [];
 
 
+
+  const [qty, setQty] = useState(0);
+  const [price, setPrice] = useState(0);
+
+  useEffect(() => {
+    let qty = 0;
+    let price = 0;
+    if (cart?.items) {
+      for (let i = 0; i < cart.items?.length; i++) {
+        qty += cart.items[i].qty;
+        price += cart.items[i].price;
+      }
+    }
+    setPrice(price);
+    setQty(qty);
+  }, [cart]);
+
+
   useEffect(() => {
     const calculateTotal = () => {
       let price = product.salePrice * productQuantity;

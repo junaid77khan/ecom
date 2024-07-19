@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { FaChevronDown, FaChevronUp, FaArrowRight } from "react-icons/fa";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { ProductInformation } from "../ProductInformation";
 import { ProductReview } from "../ProductReview";
 
@@ -13,8 +13,10 @@ const BestSeller = () => {
   useEffect(() => {
     try {
       const fetchBestSellerProduct = async() => {
-          let response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/product/best-seller`, {
-            method: 'GET',
+        console.log("cors1")
+
+        let response = await fetch('http://localhost:8000/api/v1/product/best-seller', {
+          method: 'GET',
             headers: {
               'Content-Type': 'application/json'
             },
@@ -35,6 +37,7 @@ const BestSeller = () => {
         setLoading(false)
       }
   }, [])
+  console.log("cors1")
 
   const fetchReviews = useCallback(async () => {
     if (!productId) return; 

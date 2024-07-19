@@ -12,7 +12,7 @@ const Register = () => {
     e.preventDefault();
     setError('');
     try {
-      const res = await axios.post('/api/auth/register', { username, email, password });
+      const res = await axios.post('http://localhost:8000/api/v1/auth/register', { username, email, password });
       console.log(res.data);
     } catch (error) {
       setError('Registration failed. Please try again.');

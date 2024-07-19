@@ -18,6 +18,14 @@ module.exports = {
   theme: {
     // rest of the code
     extend: {
+
+      colors: {
+        orange: {
+          light: '#FFA726',
+          DEFAULT: '#FB8C00',
+          dark: '#EF6C00'
+        },
+      },
       animation: {
 
         'fade-in': 'fadeIn 0.5s ease-out',

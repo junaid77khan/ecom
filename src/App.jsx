@@ -22,7 +22,6 @@ import CheckoutPage from "./pages/Checkout";
 import { NotFound } from "./pages/Notfound";
 
 
-
 function App() {
   return (
     <Provider store={store}>
@@ -55,6 +54,8 @@ function App() {
 
           <Route path="cart" element={<Cart />} />
           <Route path="/*" element={<NotFound />} />
+
+
 
 
         </Routes>
