@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const[emailErrMessage, setEmailErrMessage] = useState("Empty");
+  const[passwordErrMessage, setPasswordErrMessage] = useState("Empty");
   const [error, setError] = useState('');
   const[loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -17,6 +19,8 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setEmailErrMessage("Empty")
+    setPasswordErrMessage("Empty")
     try {
 
       const data = {
@@ -38,7 +42,13 @@ const Login = () => {
       const dataFromServer = await response.json();
 
       if(!dataFromServer.success) {
-        throw new Error("Failed to signin. Please try again.");
+        const data = dataFromServer.data;
+        if(data?.emailError?.length > 0) {
+          setEmailErrMessage(data.emailError)
+        }
+        if(data?.passwordError?.length > 0) {
+          setPasswordErrMessage(data.passwordError);
+        }
         return;
       }
 
@@ -48,7 +58,6 @@ const Login = () => {
       navigate(`/categories`);
     } catch (error) {
       throw new Error("Failed to signin. Please try again.");
-        return;
     } finally {
       setLoading(false);
     }
@@ -64,6 +73,8 @@ const Login = () => {
       setPassword={setPassword}
       error={error}
       loading={loading}
+      emailErrMessage={emailErrMessage}
+      passwordErrMessage={passwordErrMessage}
     />
   );
 };

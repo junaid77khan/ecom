@@ -2,9 +2,6 @@ import  { useState } from 'react';
 import AuthForm from '../components/AuthForm';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { setTokenWithExpiry } from '../store/accessToken';
-import { storeATLS } from '../store/accessToken';
-import { login } from '../store/authSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,16 +9,20 @@ const Register = () => {
   const[username, setUsername] = useState("");
   const[email, setEmail] = useState("");
   const[password, setPassword] = useState("");
+  const[usernameErrMessage, setUsernameErrMessage] = useState("Empty");
+  const[emailErrMessage, setEmailErrMessage] = useState("Empty");
+  const[passwordErrMessage, setPasswordErrMessage] = useState("Empty");
   const [error, setError] = useState('');
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const[loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setUsernameErrMessage("Empty")
+    setEmailErrMessage("Empty")
+    setPasswordErrMessage("Empty")
     try {
-
       const data = {
         "username": username,
         "email": email,
@@ -42,18 +43,22 @@ const Register = () => {
       const dataFromServer = await response.json();
 
       if(!dataFromServer.success) {
-        toast.error("Failed to sigup. Please try again.");
+        const data = dataFromServer.data;
+        if(data?.usernameError?.length > 0) {
+          setUsernameErrMessage(data.usernameError)
+        }
+        if(data?.emailError?.length > 0) {
+          setEmailErrMessage(data.emailError);
+        }
+        if(data?.passwordError?.length > 0) {
+          setPasswordErrMessage(data.passwordError);
+        }
         return;
       }
 
-      toast.success("Sign up successfully");
-
-      dispatch(setTokenWithExpiry({ttl: 30000}));
-      dispatch(storeATLS(dataFromServer.data.accessToken))
-      dispatch(login())
-      navigate(`/otp-verification/${dataFromServer.data.createdUser[0].username}`);
+      navigate(`/otp-verification/${username}`);
     } catch (error) {
-      toast.error("Failed to sigup. Please try again.");
+      toast.error("Failed to sign up. Please try again.");
         return;
     } finally {
       setLoading(false);
@@ -72,6 +77,9 @@ const Register = () => {
       setUsername={setUsername}
       error={error}
       loading={loading}
+      usernameErrMessage={usernameErrMessage}
+      emailErrMessage={emailErrMessage}
+      passwordErrMessage={passwordErrMessage}
     />
   );
 };

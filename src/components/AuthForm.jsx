@@ -1,39 +1,37 @@
 import { Link } from 'react-router-dom';
 
 // eslint-disable-next-line react/prop-types
-const AuthForm = ({ isLogin, handleSubmit, email, setEmail, password, setPassword, username, setUsername, error, loading }) => {
-  
+const AuthForm = ({ isLogin, handleSubmit, email, setEmail, password, setPassword, username, setUsername, error, loading, usernameErrMessage, emailErrMessage, passwordErrMessage }) => {
   
   return (<div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
     <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
       <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
-        {loading ? (
-          <div className="fixed top-0 left-0 right-0 bottom-0 bg-gray-900 opacity-75 flex justify-center items-center z-50">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
-        </div>
-        ) : (
-          <div className="mt-12 flex flex-col items-center">
+      <div className="mt-12 flex flex-col items-center">
           <h1 className="text-2xl xl:text-3xl font-extrabold">{isLogin ? 'Login' : 'Sign up'}</h1>
           <div className="w-full flex-1 mt-8">
             <form onSubmit={handleSubmit} className="mx-auto max-w-xs">
               {!isLogin && (
-                <input
-                  className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                  type="text"
-                  placeholder="Username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  required
-                />
+                <>
+                  <input
+                    className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                    type="text"
+                    placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                  />
+                  <p className={ `text-xs md:text-sm text-red-500 ${usernameErrMessage !== 'Empty' ? 'visible' : 'invisible'}` } >{usernameErrMessage}</p>
+                </>
               )}
               <input
                 className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                type="email"
-                placeholder="Email"
+                type="text"
+                placeholder="Email or username"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
+              <p className={ `text-xs md:text-sm text-red-500 ${emailErrMessage !== 'Empty' ? 'visible' : 'invisible'}` } >{emailErrMessage}</p>
               <input
                 className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
                 type="password"
@@ -42,6 +40,7 @@ const AuthForm = ({ isLogin, handleSubmit, email, setEmail, password, setPasswor
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
+              <p className={ `text-xs md:text-sm text-red-500 ${passwordErrMessage !== 'Empty' ? 'visible' : 'invisible'}` } >{passwordErrMessage}</p>
               {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
               <button
                 type="submit"
@@ -67,9 +66,7 @@ const AuthForm = ({ isLogin, handleSubmit, email, setEmail, password, setPasswor
               </p>
             </form>
           </div>
-        </div>
-        )}
-        
+        </div>        
       </div>
       {/* <div className="flex-1 bg-orange-100 text-center hidden lg:flex">
         <div className="m-12 xl:m-16 w-full  bg-contain bg-center bg-no-repeat" style={{ backgroundImage: `url('../public/login.jpg')` }}>
