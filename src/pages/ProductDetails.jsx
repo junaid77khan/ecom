@@ -20,37 +20,61 @@ const ProductDetails = () => {
   const [rating, setRating] = useState(0);
   const[review, setReview] = useState("");
   const[reviewLoading, setReviewLoading] = useState(false);
+  const[userStatus, setUserStatus] = useState(false);
+
+  useEffect(() => {
+    const checkUserStatus = async () => {
+        try {
+            let expiry = JSON.parse(localStorage.getItem("accessToken"));
+            if(expiry && new Date().getTime() < expiry) {
+                setUserStatus(true);
+            } else {
+                setUserStatus(false);                        
+            }    
+        } catch (error) {
+            console.error('Error checking user status:', error);
+            dispatch(logout());
+            setUserStatus(false); 
+        }
+    };
+
+    checkUserStatus();
+  }, []);
 
   const handleAddReview = async() => {
-    setReviewLoading(true);
-    try {
-      let response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/product/add-review`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          productId: product._id,
-          userId: "6695758673b5d0e6adeb5cc0",
-          rating,
-          review,
-        }),
-      });
+    if(userStatus) {
+      setReviewLoading(true);
+      try {
+        let response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/product/add-review`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            productId: product._id,
+            userId: "6695758673b5d0e6adeb5cc0",
+            rating,
+            review,
+          }),
+        });
 
-      if (!response.success) {
+        if (!response.success) {
+          toast.error("Failed to add review. Please try again.");
+          throw new Error('Failed to fetch products');
+        }
+
+        response = await response.json();
+        
+      } catch (error) {
         toast.error("Failed to add review. Please try again.");
-        throw new Error('Failed to fetch products');
+        console.error('Adding review error:', error);
+      } finally {
+        setReview("");
+        setRating(0);
+        setReviewLoading(false);
       }
-
-      response = await response.json();
-      
-    } catch (error) {
-      toast.error("Failed to add review. Please try again.");
-      console.error('Adding review error:', error);
-    } finally {
-      setReview("");
-      setRating(0);
-      setReviewLoading(false);
+    } else {
+      navigate("/signin");
     }
   }
 

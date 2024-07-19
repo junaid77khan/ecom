@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../../store/cartSlice";
-import { showPopup } from "../../store/popupSlice";
 import { ProductCard } from "../../components/ProductCard";
 
 
@@ -13,7 +10,6 @@ const CategoryProducts = () => {
   const [sortBy, setSortBy] = useState("default");
   const [products, setProducts] = useState([]);
   const [productBackup, setProductBackup] = useState([]);
-  const dispatch = useDispatch();
   const[loading, setLoading] = useState(true);
 
   useEffect(() => {

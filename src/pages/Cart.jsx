@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { FaTrash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,44 +8,26 @@ function Cart() {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const[userStatus, setUserStatus] = useState(false);
 
-
-
-    // const cartProducts = [
-    //     {
-    //         id: 1,
-    //         category: "Pillar Candles",
-    //         name: "Product 1",
-    //         description: "Lorem ipsum dolor sit amet.",
-    //         images: ["/candle1.jpg"],
-    //         price: 19.99,
-    //         rating: 4.5,
-    //         availability: true,
-    //         quantity: 1
-    //     },
-    //     {
-    //         id: 2,
-    //         category: "Scented Candles",
-    //         name: "Product 2",
-    //         description: "Consectetur adipiscing elit.",
-    //         images: ["/candle2.jpg"],
-    //         price: 24.99,
-    //         rating: 4.0,
-    //         availability: true,
-    //         quantity: 1
-    //     },
-    //     {
-    //         id: 3,
-    //         category: "Pillar Candles",
-    //         name: "Product 3",
-    //         description: "Sed do eiusmod tempor.",
-    //         images: ["/candle3.jpg"],
-    //         price: 29.99,
-    //         rating: 4.2,
-    //         availability: false,
-    //         quantity: 1
-    //     }
-    // ];
+    useEffect(() => {
+        const checkUserStatus = async () => {
+            try {
+                let expiry = JSON.parse(localStorage.getItem("accessToken"));
+                if(expiry && new Date().getTime() < expiry) {
+                    setUserStatus(true);
+                } else {
+                    setUserStatus(false);                        
+                }    
+            } catch (error) {
+                console.error('Error checking user status:', error);
+                dispatch(logout());
+                setUserStatus(false); 
+            }
+        };
+    
+        checkUserStatus();
+      }, []);
 
     const {cartProducts} = useSelector(state => state.cart);
 
@@ -68,7 +50,23 @@ function Cart() {
         <div className='md:px-40 px-5 py-5 w-full bg-orange-50'>
             <h1 className='md:text-4xl text-2xl lg:mb-14 mb-7'>Your Cart</h1>
             {
-                cartProducts && cartProducts.length === 0 && (
+                !userStatus && (
+                    <div className='flex flex-col justify-center items-center'>
+                        <p className='text-xl mb-2'>Please Login</p>
+                        <button
+                            onClick={() => navigate('/signin')}
+                            className="relative rounded-lg border-2 inline-flex items-center justify-start md:px-6 lg:px-5 px-4 py-2 overflow-hidden font-medium transition-all bg-orange-500 hover:bg-orange-500 hover:border-orange-500 group"
+                        >
+                            <span className="w-40 h-40 rounded rotate-[-40deg] bg-white absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>
+                            <span className="relative w-full text-center lg:text-md text-sm text-white transition-colors duration-300 ease-in-out group-hover:text-orange-500">
+                            Login
+                            </span>
+                        </button>
+                    </div>
+                )
+            }
+            {
+                userStatus && cartProducts && cartProducts.length === 0 && (
                     <div className='flex flex-col justify-center items-center'>
                     <p className='text-xl mb-2'>Cart is empty</p>
                     <button className='text-sm text-orange-500 font-bold border-b-2 border-orange-500 hover:border-orange-600 hover:text-orange-600' onClick={() => navigate("/categories")}>Continue Shopping</button>
@@ -76,7 +74,7 @@ function Cart() {
                 )
             }
             {
-                cartProducts?.length > 0 &&
+                userStatus && cartProducts?.length > 0 &&
                 <div className='flex flex-col justify-center w-full items-center'>
                     {cartProducts?.map(product => (
                         <div key={product.id} className="border border-gray-300 bg-white rounded-lg w-full flex justify-start lg:gap-5 gap-3 items-start lg:px-8 px-3 py-5 my-2">
