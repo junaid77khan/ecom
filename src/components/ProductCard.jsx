@@ -3,6 +3,8 @@ import { showPopup } from "../store/popupSlice";
 import { addToCart } from "../store/cartSlice";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProductStarRating = ({ rating }) => {
     const fullStars = Math.floor(rating);
@@ -32,6 +34,7 @@ const ProductCard = (props) => {
     const {check}=props;
     const dispatch = useDispatch();
     const[userStatus, setUserStatus] = useState(false);
+    const[loading, setLoading] = useState(false);
 
     useEffect(() => {
       const checkUserStatus = async () => {
@@ -53,16 +56,40 @@ const ProductCard = (props) => {
     }, []);
   
 
-    const handleAddToCart = (product) => {
-        if(userStatus) {
-          const { id, category, name, description, images, salePrice, actualPrice, rating, availability } = product;
-          const obj = { id, category, name, description, images, salePrice, rating, availability, quantity: 1 };
-          dispatch(addToCart({ product: obj }));
+    const handleAddToCart = async () => {
+      if(userStatus) {
+        setLoading(true);
+        try {
+          const productId = product._id;
+          let response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/cart/add-cart-product/${productId}`, {
+            method: 'POST',
+            mode: "cors",
+            credentials: "include",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              quantity: 1
+            }),
+          });
+
+          if (!response.ok) {
+            throw new Error('Failed to add product in cart');
+          }
+
+          response = await response.json();
+          const obj = {...product, quantity: response.data.quantity}
           dispatch(showPopup(obj));
-        } else {
-          navigate("/signin")
+        } catch (error) {
+          toast.error("Failed to add product in cart. Please try again.");
+          console.error('Adding product in cart error:', error);
+        } finally {
+          setLoading(false);
         }
-      };
+      } else {
+        navigate("/signin")
+      }
+    }
     return (
         <div
             key={product._id}

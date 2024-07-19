@@ -4,6 +4,8 @@ import { showPopup } from "../store/popupSlice";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProductInformation = (props) => {
     const {product} = props
@@ -12,6 +14,7 @@ const ProductInformation = (props) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const[userStatus, setUserStatus] = useState(false);
+    const[loading, setLoading] = useState(false);
 
     useEffect(() => {
       const checkUserStatus = async () => {
@@ -40,11 +43,36 @@ const ProductInformation = (props) => {
         if (productQuantity > 1) setProductQuantity(productQuantity - 1);
       };
     
-      const handleAddToCart = () => {
+      const handleAddToCart = async () => {
         if(userStatus) {
-          const obj = {...product, quantity: productQuantity}
-          dispatch(addToCart({"product": obj}));
-          dispatch(showPopup(obj));
+          setLoading(true);
+          try {
+            const productId = product._id;
+            let response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/cart/add-cart-product/${productId}`, {
+              method: 'POST',
+              mode: "cors",
+              credentials: "include",
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                quantity:productQuantity
+              }),
+            });
+
+            if (!response.ok) {
+              throw new Error('Failed to add product in cart');
+            }
+
+            response = await response.json();
+            const obj = {...product, quantity: response.data.quantity}
+            dispatch(showPopup(obj));
+          } catch (error) {
+            toast.error("Failed to add product in cart. Please try again.");
+            console.error('Adding product in cart error:', error);
+          } finally {
+            setLoading(false);
+          }
         } else {
           navigate("/signin")
         }
