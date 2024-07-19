@@ -31,7 +31,7 @@ function Categories() {
   }, [])
 
   return (
-    <div className="container py-12 flex flex-col justify-center items-center bg-orange-50">
+    <div className="containerw-full py-12 flex flex-col justify-center items-center bg-orange-50">
       <h2 className="lg:text-3xl text-2xl font-bold mb-6 text-start">Categories</h2>
       <div className="flex flex-wrap justify-center items-center lg:gap-8 gap-4">
         {productCategories.map((category) => (
