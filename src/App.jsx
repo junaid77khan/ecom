@@ -5,8 +5,6 @@ import { posts } from "./data/Blog-Data";
 
 import { ContactUs, NavBar } from "./components";
 
-import Login from "./pages/login";
-import Register from "./pages/register";
 import Footer from "./components/Footer";
 import Blog from "./pages/BlogPost";
 import ProductDetails from "./pages/ProductDetails";
@@ -21,7 +19,6 @@ import BlogRead from "./pages/BlogRead";
 import CheckoutPage from "./pages/Checkout";
 import { NotFound } from "./pages/Notfound";
 import OTPPage from "./pages/OTPPage";
-import Logout from "./components/Logout";
 import PaymentSuccess from "./pages/payment/PaymentSucess";
 import SendOtp from "./pages/Sendotp";
 
@@ -31,12 +28,12 @@ function App() {
       <BrowserRouter>
         <NavBar />
         <Routes>
-          <Route path="/signin" element={<Login />} />
-          <Route path="/signup" element={<Register />} />
+          {/* <Route path="/signin" element={<Login />} /> */}
+          {/* <Route path="/signup" element={<Register />} /> */}
           {/* <Route path="/otp-verification/:username" element={<OTPPage />} /> */}
           <Route path="/otp-verification" element={<OTPPage />} />
 
-          <Route path="/logout" element={<Logout />} />
+          {/* <Route path="/logout" element={<Logout />} /> */}
           {/* <Route path="/blog" element={<Blog />} /> */}
           <Route path="/blogs" element={<BlogPost post={posts[0]} />} />
           <Route path="/blogs/:id" element={<BlogRead posts={posts} />} />

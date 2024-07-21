@@ -40,13 +40,7 @@ const ProductInformation = (props) => {
       checkUserStatus();
     }, []);
 
-    // const handleButtonClick = () => {
-    //   if (userStatus) {
-    //     navigate('/checkout', { state: { product } });
-    //   } else {
-    //     navigate('/signin');
-    //   }
-    // };
+  
 
 
     const handleButtonClick = () => {
