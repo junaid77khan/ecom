@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import CryptoJS from 'crypto-js';
+import { act } from 'react';
 
 const initialState = {
-  cartProducts: []
+  cartInfo: JSON.parse(localStorage.getItem('cartInfo')) || []
 };
 
 const cartSlice = createSlice({
@@ -10,37 +12,100 @@ const cartSlice = createSlice({
   reducers: {
     addToCart(state, action) {
       const { product } = action.payload;
-      const existingProductIndex = state.cartProducts?.findIndex(item => item?.id === product?.id);
 
-      if (existingProductIndex !== -1) {
-        state.cartProducts[existingProductIndex].quantity += product?.quantity;
+      let cartProducts;
+      if (state.cartInfo && state.cartInfo.length === 2) {
+        cartProducts = state.cartInfo[1];
       } else {
-        state.cartProducts.push({ ...product, quantity: product?.quantity });
+        cartProducts = [];
       }
+      
+      let existingProduct = cartProducts.find(item => item._id === product._id);
+
+      if (existingProduct) {
+        existingProduct.quantity += product.quantity;
+      } else {
+        cartProducts.push(product);
+      }
+      
+      const cryptoKey = CryptoJS.SHA256(JSON.stringify(cartProducts)).toString();
+
+      state.cartInfo = [cryptoKey, cartProducts];
+
+      localStorage.setItem('cartInfo', JSON.stringify(state.cartInfo));
     },
+
     removeFromCart(state, action) {
       const { productId } = action.payload;
-      state.cartProducts = state.cartProducts.filter(product => product.id !== productId);
+
+      let cartProducts;
+      if (state.cartInfo && state.cartInfo.length === 2) {
+        cartProducts = state.cartInfo[1];
+      } else {
+        cartProducts = [];
+      }
+
+      cartProducts = cartProducts.filter(pro => pro._id !== productId);
+
+      const cryptoKey = CryptoJS.SHA256(JSON.stringify(cartProducts)).toString();
+
+      state.cartInfo = [cryptoKey, cartProducts];
+
+      localStorage.setItem('cartInfo', JSON.stringify(state.cartInfo));
     },
     increaseQuantity(state, action) {
       const { productId } = action.payload;
-      const existingProduct = state.cartProducts.find(item => item.id === productId);
-
-      if (existingProduct) {
-        existingProduct.quantity += 1;
+      let cartProducts;
+      if (state.cartInfo && state.cartInfo.length === 2) {
+        cartProducts = state.cartInfo[1];
+      } else {
+        cartProducts = [];
       }
+
+      cartProducts.map((product, index) => {
+        if(product._id === productId) {
+          product.quantity += 1;
+          cartProducts.splice(index, 1);
+          cartProducts.push(product);
+          const cryptoKey = CryptoJS.SHA256(JSON.stringify(cartProducts)).toString();
+          state.cartInfo = [cryptoKey, cartProducts];
+
+          localStorage.setItem('cartInfo', JSON.stringify(state.cartInfo));
+        }
+      })
     },
     decreaseQuantity(state, action) {
       const { productId } = action.payload;
-      const existingProduct = state.cartProducts.find(item => item.id === productId);
-
-      if (existingProduct && existingProduct.quantity > 1) {
-        existingProduct.quantity -= 1;
+      let cartProducts;
+      if (state.cartInfo && state.cartInfo.length === 2) {
+        cartProducts = state.cartInfo[1];
+      } else {
+        cartProducts = [];
       }
+
+      cartProducts.map((product, index) => {
+        if(product._id === productId) {
+          if(product.quantity > 0) {
+            product.quantity -= 1;
+            cartProducts.splice(index, 1);
+            cartProducts.push(product);
+            const cryptoKey = CryptoJS.SHA256(JSON.stringify(cartProducts)).toString();
+            state.cartInfo = [cryptoKey, cartProducts];
+
+            localStorage.setItem('cartInfo', JSON.stringify(state.cartInfo));
+          } else {
+            cartProducts.splice(index, 1);
+            const cryptoKey = CryptoJS.SHA256(JSON.stringify(cartProducts)).toString();
+            state.cartInfo = [cryptoKey, cartProducts];
+
+            localStorage.setItem('cartInfo', JSON.stringify(state.cartInfo));
+          }
+          return;
+        }
+      })
     }
   }
 });
 
-export const {addToCart, removeFromCart, increaseQuantity, decreaseQuantity} = cartSlice.actions
-export default cartSlice.reducer
-
+export const { addToCart, removeFromCart, increaseQuantity, decreaseQuantity } = cartSlice.actions;
+export default cartSlice.reducer;

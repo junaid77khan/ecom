@@ -44,40 +44,73 @@ const ProductInformation = (props) => {
       };
     
       const handleAddToCart = async () => {
-        if(userStatus) {
-          setLoading(true);
-          try {
-            const productId = product._id;
-            const token = JSON.parse(localStorage.getItem("Access Token"));
-            let response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/cart/add-cart-product/${productId}`, {
-              method: 'POST',
-              mode: "cors",
-              credentials: "include",
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-              },
-              body: JSON.stringify({
-                quantity:productQuantity
-              }),
-            });
+        // if(userStatus) {
+        //   setLoading(true);
+        //   try {
+        //     const productId = product._id;
+        //     const token = JSON.parse(localStorage.getItem("Access Token"));
+        //     let response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/cart/add-cart-product/${productId}`, {
+        //       method: 'POST',
+        //       mode: "cors",
+        //       credentials: "include",
+        //       headers: {
+        //         'Content-Type': 'application/json',
+        //         'Authorization': `Bearer ${token}`
+        //       },
+        //       body: JSON.stringify({
+        //         quantity:productQuantity
+        //       }),
+        //     });
 
-            if (!response.ok) {
-              throw new Error('Failed to add product in cart');
-            }
+        //     if (!response.ok) {
+        //       throw new Error('Failed to add product in cart');
+        //     }
 
-            response = await response.json();
-            const obj = {...product, quantity: response.data.quantity}
-            dispatch(showPopup(obj));
-          } catch (error) {
-            toast.error("Failed to add product in cart. Please try again.");
-            console.error('Adding product in cart error:', error);
-          } finally {
-            setLoading(false);
-          }
-        } else {
-          navigate("/signin")
+        //     response = await response.json();
+        //     const obj = {...product, quantity: response.data.quantity}
+        //     dispatch(showPopup(obj));
+        //   } catch (error) {
+        //     toast.error("Failed to add product in cart. Please try again.");
+        //     console.error('Adding product in cart error:', error);
+        //   } finally {
+        //     setLoading(false);
+        //   }
+        // } else {
+        //   navigate("/signin")
+        // }
+
+        let cartInfo = JSON.parse(localStorage.getItem('cartInfo'));
+
+        let availableProducts = [];
+
+        if(cartInfo && cartInfo.length === 2) {
+          availableProducts = cartInfo[1]; 
         }
+
+        let PrevproductData = availableProducts.filter(pro => pro._id === product._id);
+
+        const productObj = {
+          ...product,
+          quantity: productQuantity
+        };
+
+        dispatch(addToCart({ product: productObj }));
+
+        cartInfo = JSON.parse(localStorage.getItem('cartInfo'));
+
+        availableProducts = [];
+
+        if(cartInfo && cartInfo.length === 2) {
+          availableProducts = cartInfo[1]; 
+        }
+
+        let curproductData = availableProducts.filter(pro => pro._id === product._id);
+
+        if(PrevproductData[0].quantity !== curproductData[0].quantity) {
+          dispatch(showPopup({...product, "quantity": curproductData[0].quantity}));
+        } else {
+          toast.error("Failed to add product in cart. Please try again.")
+        } 
       }
     return (
         <div className="lg:flex">
