@@ -1,12 +1,14 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { bestSellerProduct } from "../../data/HomeData";
 
 function FeaturedCandles() {
   const [isMostPopularActive, setIsMostPopularActive] = useState(true);
   const scrollRef = useRef(null);
   const [mostPopularProducts, setMostPopularProducts] = useState([]);
   const [newItems, setNewItems] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchFeaturedProducts = useCallback(async () => {
     try {
@@ -41,6 +43,8 @@ function FeaturedCandles() {
       setNewItems(dataFromServer.data);
     } catch (error) {
       console.error("Error fetching featured products:", error);
+    }  finally {
+      setLoading(false);
     }
   }, []);
 
@@ -89,44 +93,56 @@ function FeaturedCandles() {
           </button>
         </div>
       </div>
-      <div className="flex justify-center items-center lg:gap-8 md:gap-7 gap-0 overflow-x-hidden mt-4">
-        <button
-          onClick={() => scrollBy("left")}
-          className="bg-white rounded-full p-2 shadow-md z-10"
-        >
-          <FaChevronLeft />
-        </button>
-        <div
-          ref={scrollRef}
-          className="flex gap-4 py-5 px-0 overflow-x-scroll no-scrollbar"
-          style={{
-            scrollSnapType: "x mandatory",
-            scrollBehavior: "smooth",
-          }}
-        >
-          {isMostPopularActive
-            ? mostPopularProducts.map((product) => (
-                <ProductCard
-                  key={product._id}
-                  product={product}
-                  isMostPopularActive={isMostPopularActive}
-                />
-              ))
-            : newItems.map((product) => (
-                <ProductCard
-                  key={product._id}
-                  product={product}
-                  isMostPopularActive={isMostPopularActive}
-                />
-              ))}
+      {
+        loading && 
+        <div className="h-96 flex justify-center items-center z-50">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500"></div>
         </div>
-        <button
-          onClick={() => scrollBy("right")}
-          className="bg-white rounded-full p-2 shadow-md z-10"
-        >
-          <FaChevronRight />
-        </button>
-      </div>
+      }
+      {
+        !loading && ((mostPopularProducts && mostPopularProducts.length === 0 && newItems && newItems.length === 0)) && 
+        <div className="text-xl sm:text-2xl">No Products Available</div>
+      }
+      {!loading && (mostPopularProducts && mostPopularProducts.length > 0 && newItems && newItems.length > 0) &&
+        <div className="flex justify-center items-center lg:gap-8 md:gap-7 gap-0 overflow-x-hidden mt-4">
+          <button
+            onClick={() => scrollBy("left")}
+            className="bg-white rounded-full p-2 shadow-md z-10"
+          >
+            <FaChevronLeft />
+          </button>
+          <div
+            ref={scrollRef}
+            className="flex gap-4 py-5 px-0 overflow-x-scroll no-scrollbar"
+            style={{
+              scrollSnapType: "x mandatory",
+              scrollBehavior: "smooth",
+            }}
+          >
+            {isMostPopularActive
+              ? mostPopularProducts.map((product) => (
+                  <ProductCard
+                    key={product._id}
+                    product={product}
+                    isMostPopularActive={isMostPopularActive}
+                  />
+                ))
+              : newItems.map((product) => (
+                  <ProductCard
+                    key={product._id}
+                    product={product}
+                    isMostPopularActive={isMostPopularActive}
+                  />
+                ))}
+          </div>
+          <button
+            onClick={() => scrollBy("right")}
+            className="bg-white rounded-full p-2 shadow-md z-10"
+          >
+            <FaChevronRight />
+          </button>
+        </div>
+      }
     </div>
   );
 }
