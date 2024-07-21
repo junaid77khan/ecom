@@ -11,7 +11,7 @@ const OtpForm = () => {
   const handleSendOtp = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8000/send-sms-otp", {
+      const response = await axios.post("http://localhost:8000/api/v1/user/send-sms-otp", {
         phoneNumber,
       });
       setVerificationId(response.data.verificationId);
@@ -25,7 +25,7 @@ const OtpForm = () => {
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8000/verify-sms-otp", {
+      await axios.post("http://localhost:8000/api/v1/user/verify-sms-otp", {
         verificationId,
         phoneNumber,
         otp,
