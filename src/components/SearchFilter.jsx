@@ -60,7 +60,7 @@ const SearchFilter = ({ products, onClose }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let response = await fetch(`http://localhost:8000/api/v1/product/search-product/${debouncedSearchInput}`, {
+        let response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/product/search-product/${debouncedSearchInput}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'

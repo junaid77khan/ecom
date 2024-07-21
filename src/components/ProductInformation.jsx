@@ -118,7 +118,7 @@ const ProductInformation = (props) => {
 
         let curproductData = availableProducts.filter(pro => pro._id === product._id);
 
-        if(PrevproductData[0].quantity !== curproductData[0].quantity) {
+        if(PrevproductData[0]?.quantity !== curproductData[0]?.quantity) {
           dispatch(showPopup({...product, "quantity": curproductData[0].quantity}));
         } else {
           toast.error("Failed to add product in cart. Please try again.")

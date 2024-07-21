@@ -181,9 +181,9 @@ function Cart() {
                                             <div className='flex justify-center items-center gap-2'>
                                                 <div className='md:text-md text-sm'>Quantity:</div>
                                                 <div className="flex border border-gray-300 rounded text-md">
-                                                    <button onClick={decreaseProductQuantity} className="px-3 py-1 bg-gray-100">-</button>
+                                                    <button onClick={() => decreaseProductQuantity(item._id} className="px-3 py-1 bg-gray-100">-</button>
                                                     <div className="px-3 py-1">{item.quantity}</div>
-                                                    <button onClick={increaseProductQuantity} className="px-3 py-1 bg-gray-100">+</button>
+                                                    <button onClick={() => increaseProductQuantity(item._id)} className="px-3 py-1 bg-gray-100">+</button>
                                                 </div>
                                             </div>
                                             {/* <FaTrash className='md:text-md text-sm' onClick={() => deleteProductFromCart(item.product._id)} /> */}
