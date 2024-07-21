@@ -1,13 +1,18 @@
+/* eslint-disable react/prop-types */
 import { ProductStarRating } from "./ProductCard";
 import { addToCart } from "../store/cartSlice";
 import { showPopup } from "../store/popupSlice";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+// import { useSelector } from 'react-redux';
+
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const ProductInformation = (props) => {
+  // const userStatus = useSelector((state) => state.auth.status);
+
     const {product} = props
     const [productQuantity, setProductQuantity] = useState(1);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -35,6 +40,13 @@ const ProductInformation = (props) => {
       checkUserStatus();
     }, []);
 
+  
+
+
+    const handleButtonClick = () => {
+      navigate('/otp-verification');
+    };
+    
     const increaseQuantity = () => {
         setProductQuantity(productQuantity + 1);
       };
@@ -171,22 +183,27 @@ const ProductInformation = (props) => {
                 Add to cart
               </span>
             </button>
-            <button
 
-              onClick={() => {
-                if(userStatus) {
-                  navigate(`/checkout`, {state: product})
-                } else {
-                  navigate('/signin');
-                }
-              }}
-              className="relative rounded-lg border-2 border-orange-500 inline-flex items-center justify-start md:px-6 lg:px-5 px-4 py-2 overflow-hidden font-medium transition-all bg-white hover:bg-white hover:border-white group"
-            >
-              <span className="w-40 h-40 rounded rotate-[-40deg] bg-orange-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>
-              <span className="relative w-full text-center lg:text-md text-sm text-orange-500 transition-colors duration-300 ease-in-out group-hover:text-white">
-                Buy now
-              </span>
-            </button>
+            <button
+  onClick={handleButtonClick}
+  className="relative rounded-lg border-2 border-orange-500 inline-flex items-center justify-start md:px-6 lg:px-5 px-4 py-2 overflow-hidden font-medium transition-all bg-white hover:bg-white hover:border-white group"
+>
+  <span className="w-40 h-40 rounded rotate-[-40deg] bg-orange-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>
+  <span className="relative w-full text-center lg:text-md text-sm text-orange-500 transition-colors duration-300 ease-in-out group-hover:text-white">
+    Buy now
+  </span>
+</button>
+
+         
+              {/* <button
+      onClick={handleButtonClick}
+      className="relative rounded-lg border-2 border-orange-500 inline-flex items-center justify-start md:px-6 lg:px-5 px-4 py-2 overflow-hidden font-medium transition-all bg-white hover:bg-white hover:border-white group"
+    >
+      <span className="w-40 h-40 rounded rotate-[-40deg] bg-orange-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>
+      <span className="relative w-full text-center lg:text-md text-sm text-orange-500 transition-colors duration-300 ease-in-out group-hover:text-white">
+        Buy now
+      </span>
+    </button> */}
           </div>
           <div className="mt-6">
             <h3 className="lg:text-xl text-lg font-semibold mb-2">Specifications:</h3>

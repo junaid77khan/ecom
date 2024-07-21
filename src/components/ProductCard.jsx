@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useNavigate } from "react-router-dom";
 import { showPopup } from "../store/popupSlice";
 import { addToCart } from "../store/cartSlice";

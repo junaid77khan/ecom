@@ -1,0 +1,283 @@
+[33mcommit c10be325afd51fd4baeb75bd9f794c2421916ce6[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: Siddhant <siddhant_010@outlook.com>
+Date:   Sun Jul 21 15:09:45 2024 +0530
+
+    otp
+
+[33mcommit 886f962ea57db853d6afa300d74a8b0d9800e3e2[m
+Merge: a8066ab f9bbcb7
+Author: Siddhant <siddhant_010@outlook.com>
+Date:   Fri Jul 19 17:27:29 2024 +0530
+
+    fix
+
+[33mcommit f9bbcb723d8a497442937047940ea0ffc04838e1[m
+Merge: ee6f06c 8de3c77
+Author: Siddhant Agrawal <120778312+siddhant-agrawal01@users.noreply.github.com>
+Date:   Fri Jul 19 17:23:17 2024 +0530
+
+    Merge pull request #24 from junaid77khan/main
+    
+    Fixing bug
+
+[33mcommit a8066abf094410397b71c2cd03bac95292a0c973[m
+Author: Siddhant <siddhant_010@outlook.com>
+Date:   Fri Jul 19 17:13:17 2024 +0530
+
+    resolved
+
+[33mcommit 8de3c77893354d216df0a8bfd7ceb5ddf6603a88[m
+Author: Junaid Khan <junaidk8185@gmail.com>
+Date:   Fri Jul 19 17:12:10 2024 +0530
+
+    Changing origin
+
+[33mcommit ee6f06c2aa52de67aa86cd646715bc2c87870602[m
+Merge: 359e7f3 ee3b842
+Author: Siddhant Agrawal <120778312+siddhant-agrawal01@users.noreply.github.com>
+Date:   Fri Jul 19 17:09:18 2024 +0530
+
+    Merge pull request #23 from junaid77khan/main
+    
+    Adding signin signup
+
+[33mcommit ee3b8429cd8052946f95abe7aac7022fb2c8427c[m
+Author: Junaid Khan <junaidk8185@gmail.com>
+Date:   Fri Jul 19 02:17:00 2024 +0530
+
+    Adding signin signup
+
+[33mcommit 359e7f35b893387dc900d957b882b5807d3ec10c[m
+Author: Siddhant <siddhant_010@outlook.com>
+Date:   Thu Jul 18 21:49:18 2024 +0530
+
+    add category
+
+[33mcommit 9a342642d7b328d073000f86634c7697ffd3d477[m
+Merge: 5b04b42 6973f79
+Author: Siddhant Agrawal <120778312+siddhant-agrawal01@users.noreply.github.com>
+Date:   Thu Jul 18 20:15:40 2024 +0530
+
+    Merge pull request #22 from junaid77khan/main
+    
+    Adding review
+
+[33mcommit 5b04b42fd344549886ca6f2ae292b6362110bd0a[m
+Author: Siddhant <siddhant_010@outlook.com>
+Date:   Thu Jul 18 20:14:30 2024 +0530
+
+    admin panel
+
+[33mcommit 6973f792479f504021e036901a28a88fa11ac11f[m
+Author: Junaid Khan <junaidk8185@gmail.com>
+Date:   Thu Jul 18 17:42:25 2024 +0530
+
+    Adding review
+
+[33mcommit 9cfd70070f0186389390613969b39d32873ac17a[m
+Author: Junaid Khan <junaidk8185@gmail.com>
+Date:   Wed Jul 17 19:26:14 2024 +0530
+
+    changing controller
+
+[33mcommit 372ecb8f1df2600e75aaab898d0bde3e445bf984[m
+Merge: 947d058 b8c69c4
+Author: Siddhant Agrawal <120778312+siddhant-agrawal01@users.noreply.github.com>
+Date:   Wed Jul 17 19:08:46 2024 +0530
+
+    Merge pull request #21 from junaid77khan/main
+    
+    connecting backend
+
+[33mcommit b8c69c4d68e8ac1cd6341268b56ff39e1d873c64[m
+Merge: 228834e 947d058
+Author: Junaid Khan <137268883+junaid77khan@users.noreply.github.com>
+Date:   Wed Jul 17 19:08:21 2024 +0530
+
+    Merge branch 'main' into main
+
+[33mcommit 228834e0919796fa16cbde5b602c7ec6dde51431[m
+Author: Junaid Khan <junaidk8185@gmail.com>
+Date:   Wed Jul 17 19:01:48 2024 +0530
+
+    Connecting backend
+
+[33mcommit 351a5445322f2cd8cc4bca03d03dc1a0b885b98a[m
+Author: Junaid Khan <junaidk8185@gmail.com>
+Date:   Wed Jul 17 18:59:11 2024 +0530
+
+    Connecting backend
+
+[33mcommit a9350aa9d71c33add90b34f53499490252a9bbde[m
+Author: Junaid Khan <junaidk8185@gmail.com>
+Date:   Wed Jul 17 18:54:45 2024 +0530
+
+    Connecting backend
+
+[33mcommit 947d0586d4824fe6abe9a74af6fd52b6e4e6dde5[m
+Author: Siddhant <siddhant_010@outlook.com>
+Date:   Wed Jul 17 13:45:19 2024 +0530
+
+    add payments
+
+[33mcommit e4a589da4c0716f0452da45304686fa3fa91c56b[m
+Merge: 8ce6dee b540cb8
+Author: Siddhant Agrawal <120778312+siddhant-agrawal01@users.noreply.github.com>
+Date:   Wed Jul 17 13:40:25 2024 +0530
+
+    Merge pull request #20 from junaid77khan/main
+    
+    Adding admin code
+
+[33mcommit b540cb809c2d0c63b76dfdf66b7e46f3faab5bb5[m
+Author: Junaid Khan <junaidk8185@gmail.com>
+Date:   Wed Jul 17 13:37:54 2024 +0530
+
+    Adding admin code
+
+[33mcommit 8ce6deea1eb5ce3ab08e70166ae02c0b7efd8f65[m
+Author: Siddhant <siddhant_010@outlook.com>
+Date:   Wed Jul 17 10:10:42 2024 +0530
+
+    user
+
+[33mcommit 1a1b6937d2877707d9de05af8d7997c91a339f5f[m
+Merge: 7aad6f7 4cd9c1b
+Author: Siddhant Agrawal <120778312+siddhant-agrawal01@users.noreply.github.com>
+Date:   Wed Jul 17 09:57:17 2024 +0530
+
+    Merge pull request #19 from junaid77khan/main
+    
+    Changing admin panel
+
+[33mcommit 4cd9c1b6909fcbe8b31842079ee8c4c8706c902a[m
+Author: Junaid Khan <junaidk8185@gmail.com>
+Date:   Wed Jul 17 02:10:23 2024 +0530
+
+    Connecting to database
+
+[33mcommit 7aad6f725b9d4c5d81daa51550acb7ffa91ea74a[m
+Merge: 91ef4b0 8aa2cbc
+Author: Siddhant Agrawal <120778312+siddhant-agrawal01@users.noreply.github.com>
+Date:   Wed Jul 17 01:30:52 2024 +0530
+
+    Merge pull request #18 from junaid77khan/main
+    
+    Connecting to database
+
+[33mcommit 8aa2cbcd69ebf69f0af5600eb535522f07692caa[m
+Author: Junaid Khan <junaidk8185@gmail.com>
+Date:   Wed Jul 17 01:29:37 2024 +0530
+
+    Connecting to database
+
+[33mcommit 91ef4b01583a45377a6259b1319d9ae93aa35281[m
+Merge: c652f8a a9b45f8
+Author: Siddhant Agrawal <120778312+siddhant-agrawal01@users.noreply.github.com>
+Date:   Tue Jul 16 19:56:55 2024 +0530
+
+    Merge pull request #17 from junaid77khan/main
+    
+    Connecting to database
+
+[33mcommit a9b45f88c25975f3866063136fbfed7f6435ad2a[m
+Author: Junaid Khan <junaidk8185@gmail.com>
+Date:   Tue Jul 16 19:55:54 2024 +0530
+
+    Connecting to database
+
+[33mcommit c652f8a856f75f7c762bcddabf2a284b20508c00[m
+Author: Siddhant <siddhant_010@outlook.com>
+Date:   Tue Jul 16 19:35:05 2024 +0530
+
+    conflict
+
+[33mcommit d4a22703cbd8d98fc7ae9f71cc13e02dcbcfe17b[m
+Merge: 7d44571 be6b83b
+Author: Siddhant Agrawal <120778312+siddhant-agrawal01@users.noreply.github.com>
+Date:   Tue Jul 16 18:33:01 2024 +0530
+
+    Merge pull request #16 from junaid77khan/main
+    
+    Solving bugs
+
+[33mcommit be6b83bdcba1498a3c34236ece1df7ed19f3deff[m
+Author: Junaid Khan <junaidk8185@gmail.com>
+Date:   Mon Jul 15 17:39:34 2024 +0530
+
+    solving cart bug
+
+[33mcommit a3fe3d6a4be185bfeb9d4c47992fa774d3d7c765[m
+Author: Junaid Khan <junaidk8185@gmail.com>
+Date:   Mon Jul 15 17:11:16 2024 +0530
+
+    Solving bugs
+
+[33mcommit 6c6255596fffc542e6170b1cf8945c2f8685b493[m
+Author: Junaid Khan <junaidk8185@gmail.com>
+Date:   Mon Jul 15 17:05:10 2024 +0530
+
+    Solving bugs
+
+[33mcommit 7d445714d23b52fe601552f69260653e7d2bb697[m
+Author: Siddhant <siddhant_010@outlook.com>
+Date:   Mon Jul 15 15:21:23 2024 +0530
+
+    commented the globe
+
+[33mcommit 490d67cdf923bc122b3299684cc55ccce00e1745[m
+Merge: 2fb8277 76fe817
+Author: Siddhant Agrawal <120778312+siddhant-agrawal01@users.noreply.github.com>
+Date:   Mon Jul 15 14:25:57 2024 +0530
+
+    Merge pull request #15 from junaid77khan/main
+    
+    Solving bugs
+
+[33mcommit 76fe817efa6c8aa53a52b16fe34787a51755e420[m
+Author: Junaid Khan <junaidk8185@gmail.com>
+Date:   Mon Jul 15 14:24:52 2024 +0530
+
+    Solving bugs
+
+[33mcommit 2fb827734681adcc9ea720bb09b2986adbcc5c65[m
+Merge: 853554a e704f3e
+Author: Siddhant Agrawal <120778312+siddhant-agrawal01@users.noreply.github.com>
+Date:   Mon Jul 15 13:26:30 2024 +0530
+
+    Merge pull request #14 from junaid77khan/main
+    
+    Make categories product details search bar responsve
+
+[33mcommit e704f3e9e06603300f9b9e39e913b1049d37781a[m
+Merge: cec93db 853554a
+Author: Siddhant Agrawal <120778312+siddhant-agrawal01@users.noreply.github.com>
+Date:   Mon Jul 15 13:26:17 2024 +0530
+
+    Merge branch 'main' into main
+
+[33mcommit cec93db4e8b5b253e764bf92fb9919d6474c8683[m
+Author: Junaid Khan <junaidk8185@gmail.com>
+Date:   Mon Jul 15 13:22:50 2024 +0530
+
+    Make categories product details search bar responsve
+
+[33mcommit 853554abdd60d01ad3f54ebe425ee25883d0f4c7[m
+Author: Siddhant <siddhant_010@outlook.com>
+Date:   Mon Jul 15 01:27:26 2024 +0530
+
+    make responsive
+
+[33mcommit ff7db6323e075eb7f0229109fef746f7c3470439[m
+Author: Siddhant <siddhant_010@outlook.com>
+Date:   Sat Jul 13 18:46:17 2024 +0530
+
+    add checkout
+
+[33mcommit 6ac20e67eb46e4b020c8880f0c4ff49297f01a75[m
+Author: Siddhant <siddhant_010@outlook.com>
+Date:   Sat Jul 13 17:25:23 2024 +0530
+
+    added the popup
+
+[33mcommit 2a582d71cd3bf0f6b5cfb0281124f4c4

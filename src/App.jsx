@@ -1,12 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { posts } from './data/Blog-Data';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { posts } from "./data/Blog-Data";
 
 import { ContactUs, NavBar } from "./components";
 
-import Login from "./pages/login";
-import Register from "./pages/register";
 import Footer from "./components/Footer";
 import Blog from "./pages/BlogPost";
 import ProductDetails from "./pages/ProductDetails";
@@ -21,8 +19,8 @@ import BlogRead from "./pages/BlogRead";
 import CheckoutPage from "./pages/Checkout";
 import { NotFound } from "./pages/Notfound";
 import OTPPage from "./pages/OTPPage";
-import Logout from "./components/Logout";
-
+import PaymentSuccess from "./pages/payment/PaymentSucess";
+import SendOtp from "./pages/Sendotp";
 
 function App() {
   return (
@@ -30,10 +28,12 @@ function App() {
       <BrowserRouter>
         <NavBar />
         <Routes>
-          <Route path="/signin" element={<Login />} />
-          <Route path="/signup" element={<Register />} />
-          <Route path="/otp-verification/:username" element={<OTPPage />} />
-          <Route path="/logout" element={<Logout />} />
+          {/* <Route path="/signin" element={<Login />} /> */}
+          {/* <Route path="/signup" element={<Register />} /> */}
+          {/* <Route path="/otp-verification/:username" element={<OTPPage />} /> */}
+          <Route path="/otp-verification" element={<OTPPage />} />
+
+          {/* <Route path="/logout" element={<Logout />} /> */}
           {/* <Route path="/blog" element={<Blog />} /> */}
           <Route path="/blogs" element={<BlogPost post={posts[0]} />} />
           <Route path="/blogs/:id" element={<BlogRead posts={posts} />} />
@@ -50,7 +50,10 @@ function App() {
             path="categories/:categoryId/:categoryName"
             element={<CategoryProducts />}
           />
-          <Route path="product/:productId" element={<ProductDetails key={location.pathname} />} />
+          <Route
+            path="product/:productId"
+            element={<ProductDetails key={location.pathname} />}
+          />
           <Route path="product/:product/checkout" element={<CheckoutPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
 
@@ -59,17 +62,16 @@ function App() {
           <Route path="cart" element={<Cart />} />
           <Route path="/*" element={<NotFound />} />
 
+          <Route path="/paymentsuccess" element={<PaymentSuccess />} />
 
-
-
+          <Route path="/send-otp" element={<SendOtp />} />
         </Routes>
-
       </BrowserRouter>
       <div>
         <Footer />
         {/* <Outlet /> */}
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </Provider>
   );
 }
