@@ -23,10 +23,6 @@ const Register = () => {
     setEmailErrMessage("Empty")
     setPasswordErrMessage("Empty")
     try {
-<<<<<<< HEAD
-      const res = await axios.post('http://localhost:8000/api/v1/auth/register', { username, email, password });
-      console.log(res.data);
-=======
       const data = {
         "username": username,
         "email": email,
@@ -61,7 +57,6 @@ const Register = () => {
       }
 
       navigate(`/otp-verification/${username}`);
->>>>>>> f9bbcb723d8a497442937047940ea0ffc04838e1
     } catch (error) {
       toast.error("Failed to sign up. Please try again.");
         return;

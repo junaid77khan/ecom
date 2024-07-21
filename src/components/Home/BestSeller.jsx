@@ -15,7 +15,7 @@ const BestSeller = () => {
       const fetchBestSellerProduct = async() => {
         console.log("cors1")
 
-        let response = await fetch('http://localhost:8000/api/v1/product/best-seller', {
+        let response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/product/best-seller`, {
           method: 'GET',
             headers: {
               'Content-Type': 'application/json'
@@ -37,30 +37,39 @@ const BestSeller = () => {
         setLoading(false)
       }
   }, [])
-  console.log("cors1")
 
   const fetchReviews = useCallback(async () => {
     if (!productId) return; 
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/product/get-reviews/${productId}`, {
-        method: 'GET',
+      let data = {
+        "productId": productId
+      }
+      const token = JSON.parse(localStorage.getItem("Access Token"));
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/review/get-product-reviews`, {
+        method: 'POST',
+        mode: 'cors',
+        credentials: 'include',
         headers: {
-          'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
+        body: JSON.stringify(
+            data
+        )
       });
 
       if (!response.ok) {
         throw new Error('Failed to fetch product reviews');
       }
 
-      const data = await response.json();
+      data = await response.json();
 
       if (!data.success) {
         throw new Error('Fetch product reviews error');
       }
 
-      setBestSellerProductReview(data.data.ratingsReviews);
+      setBestSellerProductReview(data.data);
     } catch (error) {
       console.error('Fetch product reviews error:', error);
     }

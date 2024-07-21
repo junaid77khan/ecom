@@ -1,14 +1,77 @@
 // import { GlobeDemo } from "../components/GlobeDemo";
+import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const Spinner = () => (
+  <div className="absolute inset-0 flex justify-center items-center">
+    <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></div>
+  </div>
+);
 
 const ContactUs = () => {
+  const [details, setDetails] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const[loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setDetails({
+      ...details,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const addMessageResponse = await fetch(
+        "http://localhost:8000/api/v1/message/add-message",
+        {
+          method: "POST",
+          body: JSON.stringify(
+            {
+              "name": details.name,
+              "email": details.email,
+              "message": details.message
+            }
+          ),
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      const addMessageData = await addMessageResponse.json();
+
+      if (!addMessageData.success) {
+        throw new Error("Failed to add message");
+      }
+
+      toast.success("Message added successfully!");
+      setDetails({
+        name: "",
+        email: "",
+        message:""
+      });
+    } catch (error) {
+      console.error("Error adding message:", error);
+      toast.error("Failed to add message");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="w-full bg-orange-50 flex flex-col md:flex-row justify-around">
-      {/* <div className="w-full md:w-3/5 hidden lg:flex justify-center">
-        <GlobeDemo />
-      </div> */}
       <div className="shadow-2xl rounded mt-4 lg:mx-8  w-full lg:w-1/2 px-8 py-5 h-full">
         <h2 className="lg:text-3xl text-2xl font-bold text-gray-800 mb-6">Contact Us</h2>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
               htmlFor="name"
@@ -20,6 +83,8 @@ const ContactUs = () => {
               type="text"
               id="name"
               name="name"
+              value={details.name}
+              onChange={handleChange}
               className="mt-1 outline-none block w-full border border-gray-300 rounded-md shadow-sm"
             />
           </div>
@@ -34,6 +99,8 @@ const ContactUs = () => {
               type="email"
               id="email"
               name="email"
+              value={details.email}
+              onChange={handleChange}
               className="mt-1 outline-none block w-full border border-gray-300 rounded-md shadow-sm"
             />
           </div>
@@ -48,16 +115,21 @@ const ContactUs = () => {
               id="message"
               name="message"
               rows="4"
+              value={details.message}
+              onChange={handleChange}
               className="mt-1 outline-none block w-full border border-gray-300 rounded-md shadow-sm resize-none"
             ></textarea>
           </div>
-          <div className="mt-6">
-            <button
-              type="submit"
-              className="inline-flex items-center lg:px-6 px-3 lg:py-3 py-2 border border-transparent text-base font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
-            >
-              Send Message
-            </button>
+          <div className="mt-2 py-10  border-t w-full flex flex-wrap justify-center items-center border-blueGray-200 text-center">
+                <button
+                  type="submit"
+                  className="mt-5 font-semibold bg-orange-500 px-4 text-gray-100 py-2 rounded-lg hover:bg-orange-600 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none relative"
+                  disabled={loading} 
+                  onClick={handleSubmit}
+                >
+                  {loading && <Spinner />}
+                  <span className={` ${loading ? 'invisible' : 'visible'}`}>Add Product</span>
+                </button>
           </div>
         </form>
       </div>
