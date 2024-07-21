@@ -51,7 +51,7 @@ const BlogRead = ({ posts }) => {
         </div>
 
         {/* Comments Section */}
-        <div className="w-full max-w-4xl mt-8">
+        {/* <div className="w-full max-w-4xl mt-8">
           <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">Leave a comment</h3>
           <form>
             <div className="mb-4">
@@ -79,7 +79,7 @@ const BlogRead = ({ posts }) => {
               Post comment
             </button>
           </form>
-        </div>
+        </div> */}
       </div>
     </div>
   );

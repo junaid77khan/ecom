@@ -2,27 +2,24 @@
 export const posts = [
     {
       id: '1',
-      title: 'The magic of Sand Wax - Aura Decor',
+      title: 'Top Ten DIY Trends For Candles',
       date: 'MAY 16, 2024',
-      introduction: 'Welcome to our comprehensive guide on Sand wax – a practical solution for creative candle making. In this guide, we\'ll delve into the essentials of Sand wax, from its...',
+      introduction: 'Candles are a staple in many households as they provide a warm, relaxing, and inviting atmosphere. There are many ways you can enjoy your candles — even more so if they’re paired with DIY activities. Here are our top ten DIY trends to get inspired and light up your world with candles.',
       imageUrl: '/blog.jpg',
       content: [
         {
-          title: 'Chapter 1: Understanding Sand Wax',
+          title: 'Paint or Draw',
           paragraphs: [
-            'Sand Wax is a versatile candle making material known for its unique composition. Comprising granular particles reminiscent of sand, Sand wax opens up new possibilities for candle makers.',
-            'Unlike traditional wax, candle sand allows for easy pouring into various vessel shapes, offering flexibility in candle design.'
+            'Decorating candle jars is a great DIY activity, especially if you decide to write a special message for someone or create a one of a kind gift. You can use paint, markers, or paint pens to customize your candle jar designs. If you’re personalizing a gift or making a home decor statement, you can use a Cricut to create a new label. If you need to remove the label here are a few tips -',
+              '1) Use warm water and soap – just be sure to not get the candle wet',
+              '2) Use a hair dryer to warm the label making it easier to peel off',
+              '3) Use a bit of mayonnaise or a dab of alcohol on a paper towel to gently remove the adhesive residue'
           ],
         },
         {
-          title: 'Chapter 2: How to use Sand Wax?',
+          title: 'Crochet a Candle Cozy',
           paragraphs: [
-            'Using Sand wax is straightforward and user-friendly. Here\'s a simple guide to get you started:',
-            '1. Pour Sand wax into a clean container suitable for candle making.',
-            '2. Insert the wick into the sand, leaving a small portion above the surface.',
-            '3. After use, extinguish the flame and let the wax cool.',
-            '4. Remove the wick and any hardened wax, disposing of them properly.',
-            '5. Store the remaining sand in its original packaging or an airtight container for future use.'
+            'Create a fun candle cozy that can be used over and over again. You can braid or crochet it together to fit your specific candle jar. You can purchase a cord at a local craft store or from an online vendor. Why not kick it up a notch and dip dye your candle cozy? It will add personality and style to your candle display. Below are the ones we dip dyed recently. These make for a great home decor enhancement to any candle.'
           ],
           image: '/path-to-instructions-image.png',
           imageAlt: 'Instructions for using Sand Wax',
