@@ -1,7 +1,9 @@
 // /* eslint-disable react/prop-types */
 import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { posts } from '../data/Blog-Data';
 
-const BlogRead = ({ posts }) => {
+const BlogRead = () => {
   const { id } = useParams();
   const post = posts.find(post => post.id === id);
 
@@ -9,15 +11,17 @@ const BlogRead = ({ posts }) => {
     return <div>Post not found</div>;
   }
 
+  console.log(post);
+
   return (
-    <div className="flex flex-col items-center px-4 py-8 md:px-8 lg:px-16">
+    <div className="flex flex-col items-center px-4 py-8 md:px-8 lg:px-16 bg-orange-50">
       {/* Blog Content Section */}
       <div className="w-full max-w-4xl">
         {/* Header Image */}
         <img 
           src={post.imageUrl} 
           alt={post.title} 
-          className="w-full object-cover rounded-lg"
+          className="w-full lg:w-1/2 mx-auto h-96 object-cover rounded-lg"
         />
 
         {/* Blog Title */}
@@ -37,14 +41,14 @@ const BlogRead = ({ posts }) => {
 
         {/* Blog Content */}
         <div className="text-base md:text-lg lg:text-xl text-gray-800">
-          {post.content.map((section, index) => (
+          {post?.content?.map((section, index) => (
             <div key={index} className="mb-8">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">{section.title}</h2>
-              {section.paragraphs.map((paragraph, pIndex) => (
+              {section?.paragraphs?.map((paragraph, pIndex) => (
                 <p key={pIndex} className="mb-4">{paragraph}</p>
               ))}
               {section.image && (
-                <img src={section.image} alt={section.imageAlt} className="w-full object-cover rounded-lg mb-4" />
+                <img src={section.image} alt={section.imageAlt} className="w-full lg:w-1/2 h-96 object-cover rounded-lg mb-4" />
               )}
             </div>
           ))}
