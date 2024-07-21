@@ -28,28 +28,22 @@ function NavBar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
+  // const toggleDropdown = () => {
+  //   setIsDropdownOpen(!isDropdownOpen);
+  // };
 
-  const handleClickOutside = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setIsDropdownOpen(false);
-    }
-  };
+  // const handleClickOutside = (event) => {
+  //   if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+  //     setIsDropdownOpen(false);
+  //   }
+  // };
 
-  useEffect(() => {
-    document.addEventListener('click', handleClickOutside);
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, []);
-
-  const products = [
-    { id: 1, name: "Product 1" },
-    { id: 2, name: "Product 2" },
-    { id: 3, name: "Product 3" },
-  ];
+  // useEffect(() => {
+  //   document.addEventListener('click', handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener('click', handleClickOutside);
+  //   };
+  // }, []);
 
   const handleSearchClick = () => {
     setIsSearchOpen(true);
@@ -148,7 +142,7 @@ function NavBar() {
             <FaSearch className="md:text-xl text-md text-gray-500 hover:text-orange-400" />
           </button>
         </li>
-        <li ref={dropdownRef}>
+        {/* <li ref={dropdownRef}>
           <div className="relative">
             <button
               onClick={toggleDropdown}
@@ -160,7 +154,7 @@ function NavBar() {
               <ProfileDropDown setIsDropdownOpen={setIsDropdownOpen} />
             )}
           </div>
-        </li>
+        </li> */}
         <li>
           <NavLink
             to={"/cart"}

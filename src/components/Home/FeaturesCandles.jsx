@@ -53,7 +53,7 @@ function FeaturedCandles() {
   }, [fetchFeaturedProducts]);
 
   const scrollBy = (direction) => {
-    const scrollAmount = scrollRef.current.clientWidth;
+    const scrollAmount = scrollRef.current.clientWidth+32;
     if (direction === "left") {
       scrollRef.current.scrollLeft -= scrollAmount;
     } else {
@@ -164,9 +164,9 @@ function ProductCard({ product, isMostPopularActive }) {
         />
       </div>
       <div className="w-full flex flex-col">
-        <h1 className="text-lg p-1">{product.name}</h1>
+        <h1 className="text-lg p-1">{product.name.length > 25 ? `${product.name.substring(0, 25)}...` : product.name}</h1>
         <h1 className="text-md text-gray-500">
-          {product.description.substring(0, 40)}
+          {product.description.length > 40 ? `${product.description.substring(0, 40)}...` : product.description}
         </h1>
       </div>
     </div>

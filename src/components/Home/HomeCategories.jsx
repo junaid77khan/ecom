@@ -85,12 +85,12 @@ const HomeCategories = () => {
                 />
               </div>
               <h1 className="text-md md:text-lg">
-                {category.name.length > 13 ? `${category.name.substring(0, 13) }...`: category.name}{" "}
+                {category.name.length > 20 ? `${category.name.substring(0, 20) }...`: category.name}{" "}
                 <FaArrowRight className="inline" />{" "}
               </h1>
               <div>
                 <p className="text-gray-500 hover:text-black">
-                  {category.description.substring(0, 40)}...
+                  {category.description.length > 50 ? `${category.description.substring(0, 50)}...` : category.description}
                 </p>
               </div>
             </div>

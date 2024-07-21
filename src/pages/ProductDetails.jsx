@@ -271,7 +271,10 @@ const ProductDetails = () => {
                 </a>
             ))
         ) : (
-            <p className="font-semibold text-center w-full h-40 text-xl ">No Available related products <span onClick={() => navigate('/categories')} className="border-b-2 cursor-pointer text-orange-500 border-orange-500 hover:text-orange-600 hover:border-orange-600">See more Categories</span></p>
+            <div className="font-semibold w-full h-40 lg:text-xl text-md text-center">
+            <p >No Available related products</p>
+            <span onClick={() => navigate('/categories')} className="border-b-2 cursor-pointer text-orange-500 border-orange-500 hover:text-orange-600 hover:border-orange-600">See more Categories</span>
+            </div>
         )}
         </div>
       </div>

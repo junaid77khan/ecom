@@ -170,7 +170,7 @@ function Cart() {
                         <div key={item?._id} className="border border-gray-300 bg-white rounded-lg w-full flex justify-start lg:gap-5 gap-3 items-start lg:px-8 px-3 py-5 my-2">
                             <img className='w-24 md:h-24 h-20 rounded-lg' src={item.images ? item.images[0] : ''} alt={item.name} />
                             <div className="flex md:flex-row flex-col justify-between w-full items-start md:gap-5 gap-1 ">
-                                <div className=' '>
+                                <div className=' flex flex-col justify-center items-start gap-1 lg:gap-2'>
                                     <p className='md:text-md text-sm'>{item.name}</p>
                                     <p className='md:text-md text-sm'>₹ {item.salePrice}</p>
                                     <p className='md:text-md text-xs'>{item.stock > 0 ? <span className='text-green-500'>In stock</span> : <span className='text-red-500'>Out of stock</span>}</p>
