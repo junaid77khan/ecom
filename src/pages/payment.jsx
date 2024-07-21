@@ -1,8 +1,6 @@
-import React from 'react'
 import { useState, useEffect } from 'react'
 import { RadioGroup } from '@headlessui/react'
-import { CheckCircleIcon, TrashIcon } from '@heroicons/react/solid'
-import { auth } from "../../firebase.config";
+import { CheckCircleIcon} from '@heroicons/react/solid'
 // import { RecaptchaVerifier, signInWithPhoneNumber,getAuth } from "firebase/auth";
 
 export default function Checkouts() {
@@ -108,7 +106,7 @@ export default function Checkouts() {
                 try {
                     console.log("verifying");
                     const data = await fetch(
-                        // http://localhost:5000/api/v1/payment/verify,
+                        `http://localhost:8000/api/v1/payment/verify`,
                         {
                             method: "POST",
 
@@ -140,7 +138,7 @@ export default function Checkouts() {
         console.log(amount);
         try {
             const response = await fetch(
-                // http://localhost:8000/api/v1/payment/orders,
+                'http://localhost:8000/api/v1/payment/orders',
 
                 {
                     method: "POST",

@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useParams, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 import { ProductReview } from "../components/ProductReview";
 import { ProductCard } from "../components/ProductCard";
@@ -33,7 +34,7 @@ const ProductDetails = () => {
             }    
         } catch (error) {
             console.error('Error checking user status:', error);
-            dispatch(logout());
+            // dispatch(logout());
             setUserStatus(false); 
         }
     };
@@ -41,7 +42,7 @@ const ProductDetails = () => {
     checkUserStatus();
   }, []);
 
-  const handleAddReview = async() => {
+  const handleAddReview = useCallback(async() => {
     if(userStatus) {
       setReviewLoading(true);
       try {
@@ -77,7 +78,7 @@ const ProductDetails = () => {
     } else {
       navigate("/signin");
     }
-  }
+  }, [userStatus, product._id, rating, review, navigate])
 
   const Rating = () => {
     const handleStarClick = (starNumber) => {
@@ -173,9 +174,9 @@ const ProductDetails = () => {
     fetchReviews();
   }, [handleAddReview]);
 
-  const handleRatingChange = (rating) => {
-    setRating(rating);
-  };
+  // const handleRatingChange = (rating) => {
+  //   setRating(rating);
+  // };
 
   return (
     <div className=" mx-auto lg:px-4 px-2 py-8 bg-orange-50">

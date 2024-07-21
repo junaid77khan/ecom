@@ -43,7 +43,7 @@ const BestSeller = () => {
     if (!productId) return; 
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/product/get-reviews/${productId}`, {
+      const response = await fetch("http://localhost:8000/api/v1/product/best-seller", {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -78,7 +78,7 @@ const BestSeller = () => {
             Best Seller
           </button>
         </div>
-        { loading || Object.entries(bestSellerProduct).length === 0 || bestSellerProductReview.length === 0? (
+        { loading || Object.entries(bestSellerProduct).length === 0 || bestSellerProductReview?.length === 0? (
           <div className="h-96 flex justify-center items-center z-50">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
           </div>
