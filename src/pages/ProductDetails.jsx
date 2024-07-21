@@ -46,12 +46,14 @@ const ProductDetails = () => {
     if(userStatus) {
       setReviewLoading(true);
       try {
-        let response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/product/add-review`, {
+        const token = JSON.parse(localStorage.getItem("Access Token"));
+        let response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/review/add-review`, {
           method: 'POST',
           mode: "cors",
           credentials: "include",
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
           },
           body: JSON.stringify({
             productId: product._id,
@@ -66,7 +68,7 @@ const ProductDetails = () => {
         }
 
         response = await response.json();
-        
+        setProductReviews(response.data)
       } catch (error) {
         toast.error("Failed to add review. Please try again.");
         console.error('Adding review error:', error);
@@ -82,7 +84,6 @@ const ProductDetails = () => {
 
   const Rating = () => {
     const handleStarClick = (starNumber) => {
-      console.log("Clicked");
       setRating(starNumber);
     };
   
@@ -147,11 +148,19 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        let response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/product/get-reviews/${productId}`, {
-          method: 'GET',
+        const data = {
+          "productId": productId
+        }
+        let response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/review/get-product-reviews`, {
+          method: 'POST',
+          mode: 'cors',
+          credentials: 'include',
           headers: {
             'Content-Type': 'application/json'
           },
+          body: JSON.stringify(
+            data
+          )
         });
 
         if (!response.ok) {
@@ -163,7 +172,7 @@ const ProductDetails = () => {
         if (!response.success) {
           console.error('Fetch product reviews error:');
         }
-        setProductReviews(response.data.ratingsReviews)
+        setProductReviews(response.data)
         
       } catch (error) {
         console.error('Fetch product reviews error:', error);
@@ -172,7 +181,7 @@ const ProductDetails = () => {
     };
 
     fetchReviews();
-  }, [handleAddReview]);
+  }, []);
 
   // const handleRatingChange = (rating) => {
   //   setRating(rating);
