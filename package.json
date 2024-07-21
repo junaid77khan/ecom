@@ -16,6 +16,8 @@
     "@react-three/drei": "^9.108.4",
     "@react-three/fiber": "^8.16.8",
     "@reduxjs/toolkit": "^2.2.6",
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
     "axios": "^1.7.2",
     "clsx": "^2.1.1",
     "clx": "^1.0.0",
