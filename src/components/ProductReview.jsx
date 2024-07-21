@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 const ProductReview = (props) => {
     const { ratingReview } = props
     return (
@@ -20,3 +21,15 @@ const ProductReview = (props) => {
 }
 
 export { ProductReview }
+
+
+
+
+
+
+
+
+
+
+
+

@@ -18,9 +18,8 @@ import BlogPost from "./pages/BlogPost";
 import BlogRead from "./pages/BlogRead";
 import CheckoutPage from "./pages/Checkout";
 import { NotFound } from "./pages/Notfound";
-import OTPPage from "./pages/OTPPage";
 import PaymentSuccess from "./pages/payment/PaymentSucess";
-import SendOtp from "./pages/Sendotp";
+import OtpForm from "./pages/OtpForm";
 
 function App() {
   return (
@@ -30,8 +29,10 @@ function App() {
         <Routes>
           {/* <Route path="/signin" element={<Login />} /> */}
           {/* <Route path="/signup" element={<Register />} /> */}
-          {/* <Route path="/otp-verification/:username" element={<OTPPage />} /> */}
-          <Route path="/otp-verification" element={<OTPPage />} />
+          {/* <Route path="/otp/:username" element={<OTPPage />} /> */}
+          <Route path="/otp" element={<OtpForm/>} />
+          
+
 
           {/* <Route path="/logout" element={<Logout />} /> */}
           {/* <Route path="/blog" element={<Blog />} /> */}
@@ -64,7 +65,7 @@ function App() {
 
           <Route path="/paymentsuccess" element={<PaymentSuccess />} />
 
-          <Route path="/send-otp" element={<SendOtp />} />
+          {/* <Route path="/send-otp" element={<SendOtp />} /> */}
         </Routes>
       </BrowserRouter>
       <div>
