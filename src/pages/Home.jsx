@@ -19,7 +19,7 @@ function Home() {
 
       <Testimonials />
 
-      <Form />
+      {/* <Form /> */}
     </div>
   );
 }

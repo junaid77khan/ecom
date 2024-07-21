@@ -137,8 +137,8 @@ const ProductCard = (props) => {
               alt={product.name}
               className="rounded-lg mb-2 w-full md:h-56 h-52"
             />
-            <h3 className="md:text-xl text-lg font-bold mb-2">{product.name}</h3>
-            <p className="text-gray-600 mb-2">{product.description.substring(0, 40)}...</p>
+            <h3 className="md:text-xl text-lg font-bold mb-2">{product.name.length > 30 ? `${product.name.substring(0, 30)}...` : product.name}</h3>
+            <p className="text-gray-600 mb-2">{product.description.length > 50 ? `${product.description.substring(0, 50)}...` : product.description}</p>
             <div className="flex items-center justify-between mb-2">
               <span className="font-bold">₹{product.salePrice}</span>
               <ProductStarRating rating={typeof product?.avgRating === 'undefined' ? 5 : product.avgRating} />

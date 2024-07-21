@@ -48,12 +48,11 @@ function Categories() {
           />
         </div>
         <h1 className="text-lg lg:text-xl">
-          {category.name}{" "}<FaArrowRight className="cursor-pointer inline" />{" "}
+          {category.name.length > 20 ? `${category.name.substring(0, 20)}...` : category.name}{" "}<FaArrowRight className="cursor-pointer inline" />{" "}
           
         </h1>
         <div>
-          <p className="text-gray-500 text-sm lg:text-md hover:text-black">{category.description.substring(0,80)}... 
-          </p>
+        {category.description.length > 50 ? `${category.description.substring(0, 50)}...` : category.description}
         </div>
       </a>
     ))}

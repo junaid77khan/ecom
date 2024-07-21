@@ -31,7 +31,7 @@ const ContactUs = () => {
     setLoading(true);
     try {
       const addMessageResponse = await fetch(
-        "http://localhost:8000/api/v1/message/add-message",
+        `${import.meta.env.VITE_API_URL}/api/v1/message/add-message`,
         {
           method: "POST",
           body: JSON.stringify(
@@ -69,7 +69,7 @@ const ContactUs = () => {
 
   return (
     <div className="w-full bg-orange-50 flex flex-col md:flex-row justify-around">
-      <div className="shadow-2xl rounded mt-4 lg:mx-8  w-full lg:w-1/2 px-8 py-5 h-full">
+      <div className="shadow-2xl rounded mt-4 lg:mx-8  w-full lg:w-1/3 px-8 py-5 h-full">
         <h2 className="lg:text-3xl text-2xl font-bold text-gray-800 mb-6">Contact Us</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -128,7 +128,7 @@ const ContactUs = () => {
                   onClick={handleSubmit}
                 >
                   {loading && <Spinner />}
-                  <span className={` ${loading ? 'invisible' : 'visible'}`}>Add Product</span>
+                  <span className={` ${loading ? 'invisible' : 'visible'}`}>Add Message</span>
                 </button>
           </div>
         </form>
