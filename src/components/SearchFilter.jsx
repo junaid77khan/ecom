@@ -71,8 +71,14 @@ const SearchFilter = ({ products, onClose }) => {
         if (!response.success) {
           throw new Error("Something went wrong while searching");
         }
+
+        if(response.data.length > 0) {
+          setSearchResults(response.data);
+        } else {
+          setSearchResults(null);
+        }
   
-        setSearchResults(response.data);
+        
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -110,13 +116,13 @@ const SearchFilter = ({ products, onClose }) => {
           onChange={handleSearch}
           className="w-full md:p-2 p-1 rounded-lg md:mb-4 mb-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
         />
-        <ul>
-          {searchResults.map((product) => (
+        <ul className="">
+          {searchResults && searchResults.length > 0 && searchResults.map((product) => (
             <a
               key={product._id}
               href={`/product/${product._id}`}
               onClick={onClose}
-              className="text-gray-900 md:text-md text-md py-2 border-b border-gray-500 last:border-b-0"
+              className="text-gray-900 block font-semibold md:text-md text-md py-2 border-b border-gray-500 last:border-b-0"
             >
               {product.name.length > 30 ? `${product.name.substring(0, 30)}...` : product.name}
             </a>
