@@ -429,17 +429,20 @@ import { State, City } from "country-state-city";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
   // const dispatch = useDispatch();
   const location = useLocation();
-  const { cartProducts } = location.state || [];
+  const { product } = location.state || {};
 
   const [discount, setDiscount] = useState("");
   const [shippingCost] = useState(0); // Shipping is free
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(product?.quantity * product?.salePrice);
   const [paymentMethod, setPaymentMethod] = useState("online");
+  const[coupons, setCoupons] = useState([]);
+  const[numSubtract, setNumSubtract] = useState(0);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -459,25 +462,45 @@ const CheckoutPage = () => {
     ? City.getCitiesOfState(formData.country, formData.state)
     : [];
 
+
   useEffect(() => {
-    calculateTotal();
+    try {
+      const fetchCoupons = async() => {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/coupon/get-coupons`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        });
+  
+        const dataFromServer = await response.json();
+        
+        if(!dataFromServer.success) {
+          throw new Error("Error Getting Coupons")
+        }
+        setCoupons(dataFromServer.data);
+      }
+  
+      fetchCoupons();
+    } catch (error) {
+      console.log("Error fetching coupons", error);
+    }
+  }, [])
+
+  useEffect(() => {
     validateForm();
-  }, [discount, shippingCost, formData, cartProducts]);
+  }, [discount, shippingCost, formData, product]);
 
-  const calculateTotal = () => {
-    let price = cartProducts?.reduce(
-      (acc, product) => acc + product.salePrice * product.quantity,
-      0
-    );
-
-    if (discount === "DISCOUNT10") {
-      price *= 0.9; // Apply 10% discount
-    } else if (discount === "DISCOUNT20") {
-      price *= 0.8; // Apply 20% discount
+  const calculateTotal = (curDiscountValue) => {
+    let price = (product?.salePrice * product?.quantity)
+    const temp=(price/100) * curDiscountValue;
+    setNumSubtract(temp);
+    price -= temp;
+    if(price < 0) {
+      price = 0;
     }
     price += shippingCost;
-    setTotalPrice(price); // Set the total price in INR
-    console.log(price);
+    setTotalPrice(price);
   };
 
   const handleInputChange = (e) => {
@@ -492,19 +515,61 @@ const CheckoutPage = () => {
     // setFormData({ ...formData, [name]: value });
   };
 
-  const applyDiscount = () => {
-    if (discount !== "DISCOUNT10" && discount !== "DISCOUNT20") {
-      alert("Invalid discount code");
+  const applyDiscount = () => {  
+    let curDiscountValue = -1;
+    coupons.map((coupon) => {
+      if(coupon.couponId.toString() === discount.toString()) {
+        curDiscountValue = coupon.discountValue;
+      }
+    })
+    if(curDiscountValue !== -1) {
+      calculateTotal(curDiscountValue);
     } else {
-      calculateTotal();
+      toast.error("Invalid coupon")
     }
   };
 
-  const handleOrderPlacement = () => {
+  const handleOrderPlacement = async () => {
     validateForm();
     if (isFormValid) {
-      alert("Order placed successfully!");
-      navigate("/paymentsuccess");
+      try {
+        let response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/v1/order/add-order`,
+          {
+            method: "POST",
+            body: JSON.stringify(
+              {
+                "productId": product._id,
+                "overAllPrice": (product?.quantity * product?.salePrice),
+                "discountAmount": (numSubtract),
+                "userPayAmount": (totalPrice),
+                "email": formData.email,
+                "phone": formData.contact,
+                "fullName": formData.name,
+                "address": formData.address,
+                "city": formData.city,
+                "state": formData.state,
+                "pin": formData.pinCode,
+                "paymentMethod": "COD",
+              }
+            ),
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+          }
+        );
+        response = await response.json();
+        if(!response.success) {
+          throw new Error("Order failed!!")
+        }
+        alert("Order placed successfully!");
+        navigate("/paymentsuccess", {state: {orderId:"", paymentId:""}});
+      } catch (error) {
+        console.log(error);
+        toast.error("Order failed, please try again");
+      }
+      
     } else {
       alert("Please fill all the required fields correctly.");
     }
@@ -514,12 +579,46 @@ const CheckoutPage = () => {
     validateForm();
     if (isFormValid) {
       try {
+        let response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/v1/order/add-order`,
+          {
+            method: "POST",
+            body: JSON.stringify(
+              {
+                "productId": product._id,
+                "overAllPrice": (product?.quantity * product?.salePrice),
+                "discountAmount": (numSubtract),
+                "userPayAmount": (totalPrice),
+                "email": formData.email,
+                "phone": formData.contact,
+                "fullName": formData.name,
+                "address": formData.address,
+                "city": formData.city,
+                "state": formData.state,
+                "pin": formData.pinCode,
+                "paymentMethod": "RazorPay",
+              }
+            ),
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+          }
+        );
+        response = await response.json();
+        if(!response.success) {
+          throw new Error("Order failed!!")
+        }
+        const order_Id = response.data;
+
+        console.log(order_Id);
+
         const {
           data: { key },
-        } = await axios.get("http://localhost:8000/api/getkey");
+        } = await axios.get(`${import.meta.env.VITE_API_URL}/api/getkey`);
         const {
           data: { order },
-        } = await axios.post("http://localhost:8000/api/checkout", {
+        } = await axios.post(`${import.meta.env.VITE_API_URL}/api/checkout`, {
           amount: totalPrice, // Amount in paise
         });
 
@@ -529,9 +628,9 @@ const CheckoutPage = () => {
           currency: "INR",
           name: formData.name,
           description: "Your Order",
-          image: "https://example.com/your_logo",
+          image: "https://beforeigosolutions.com/pascale-atkinson/attachment/dummy-profile-pic-300x300-1/",
           order_id: order.id,
-          callback_url: "http://localhost:8000/api/paymentverification",
+          callback_url: `${import.meta.env.VITE_API_URL}/api/paymentverification`,
           prefill: {
             name: formData.name,
             email: formData.email,
@@ -544,30 +643,18 @@ const CheckoutPage = () => {
             color: "#121212",
           },
           handler: async function (response) {
-            alert("Payment Successful!");
-            console.log(response);
-            const orderId = response.razorpay_order_id;
-            const paymentId = response.razorpay_payment_id;
-            const signature = response.searchQuery.razorpay_signature;
-            console.log("data ", orderId, paymentId, signature);
+            
+            const orderId = response?.razorpay_order_id;
+            const paymentId = response?.razorpay_payment_id;
             const result = await fetch(
-              `${import.meta.env.VITE_API_URL}/api/v1/order/add-order`,
+              `${import.meta.env.VITE_API_URL}/api/payment/add-payment-details`,
               {
                 method: "POST",
                 body: JSON.stringify(
                   {
-                    "productId": product._id,
-                    "email": formData.email,
-                    "phone": formData.contact,
-                    "fullName": formData.name,
-                    "address": formData.address,
-                    "city": formData.city,
-                    "state": formData.state,
-                    "pin": formData.pinCode,
-                    "paymentMethod": "RazorPay",
                     "razorpay_order_id": orderId,
                     "razorpay_payment_id": paymentId,
-                    "razorpay_signature": signature
+                    order_Id
                   }
                 ),
                 headers: {
@@ -576,8 +663,8 @@ const CheckoutPage = () => {
                 }
               }
             );
-            console.log(result);
-            navigate("/paymentsuccess");
+            alert("Payment Successful!");
+            navigate("/paymentsuccess", {state: {orderId, paymentId}});
           },
           modal: {
             ondismiss: function () {
@@ -589,8 +676,8 @@ const CheckoutPage = () => {
         const razor = new window.Razorpay(options);
         razor.open();
       } catch (error) {
-        console.error("Error during checkout:", error);
-        alert("An error occurred during checkout. Please try again.");
+        console.error("Error during adding order:", error);
+        toast.error("An error occurred during checkout. Please try again.");
       }
     } else {
       alert("Please fill all the required fields.");
@@ -690,6 +777,28 @@ const CheckoutPage = () => {
                     <span className="text-red-500">{formErrors.address}</span>
                   )}
                 </div>
+                
+                <div>
+                  <label className="block mb-1">State</label>
+                  <select
+                    className="w-full p-2 border rounded-md"
+                    name="state"
+                    value={formData.state}
+                    onChange={handleInputChange}
+                    required
+                  >
+                    <option value="">Select State</option>
+                    {states.map((state) => (
+                      <option key={state.isoCode} value={state.isoCode}>
+                        {state.name}
+                      </option>
+                    ))}
+                  </select>
+                  {formErrors.state && (
+                    <span className="text-red-500">{formErrors.state}</span>
+                  )}
+                </div>
+
                 <div>
                   <label className="block mb-1">City</label>
                   <select
@@ -709,26 +818,6 @@ const CheckoutPage = () => {
                   </select>
                   {formErrors.city && (
                     <span className="text-red-500">{formErrors.city}</span>
-                  )}
-                </div>
-                <div>
-                  <label className="block mb-1">State</label>
-                  <select
-                    className="w-full p-2 border rounded-md"
-                    name="state"
-                    value={formData.state}
-                    onChange={handleInputChange}
-                    required
-                  >
-                    <option value="">Select State</option>
-                    {states.map((state) => (
-                      <option key={state.isoCode} value={state.isoCode}>
-                        {state.name}
-                      </option>
-                    ))}
-                  </select>
-                  {formErrors.state && (
-                    <span className="text-red-500">{formErrors.state}</span>
                   )}
                 </div>
                 <div>
@@ -775,18 +864,18 @@ const CheckoutPage = () => {
 
           <section className="mb-6">
             <h2 className="text-xl font-semibold mb-2">Order Details</h2>
-            {cartProducts && cartProducts?.map((product) => (
-              <div key={product._id} className="mb-4">
+            {product &&
+              <div className="mb-4">
+                <img className="h-36 w-36 rounded-lg mb-4" src={product.images[0]} />
                 <div className="flex justify-between">
-                  <span>{product.name}</span>
+                  <span className="font-semibold">{product.name}</span>
                   <span>₹{product.salePrice}</span>
-                  console.log(salePrice)
                 </div>
                 <div className="flex justify-between">
                   <span>Quantity: {product.quantity}</span>
                 </div>
-              </div>
-            ))}
+              </div>            
+            }
             <div className="flex justify-between mt-2">
               <span>Shipping:</span>
               <span>Free</span>
@@ -794,12 +883,7 @@ const CheckoutPage = () => {
             <div className="flex justify-between mt-2">
               <span>Discount:</span>
               <span>
-                - ₹
-                {discount === "DISCOUNT10"
-                  ? (totalPrice * 0.1).toFixed(2)
-                  : discount === "DISCOUNT20"
-                  ? (totalPrice * 0.2).toFixed(2)
-                  : "0.00"}
+                - ₹{numSubtract}
               </span>
             </div>
 
