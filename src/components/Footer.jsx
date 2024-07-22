@@ -1,7 +1,7 @@
 import { AiOutlineFacebook } from "react-icons/ai";
 import { FaInstagram } from "react-icons/fa";
 import { AiOutlineLinkedin } from "react-icons/ai";
-import { FaXTwitter } from "react-icons/fa6";
+import { AiOutlineYoutube } from "react-icons/ai";
 
 const Footer = () => {
   return (
@@ -15,8 +15,12 @@ const Footer = () => {
                 About Us
               </a>
             </li>
-           
-           
+            <li>
+              <a href="/about" className="hover:underline">
+                Privacy policy
+              </a>
+            </li>
+
             <li>
               <a href="/blog" className="hover:underline">
                 Blog
@@ -28,34 +32,29 @@ const Footer = () => {
           <h3 className="text-xl font-semibold mb-4">Customer Service</h3>
           <ul>
             <li>
-              <a href="/help" className="hover:underline">
-                Help Center
+              <a href="/contact-us" className="hover:underline">
+                contact
               </a>
             </li>
-           
           </ul>
         </div>
         <div>
-          <h3 className="text-xl font-semibold mb-4">My Account</h3>
+          <h3 className="text-xl font-semibold mb-4">Useful links</h3>
           <ul>
             <li>
-              <a href="/account" className="hover:underline">
-                Manage Account
+              <a href="/" className="hover:underline">
+                Home
               </a>
             </li>
             <li>
-              <a href="/orders" className="hover:underline">
-                My Orders
+              <a href="/categories" className="hover:underline">
+                categories
               </a>
             </li>
+
             <li>
-              <a href="/wishlist" className="hover:underline">
-                Wishlist
-              </a>
-            </li>
-            <li>
-              <a href="/track" className="hover:underline">
-                Track Order
+              <a href="/cart" className="hover:underline">
+                cart
               </a>
             </li>
           </ul>
@@ -81,10 +80,16 @@ const Footer = () => {
             <a href="https://facebook.com" className="hover:underline">
               <AiOutlineFacebook className="h-6 w-6" />
             </a>
-            <a href="https://twitter.com" className="hover:underline">
-              <FaXTwitter className="h-6 w-6" />
+            <a
+              href="https://youtube.com/@skpdecor?si=2_I5vAIZYm67GraM"
+              className="hover:underline"
+            >
+              <AiOutlineYoutube className="h-6 w-6" />
             </a>
-            <a href="https://instagram.com" className="hover:underline">
+            <a
+              href="https://www.instagram.com/skpdecor?igsh=c2tmamtjemFkMXhp"
+              className="hover:underline"
+            >
               <FaInstagram className="h-6 w-6" />
             </a>
             <a href="https://linkedin.com" className="hover:underline">
@@ -95,7 +100,8 @@ const Footer = () => {
       </div>
       <div className="container mx-auto px-6 lg:px-8 mt-8 border-t border-gray-200 pt-6 text-center">
         <p>
-          &copy; {new Date().getFullYear()} Copyright © 2023 SKP Decor Pvt. Ltd. All Rights Reserved.
+          &copy; {new Date().getFullYear()} Copyright © 2023 SKP Decor Pvt. Ltd.
+          All Rights Reserved.
         </p>
       </div>
     </footer>
