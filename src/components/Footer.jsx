@@ -15,16 +15,8 @@ const Footer = () => {
                 About Us
               </a>
             </li>
-            <li>
-              <a href="/careers" className="hover:underline">
-                Careers
-              </a>
-            </li>
-            <li>
-              <a href="/press" className="hover:underline">
-                Press
-              </a>
-            </li>
+           
+           
             <li>
               <a href="/blog" className="hover:underline">
                 Blog
@@ -40,21 +32,7 @@ const Footer = () => {
                 Help Center
               </a>
             </li>
-            <li>
-              <a href="/returns" className="hover:underline">
-                Returns
-              </a>
-            </li>
-            <li>
-              <a href="/shipping" className="hover:underline">
-                Shipping
-              </a>
-            </li>
-            <li>
-              <a href="/faq" className="hover:underline">
-                FAQs
-              </a>
-            </li>
+           
           </ul>
         </div>
         <div>
@@ -117,7 +95,7 @@ const Footer = () => {
       </div>
       <div className="container mx-auto px-6 lg:px-8 mt-8 border-t border-gray-200 pt-6 text-center">
         <p>
-          &copy; {new Date().getFullYear()} Your Company. All rights reserved.
+          &copy; {new Date().getFullYear()} Copyright © 2023 SKP Decor Pvt. Ltd. All Rights Reserved.
         </p>
       </div>
     </footer>
