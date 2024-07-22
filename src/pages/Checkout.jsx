@@ -428,7 +428,7 @@
 import { State, City } from "country-state-city";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
@@ -465,7 +465,7 @@ const CheckoutPage = () => {
   }, [discount, shippingCost, formData, cartProducts]);
 
   const calculateTotal = () => {
-    let price = cartProducts.reduce(
+    let price = cartProducts?.reduce(
       (acc, product) => acc + product.salePrice * product.quantity,
       0
     );
@@ -543,8 +543,40 @@ const CheckoutPage = () => {
           theme: {
             color: "#121212",
           },
-          handler: function (response) {
+          handler: async function (response) {
             alert("Payment Successful!");
+            console.log(response);
+            const orderId = response.razorpay_order_id;
+            const paymentId = response.razorpay_payment_id;
+            const signature = response.searchQuery.razorpay_signature;
+            console.log("data ", orderId, paymentId, signature);
+            const result = await fetch(
+              `${import.meta.env.VITE_API_URL}/api/v1/order/add-order`,
+              {
+                method: "POST",
+                body: JSON.stringify(
+                  {
+                    "productId": product._id,
+                    "email": formData.email,
+                    "phone": formData.contact,
+                    "fullName": formData.name,
+                    "address": formData.address,
+                    "city": formData.city,
+                    "state": formData.state,
+                    "pin": formData.pinCode,
+                    "paymentMethod": "RazorPay",
+                    "razorpay_order_id": orderId,
+                    "razorpay_payment_id": paymentId,
+                    "razorpay_signature": signature
+                  }
+                ),
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+                }
+              }
+            );
+            console.log(result);
             navigate("/paymentsuccess");
           },
           modal: {
@@ -743,7 +775,7 @@ const CheckoutPage = () => {
 
           <section className="mb-6">
             <h2 className="text-xl font-semibold mb-2">Order Details</h2>
-            {cartProducts.map((product) => (
+            {cartProducts && cartProducts?.map((product) => (
               <div key={product._id} className="mb-4">
                 <div className="flex justify-between">
                   <span>{product.name}</span>

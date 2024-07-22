@@ -132,7 +132,7 @@ import { posts } from '../data/Blog-Data';
 const BlogPost = () => {
   const navigate = useNavigate();
   return (
-    <div className="flex flex-col items-center px-4 py-8 md:px-8 lg:px-16 bg-orange-50">
+    <div className="flex flex-col items-center px-4 py-8 md:px-8 lg:px-16 bg-orange-50 gap-5">
       {posts.map((post) => (
         <div key={post.title}  className=''>
         <div  className="w-full max-w-4xl flex flex-col cursor-pointer justify-center items-center overflow-hidden">
