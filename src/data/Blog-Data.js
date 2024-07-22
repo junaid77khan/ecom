@@ -59,6 +59,28 @@ export const posts = [
 
     ],
   },
+  {
+    id: '2',
+    title: 'Scented Candle Trends: A Journey Through Food-Inspired Aromas',
+    date: 'June 22, 2024',
+    introduction: 'When it comes to home fragrance, scented candles have always had a special place. They have a unique ability to evoke memories, create an unparalleled ambiance, and influence feelings through aromatherapy. Among the various scents available, the latest trends involve food-inspired candles. Ranging from your favorite donut line to your favorite coffee. Here are some of the latest food-inspired candle scents and their affects:',
+    imageUrl: `${import.meta.env.VITE_API_BLOG2_MAIN}`,
+    content: [
+      {
+        paragraphs: [
+          'Freshly Baked Bread: Offering a comforting aroma, this scent brings warmth, coziness, and nostalgia to your home. This is perfect for creating a welcoming environment as it also provides a sense of home and security. Place this in your kitchen or living room for the best effects.',
+          'Cereal: No matter what generation you are, a cereal scented candle brings back nostalgic memories of milky sweet morning goodness. Lending itself to a unique and playful aroma compared to more traditional scents. Light this in the morning while you brew your coffee or on a relaxing day for the best effect.',
+          'Espresso: No, not the song – the scent. This robust scent brings energy and alertness and goes beyond just a freshly brewed cup of coffee. Place this in your home office or living room to enhance focus and productivity.',
+          `Tomato: Providing a fresh, earthy scent, tomato stands out compared to other fruity or floral aromas. This will evoke memories of warm sunny days and that unique smell of garden-fresh tomatoes.  This scent leaves users in a calm, relaxing mood as it provides a similar effect to being in a garden.`,
+          `Maple Bacon: A savory scent that provides a smoky, sweet aroma. Combining these scents leaves users with a unique fragrance that is both comforting and indulgent. A great option for those who love bold scents, or simply bacon. This can be used seasonally or year-round and for those who have a rustic home environment – it will only accentuate it.`,
+          `Pistachio: This warm and nutty aroma offers a cozy and inviting atmosphere with added sophistication. As a subtler scent, pistachio can be used year-round and blend well with other fragrances including vanilla or florals.`,
+          `Chocolate Chip Cookie: Not only is this scent universally nostalgic, but it can make any space feel like home. Combining the richness of chocolate scent with a hint of butter and vanilla, this fragrance will evoke happiness and stress relief.`,
+          `Popcorn: Bring the excitement of a movie theatre straight to your home, minus the buttery fingers, with this fragrance. This aroma is known to bring playfulness and fun to an atmosphere. Making it great for families or gathering with friends. Place this in your living room for the best effect, but be prepared with popcorn in case someone asks, “who made popcorn?”`,
+          `Overall, food-inspired candles offer a unique way to enrich your home. Beyond typical fragrances, these have a heightened ability to evoke emotions, create nostalgia, and influence ambiance. Make your household an experience and opt for a food-inspired scent next time you pick up a candle.`
+        ],
+      },
+    ],
+  },
 ];
 
 

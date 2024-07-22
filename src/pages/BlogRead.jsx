@@ -43,8 +43,8 @@ const BlogRead = () => {
         <div className="text-base md:text-lg lg:text-xl text-gray-800">
           {post?.content?.map((section, index) => (
             <div key={index} className="mb-8">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">{section.title}</h2>
-              {section?.paragraphs?.map((paragraph, pIndex) => (
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">{section.title && section?.title}</h2>
+              {section?.paragraphs && section?.paragraphs?.map((paragraph, pIndex) => (
                 <p key={pIndex} className="mb-4">{paragraph}</p>
               ))}
               {section.image && (

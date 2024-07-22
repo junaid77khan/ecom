@@ -469,7 +469,7 @@ const CheckoutPage = () => {
   
 
   const calculateTotal = () => {
-    let price = cartProducts.reduce(
+    let price = cartProducts?.reduce(
       (acc, product) => acc + product.salePrice * product.quantity,
       0
       
@@ -738,7 +738,7 @@ const CheckoutPage = () => {
 
           <section className="mb-6">
             <h2 className="text-xl font-semibold mb-2">Order Details</h2>
-            {cartProducts.map((product) => (
+            {cartProducts && cartProducts?.map((product) => (
               <div key={product._id} className="mb-4">
                 <div className="flex justify-between">
                   <span>{product.name}</span>
