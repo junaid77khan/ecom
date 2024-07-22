@@ -459,24 +459,17 @@ const CheckoutPage = () => {
     ? City.getCitiesOfState(formData.country, formData.state)
     : [];
 
-    
   useEffect(() => {
     calculateTotal();
     validateForm();
   }, [discount, shippingCost, formData, cartProducts]);
-  
-
-  
 
   const calculateTotal = () => {
     let price = cartProducts.reduce(
       (acc, product) => acc + product.salePrice * product.quantity,
       0
-      
     );
-    
 
-    
     if (discount === "DISCOUNT10") {
       price *= 0.9; // Apply 10% discount
     } else if (discount === "DISCOUNT20") {
@@ -484,15 +477,19 @@ const CheckoutPage = () => {
     }
     price += shippingCost;
     setTotalPrice(price); // Set the total price in INR
-    console.log(price)
-
+    console.log(price);
   };
-
-
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    if (name === 'contact') {
+      // Allow only numeric input
+      const numericValue = value.replace(/\D/g, '');
+      setFormData({ ...formData, [name]: numericValue });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+    // setFormData({ ...formData, [name]: value });
   };
 
   const applyDiscount = () => {
@@ -507,7 +504,7 @@ const CheckoutPage = () => {
     validateForm();
     if (isFormValid) {
       alert("Order placed successfully!");
-      navigate("/order-success");
+      navigate("/paymentsuccess");
     } else {
       alert("Please fill all the required fields correctly.");
     }
@@ -523,7 +520,7 @@ const CheckoutPage = () => {
         const {
           data: { order },
         } = await axios.post("http://localhost:8000/api/checkout", {
-          amount: totalPrice , // Amount in paise
+          amount: totalPrice, // Amount in paise
         });
 
         const options = {
@@ -548,7 +545,7 @@ const CheckoutPage = () => {
           },
           handler: function (response) {
             alert("Payment Successful!");
-            navigate("/order-success");
+            navigate("/paymentsuccess");
           },
           modal: {
             ondismiss: function () {
@@ -577,6 +574,12 @@ const CheckoutPage = () => {
     if (!formData.city) errors.city = "City is required";
     if (!formData.state) errors.state = "State is required";
     if (!formData.pinCode) errors.pinCode = "PIN Code is required";
+    if (formData.contact.length !== 10) {
+      errors.contact = "Phone number must be exactly 10 digits";
+    }
+  
+    // setFormErrors(errors);
+    // return Object.keys(errors).length === 0;
 
     setFormErrors(errors);
     setIsFormValid(Object.keys(errors).length === 0);
@@ -604,14 +607,16 @@ const CheckoutPage = () => {
               )}
 
               <div className="col-span-1 md:col-span-2">
-                <label className="block mb-1">Phone</label>
+                <label className="block mb-1"></label>
                 <input
                   type="text"
                   name="contact"
-                  placeholder="Phone"
+                  placeholder="Phone(10 digits only)"
                   value={formData.contact}
                   onChange={handleInputChange}
                   required
+                  maxLength="10"
+                  pattern="[0-9]{10}"
                   className="w-full p-2 border rounded-md"
                 />
                 {formErrors.contact && (
@@ -744,7 +749,6 @@ const CheckoutPage = () => {
                   <span>{product.name}</span>
                   <span>₹{product.salePrice}</span>
                   console.log(salePrice)
-
                 </div>
                 <div className="flex justify-between">
                   <span>Quantity: {product.quantity}</span>
@@ -769,7 +773,7 @@ const CheckoutPage = () => {
 
             <div className="flex justify-between mt-4 font-bold">
               <span>Total:</span>
-              <span>₹{(totalPrice).toFixed(2)}</span>
+              <span>₹{totalPrice.toFixed(2)}</span>
             </div>
           </section>
 
