@@ -804,7 +804,7 @@ const CheckoutPage = () => {
           <h2 className="text-xl font-semibold mb-2">Payment Method</h2>
           <div className="border rounded-md p-4">
             <div className="mb-4">
-              <label className="inline-flex items-center">
+              <label className="inline-flex px-4 items-center">
                 <input
                   type="radio"
                   name="paymentMethod"
@@ -812,9 +812,9 @@ const CheckoutPage = () => {
                   checked={paymentMethod === "online"}
                   onChange={(e) => setPaymentMethod(e.target.value)}
                   required
-                  className="form-radio"
+                  className="form-radio "
                 />
-                <span className="ml-2">Online Payment (Razorpay)</span>
+                <span className="ml-2">Online Payment </span>
               </label>
               <label className="inline-flex items-center mt-2">
                 <input

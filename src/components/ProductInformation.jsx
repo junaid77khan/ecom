@@ -44,7 +44,7 @@ const ProductInformation = (props) => {
 
 
     const handleButtonClick = () => {
-      navigate('/otp-verification');
+      navigate('/otp');
     };
     
     const increaseQuantity = () => {

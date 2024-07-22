@@ -50,7 +50,7 @@ const PopupCart = ({ product }) => {
           <button
             onClick={() => {
               dispatch(closePopup())
-              navigate(`/checkout`, {state: product})
+              navigate(`/otp`, {state: product})
             }}
             className="relative rounded-lg border-2 inline-flex items-center justify-start px-6 py-2 overflow-hidden font-medium transition-all bg-orange-500 hover:bg-orange-500 hover:border-orange-500 group"
           >
