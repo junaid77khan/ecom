@@ -465,6 +465,9 @@ const CheckoutPage = () => {
 
   useEffect(() => {
     try {
+      if(!product || product.length === 0) {
+        navigate("/error");
+      }
       const fetchCoupons = async() => {
         const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/coupon/get-coupons`, {
           method: 'GET',
@@ -705,9 +708,9 @@ const CheckoutPage = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row justify-between p-4">
-      <div className="container mx-auto p-4 lg:w-1/2">
-        <div className="shadow-2xl  rounded-lg p-6">
+    <div className="flex flex-col lg:flex-row justify-between gap-4 p-4 bg-orange-50">
+      <div className="container mx-auto p-4 lg:w-1/2 bg-white shadow-2xl">
+        <div className="  rounded-lg p-6">
           <h1 className="text-2xl font-bold mb-6">User Details</h1>
           <form>
             <section className="mb-6">
@@ -841,8 +844,8 @@ const CheckoutPage = () => {
         </div>
       </div>
 
-      <div className="container mx-auto p-4 lg:w-1/2">
-        <div className="shadow-xl rounded-lg p-6">
+      <div className="container mx-auto shadow-2xl p-4 lg:w-1/2 bg-white">
+        <div className=" rounded-lg p-6">
           <h1 className="text-2xl font-bold mb-6">Order Summary</h1>
           <section className="mb-6">
             <h2 className="text-xl font-semibold mb-2">Discount Code</h2>
