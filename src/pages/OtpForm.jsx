@@ -266,15 +266,15 @@ const OtpForm = () => {
   const [resendTimer, setResendTimer] = useState(60);
   const navigate = useNavigate();
   const location = useLocation();
-  const { cartProducts } = location.state || {};
+  const { product } = location.state || {};
 
   const handleSendOtp = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8000/api/v1/user/send-sms-otp", {
+      let response = await axios.post(`${import.meta.env.VITE_API_URL}/api/v1/user/send-sms-otp`, {
         phoneNumber,
       });
-      setVerificationId(response.data.verificationId);
+      setVerificationId(response.data.data.data.verificationId);
       setStep("verify");
       toast.success(`OTP sent successfully to ${phoneNumber}`);
       startResendTimer();
@@ -286,15 +286,31 @@ const OtpForm = () => {
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8000/api/v1/user/verify-sms-otp", {
-        verificationId,
-        phoneNumber,
-        otp: otp.join(""),
-      });
-      toast.success("OTP verified successfully");
-      navigate("/checkout", { state: { cartProducts } });
+      let response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/v1/user/verify-sms-otp`,
+        {
+          method: "POST",
+          body: JSON.stringify(
+            {
+              verificationId,
+              phoneNumber,
+              otp: otp.join(""),
+            }
+          ),
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      response = await response.json();
+      if(response.data.responseCode !== 200) {
+        throw new Error("Failed")
+      }
+      toast.success("Verification successfull");
+      navigate("/checkout", { state: {product} });
     } catch (error) {
-      toast.error("Failed to verify OTP");
+      toast.error("Verfication failed");
     }
   };
 
@@ -324,10 +340,10 @@ const OtpForm = () => {
 
   const handleResendOtp = async () => {
     try {
-      const response = await axios.post("http://localhost:8000/api/v1/user/send-sms-otp", {
+      let response = await axios.post(`${import.meta.env.VITE_API_URL}/api/v1/user/send-sms-otp`, {
         phoneNumber,
       });
-      setVerificationId(response.data.verificationId);
+      setVerificationId(response.data.data.data.verificationId);
       toast.success(`OTP resent successfully to ${phoneNumber}`);
       startResendTimer();
     } catch (error) {
@@ -344,7 +360,6 @@ const OtpForm = () => {
             className="bg-white p-6 sm:p-8 md:p-10 lg:p-12 xl:p-16 rounded-xl shadow-xl w-full max-w-md"
           >
             <h2 className="text-2xl font-bold text-center text-gray-800 mb-4">Mobile Phone Verification</h2>
-            <p className="flex text-center justify-center pb-4 text-[13px] text-slate-500">Enter your mobile number.</p>
 
             <input
               type="text"
