@@ -5,7 +5,7 @@ const ProductReview = (props) => {
         <div className="border-t border-gray-300 pt-4 m-4">
             <div className="flex items-center mb-2">
                 <div className="lg:text-lg text-md font-bold text-gray-800 mr-2">
-                    {ratingReview?.userId?.username}
+                    {ratingReview?.name}
                 </div>
                 <div className="text-yellow-500">
                     {Array(ratingReview?.rating)

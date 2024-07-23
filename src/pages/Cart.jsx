@@ -249,7 +249,7 @@ function Cart() {
   };
 
   const handleButtonClick = (product) => {
-    navigate("/checkout", { state: { product } });
+    navigate("/otp", { state: { product } });
   };
 
   useEffect(() => {
