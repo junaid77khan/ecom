@@ -86,7 +86,7 @@ const ContactUs = () => {
               name="name"
               value={details.name}
               onChange={handleChange}
-              className="mt-1 outline-none block w-full border border-gray-300 rounded-md shadow-sm"
+              className="mt-1 px-2 outline-none block w-full border border-gray-300 rounded-md shadow-sm"
             />
           </div>
           <div className="mb-4">
@@ -102,7 +102,7 @@ const ContactUs = () => {
               name="email"
               value={details.email}
               onChange={handleChange}
-              className="mt-1 outline-none block w-full border border-gray-300 rounded-md shadow-sm"
+              className="mt-1 px-2 outline-none block w-full border border-gray-300 rounded-md shadow-sm"
             />
           </div>
           <div className="mb-4">
@@ -118,7 +118,7 @@ const ContactUs = () => {
               rows="4"
               value={details.message}
               onChange={handleChange}
-              className="mt-1 outline-none block w-full border border-gray-300 rounded-md shadow-sm resize-none"
+              className="mt-1 px-2 outline-none block w-full border border-gray-300 rounded-md shadow-sm resize-none"
             ></textarea>
           </div>
           <div className="mt-2 py-10  border-t w-full flex flex-wrap justify-center items-center border-blueGray-200 text-center">
