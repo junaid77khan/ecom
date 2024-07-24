@@ -18,7 +18,7 @@ import CheckoutPage from "./pages/Checkout";
 import { NotFound } from "./pages/Notfound";
 import PaymentSuccess from "./pages/payment/PaymentSucess";
 import OtpForm from "./pages/OtpForm";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
+// import { PrivacyPolicy } from "./pages/PrivacyPolicy";
 
 function App() {
   return (
@@ -27,7 +27,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/otp" element={<OtpForm />} />
-          <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+          {/* <Route path="/privacypolicy" element={<PrivacyPolicy />} /> */}
 
           <Route path="/blogs" element={<BlogPost post={posts[0]} />} />
           <Route path="/blogs/:id" element={<BlogRead posts={posts} />} />
