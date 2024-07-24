@@ -84,52 +84,44 @@ const ProductDetails = () => {
   //   }
   // }, [userStatus, product._id, rating, review, navigate])
   const handleAddReview = useCallback(async () => {
-    if (userStatus) {
-      if (!name || !review) {
-        toast.error("Please enter your name and review before submitting.");
-        return;
-      }
+    if (!name || !review) {
+      toast.error("Please enter your name and review before submitting.");
+      return;
+    }
 
-      setReviewLoading(true);
-      try {
-        const token = JSON.parse(localStorage.getItem("Access Token"));
-        let response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/v1/review/add-review`,
-          {
-            method: "POST",
-            mode: "cors",
-            credentials: "include",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-              productId: product._id,
-              rating,
-              review,
-              name, // Include name in the request
-            }),
-          }
-        );
-
-        if (!response.ok) {
-          toast.error("Failed to add review. Please try again.");
-          throw new Error("Failed to add review");
+    setReviewLoading(true);
+    try {
+      let response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/v1/review/add-review`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            productId: product._id,
+            rating,
+            review,
+            name, 
+          }),
         }
+      );
 
-        response = await response.json();
-        setProductReviews(response.data);
-      } catch (error) {
+      if (!response.ok) {
         toast.error("Failed to add review. Please try again.");
-        console.error("Adding review error:", error);
-      } finally {
-        setReview("");
-        setName(""); // Clear the name field after submission
-        setRating(0);
-        setReviewLoading(false);
+        throw new Error("Failed to add review");
       }
-    } else {
-      navigate("/signin");
+      toast.success("Added.");
+      response = await response.json();
+      setProductReviews(response.data);
+    } catch (error) {
+      toast.error("Failed to add review. Please try again.");
+      console.error("Adding review error:", error);
+    } finally {
+      setReview("");
+      setName(""); 
+      setRating(0);
+      setReviewLoading(false);
     }
   }, [userStatus, product._id, rating, review, name, navigate]);
 

@@ -248,8 +248,8 @@ function Cart() {
     dispatch(removeFromCart({ productId }));
   };
 
-  const handleButtonClick = () => {
-    navigate("/otp", { state: { cartProducts } });
+  const handleButtonClick = (product) => {
+    navigate("/otp", { state: { product } });
   };
 
   useEffect(() => {
@@ -349,7 +349,7 @@ function Cart() {
                           </span>
                         </button>
                         <button
-                          onClick={handleButtonClick}
+                          onClick={() => handleButtonClick(item)}
                           className="relative rounded-lg border-2 inline-flex items-center justify-start px-3 py-1 overflow-hidden font-medium transition-all bg-orange-500 hover:bg-orange-500 hover:border-orange-500 group"
                         >
                           <span className="w-40 h-40 rounded rotate-[-40deg] bg-white absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-6 ml-6 group-hover:ml-0 group-hover:mb-24 group-hover:translate-x-0"></span>

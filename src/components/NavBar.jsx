@@ -169,7 +169,7 @@ function NavBar() {
         </li>
       </ul>
       {isSearchOpen && (
-        <SearchFilter products={products} onClose={handleCloseSearch} />
+        <SearchFilter onClose={handleCloseSearch} />
       )}
       {popup.isVisible && (
         <CartPopup product={popup.product} onClose={handleClosePopup} />

@@ -6,10 +6,9 @@ import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-// import { toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
 import { Toaster, toast } from 'sonner'
 
+import { bestSellerProduct } from "../data/HomeData";
 
 const ProductInformation = (props) => {
   const { product } = props;
@@ -40,7 +39,11 @@ const ProductInformation = (props) => {
   }, []);
 
   const handleButtonClick = () => {
-    navigate("/otp");
+    const obj = {
+      ...product,
+      "quantity": 1
+    }
+    navigate("/otp", {state: {"product": obj}});
   };
 
   const increaseQuantity = () => {

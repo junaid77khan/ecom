@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 const SearchFilter = ({ products, onClose }) => {
   const [searchInput, setSearchInput] = useState("");
-  const [allProducts, setAllProducts] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const navigate = useNavigate();
   
@@ -28,30 +27,6 @@ const SearchFilter = ({ products, onClose }) => {
 
 
   const debouncedSearchInput = useDebounce(searchInput, 1000);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/product/all-products`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-        });
-    
-        const dataFromServer = await response.json();
-    
-        if (!dataFromServer.success) {
-          throw new Error("Something went wrong while fetching products data");
-        }
-        setAllProducts(dataFromServer.data);
-      } catch (error) {
-        console.log("Something went wrong while fetching products data", error);
-      }
-    };
-  
-    fetchProducts();
-  }, []);
 
   const handleSearch = (event) => {
     setSearchInput(event.target.value);
@@ -84,7 +59,7 @@ const SearchFilter = ({ products, onClose }) => {
       }
     };
   
-    fetchData();
+    if(debouncedSearchInput && debouncedSearchInput.length > 0) fetchData();
   }, [debouncedSearchInput]);
 
   return (
