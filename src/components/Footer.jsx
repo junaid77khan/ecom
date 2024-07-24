@@ -1,7 +1,7 @@
-import { AiOutlineFacebook } from "react-icons/ai";
-import { FaInstagram } from "react-icons/fa";
-import { AiOutlineLinkedin } from "react-icons/ai";
-import { AiOutlineYoutube } from "react-icons/ai";
+// import { AiOutlineFacebook } from "react-icons/ai";
+// import { FaInstagram } from "react-icons/fa";
+// import { AiOutlineLinkedin } from "react-icons/ai";
+// import { AiOutlineYoutube } from "react-icons/ai";
 
 // const Footer = () => {
 //   return (
@@ -106,9 +106,10 @@ import { AiOutlineYoutube } from "react-icons/ai";
 //       </div>
 //     </footer>
 //   );
-};
+// };
 
-export default Footer;
+// export default Footer;
+// export default Footer;
 const Footer = () => {
   return (
     <footer className="relative bg-blueGray-200 pt-8 pb-6">
