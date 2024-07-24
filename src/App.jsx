@@ -7,7 +7,6 @@ import { ContactUs, NavBar } from "./components";
 import { Toaster } from 'sonner'
 
 import Footer from "./components/Footer";
-// import Blog from "./pages/BlogPost";
 import ProductDetails from "./pages/ProductDetails";
 import Home from "./pages/Home";
 import Categories from "./pages/Categories_Component/Categories";
@@ -72,7 +71,7 @@ function App() {
         <Footer />
         {/* <Outlet /> */}
       </div>
-      <Toaster richColors position="top-center"  />
+      <Toaster richColors position="top-right"  />
     </Provider>
   );
 }

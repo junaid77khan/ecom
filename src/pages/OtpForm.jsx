@@ -29,8 +29,12 @@ const OtpForm = () => {
       let response = await axios.post(`${import.meta.env.VITE_API_URL}/api/v1/user/send-sms-otp`, {
         phoneNumber,
       });
+      if(response.data.data.responseCode != 200) {
+        const error = response.data.data.message;
+        toast.error(error);
+        return;
+      }
       setVerificationId(response.data.data.data.verificationId);
-      setStep("verify");
       toast.success(`OTP sent successfully to ${phoneNumber}`);
       startResendTimer();
     } catch (error) {
@@ -98,7 +102,7 @@ const OtpForm = () => {
       let response = await axios.post(`${import.meta.env.VITE_API_URL}/api/v1/user/send-sms-otp`, {
         phoneNumber,
       });
-      setVerificationId(response.data.data.data.verificationId);
+      setVerificationId(response.data.data.verificationId);
       toast.success(`OTP resent successfully to ${phoneNumber}`);
       startResendTimer();
     } catch (error) {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ProductCard } from "../../components/ProductCard";
+import DummyProductCard from "./DummyProductCard";
 
 
 const CategoryProducts = () => {
@@ -29,14 +30,12 @@ const CategoryProducts = () => {
         response = await response.json();
 
         if (!response.success) {
-          console.error('Fetch products error:');
-          navigate("/error");
+          throw new Error("error fetching products")
         }
         setProducts(response.data);
         setProductBackup(response.data)
       } catch (error) {
         console.error('Fetch products error:', error);
-        navigate("/error");
       } finally {
         setLoading(false);
       }
@@ -76,14 +75,8 @@ const CategoryProducts = () => {
   }, [priceRangeOption]);
 
   
-  return (
-    loading ? (
-      <div className="h-96 flex justify-center items-center z-50">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
-        </div>
-    ) : (
-      
-      <div className="container mx-auto py-12 px-3 flex flex-col justify-center items-center bg-orange-50">
+  return (      
+      <div className=" w-full mx-auto py-12 px-3 flex flex-col justify-center items-center bg-orange-50">
       <h2 className="lg:text-3xl text-2xl font-bold mb-6">{categoryName}</h2>
       <div className="flex gap-4 mb-6">
         <select
@@ -106,14 +99,27 @@ const CategoryProducts = () => {
           <option value="price-high-to-low">Price: High to Low</option>
         </select>
       </div>
-      <div className="flex flex-wrap justify-center items-center lg:gap-8 gap-4">
-        {Array.isArray(products) &&  products?.map((product) => (
-          <ProductCard key={product._id} check={true} product={product} />
-        ))}
-      </div>
+      {(loading || !products) &&
+        <DummyProductCard />
+       }
+
+       {
+        !loading && products.length === 0 && 
+        <div className="w-[100%]   ">
+            <div colSpan="6" className="w-full h-full text-xl lg:text-2xl py-10 px-5 font-bold">No Products Available</div>
+          </div>
+       }
+      {
+        !loading && products.length > 0 &&
+        <div className="flex flex-wrap justify-center items-center lg:gap-8 gap-4">
+          {Array.isArray(products) &&  products?.map((product) => (
+            <ProductCard key={product._id} check={true} product={product} />
+          ))}
+        </div>
+      }
     </div>
     )
-  );
+  
 };
 
 export default CategoryProducts;

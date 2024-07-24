@@ -195,6 +195,7 @@ import {
   decreaseQuantity,
   removeFromCart,
 } from "../store/cartSlice";
+import { Toaster, toast } from 'sonner'
 import CryptoJS from "crypto-js";
 
 function Cart() {
@@ -203,35 +204,6 @@ function Cart() {
   const [loading, setLoading] = useState(true);
   const [cartProducts, setCartProducts] = useState([]);
   const [check, setCheck] = useState(false);
-
-  const handleDelete = async (productId) => {
-    try {
-      const token = JSON.parse(localStorage.getItem("Access Token"));
-      let response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/v1/cart/remove-cart-product/${productId}`,
-        {
-          method: "GET",
-          mode: "cors",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to delete product from cart");
-      }
-
-      response = await response.json();
-      window.location.reload();
-    } catch (error) {
-      console.error("Deleting product error:", error);
-    } finally {
-      console.log(cartProducts);
-    }
-  };
 
   const increaseProductQuantity = (productId) => {
     setCheck((prev) => !prev);
@@ -246,6 +218,7 @@ function Cart() {
   const deleteProductFromCart = (productId) => {
     setCheck((prev) => !prev);
     dispatch(removeFromCart({ productId }));
+    toast.success("Deleted")
   };
 
   const handleButtonClick = (product) => {
