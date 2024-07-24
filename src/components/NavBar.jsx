@@ -1,18 +1,10 @@
-
-import { useState, useRef, useEffect} from "react";
-import { 
-  FaUser, 
-  FaSearch, 
-  FaShoppingBag, 
-  FaBars, 
-  FaTimes 
-} from "react-icons/fa";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { FaSearch, FaShoppingBag, FaBars, FaTimes } from "react-icons/fa";
+import { NavLink, useLocation } from "react-router-dom";
 import SearchFilter from "./SearchFilter";
 import { useSelector, useDispatch } from "react-redux";
 import { closePopup } from "../store/popupSlice";
 import CartPopup from "../components/CartPopup";
-import { ProfileDropDown } from "./ProfileDropDown";
 
 function NavBar() {
   const popup = useSelector((state) => state.popup);
@@ -25,25 +17,6 @@ function NavBar() {
   const location = useLocation();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
-
-  // const toggleDropdown = () => {
-  //   setIsDropdownOpen(!isDropdownOpen);
-  // };
-
-  // const handleClickOutside = (event) => {
-  //   if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-  //     setIsDropdownOpen(false);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   document.addEventListener('click', handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener('click', handleClickOutside);
-  //   };
-  // }, []);
 
   const handleSearchClick = () => {
     setIsSearchOpen(true);
@@ -135,26 +108,11 @@ function NavBar() {
       </ul>
       <ul className="flex flex-wrap justify-center lg:justify-end text-lg items-center gap-4 lg:gap-10">
         <li>
-          <button
-            onClick={handleSearchClick}
-            className="block duration-200 "
-          >
+          <button onClick={handleSearchClick} className="block duration-200 ">
             <FaSearch className="md:text-xl text-md text-gray-500 hover:text-orange-400" />
           </button>
         </li>
-        {/* <li ref={dropdownRef}>
-          <div className="relative">
-            <button
-              onClick={toggleDropdown}
-              className="block duration-200 relative"
-            >
-              <FaUser className={`md:text-xl text-md text-gray-500 ${isDropdownOpen ? 'text-orange-500' : 'text-gray-500'} hover:text-orange-400`} />
-            </button>
-            {isDropdownOpen && (
-              <ProfileDropDown setIsDropdownOpen={setIsDropdownOpen} />
-            )}
-          </div>
-        </li> */}
+
         <li>
           <NavLink
             to={"/cart"}
@@ -168,9 +126,7 @@ function NavBar() {
           </NavLink>
         </li>
       </ul>
-      {isSearchOpen && (
-        <SearchFilter onClose={handleCloseSearch} />
-      )}
+      {isSearchOpen && <SearchFilter onClose={handleCloseSearch} />}
       {popup.isVisible && (
         <CartPopup product={popup.product} onClose={handleClosePopup} />
       )}

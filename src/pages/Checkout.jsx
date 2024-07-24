@@ -1,5 +1,4 @@
-
-import { Toaster, toast } from 'sonner'
+import { Toaster, toast } from "sonner";
 import { State, City } from "country-state-city";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -13,10 +12,12 @@ const CheckoutPage = () => {
 
   const [discount, setDiscount] = useState("");
   const [shippingCost] = useState(0); // Shipping is free
-  const [totalPrice, setTotalPrice] = useState(product?.quantity * product?.salePrice);
+  const [totalPrice, setTotalPrice] = useState(
+    product?.quantity * product?.salePrice
+  );
   const [paymentMethod, setPaymentMethod] = useState("online");
-  const[coupons, setCoupons] = useState([]);
-  const[numSubtract, setNumSubtract] = useState(0);
+  const [coupons, setCoupons] = useState([]);
+  const [numSubtract, setNumSubtract] = useState(0);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -36,44 +37,46 @@ const CheckoutPage = () => {
     ? City.getCitiesOfState(formData.country, formData.state)
     : [];
 
-
   useEffect(() => {
     try {
-      if(!product || product.length === 0) {
+      if (!product || product.length === 0) {
         navigate("/error");
       }
-      const fetchCoupons = async() => {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/coupon/get-coupons`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-        });
-  
+      const fetchCoupons = async () => {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/v1/coupon/get-coupons`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
         const dataFromServer = await response.json();
-        
-        if(!dataFromServer.success) {
-          throw new Error("Error Getting Coupons")
+
+        if (!dataFromServer.success) {
+          throw new Error("Error Getting Coupons");
         }
         setCoupons(dataFromServer.data);
-      }
-  
+      };
+
       fetchCoupons();
     } catch (error) {
       console.log("Error fetching coupons", error);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     validateForm();
   }, [discount, shippingCost, formData, product]);
 
   const calculateTotal = (curDiscountValue) => {
-    let price = (product?.salePrice * product?.quantity)
-    const temp=(price/100) * curDiscountValue;
+    let price = product?.salePrice * product?.quantity;
+    const temp = (price / 100) * curDiscountValue;
     setNumSubtract(temp);
     price -= temp;
-    if(price < 0) {
+    if (price < 0) {
       price = 0;
     }
     price += shippingCost;
@@ -82,9 +85,9 @@ const CheckoutPage = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'contact') {
+    if (name === "contact") {
       // Allow only numeric input
-      const numericValue = value.replace(/\D/g, '');
+      const numericValue = value.replace(/\D/g, "");
       setFormData({ ...formData, [name]: numericValue });
     } else {
       setFormData({ ...formData, [name]: value });
@@ -92,17 +95,17 @@ const CheckoutPage = () => {
     // setFormData({ ...formData, [name]: value });
   };
 
-  const applyDiscount = () => {  
+  const applyDiscount = () => {
     let curDiscountValue = -1;
     coupons.map((coupon) => {
-      if(coupon.couponId.toString() === discount.toString()) {
+      if (coupon.couponId.toString() === discount.toString()) {
         curDiscountValue = coupon.discountValue;
       }
-    })
-    if(curDiscountValue !== -1) {
+    });
+    if (curDiscountValue !== -1) {
       calculateTotal(curDiscountValue);
     } else {
-      toast.error("Invalid coupon")
+      toast.error("Invalid coupon");
     }
   };
 
@@ -114,40 +117,37 @@ const CheckoutPage = () => {
           `${import.meta.env.VITE_API_URL}/api/v1/order/add-order`,
           {
             method: "POST",
-            body: JSON.stringify(
-              {
-                "productId": product._id,
-                "overAllPrice": (product?.quantity * product?.salePrice),
-                "discountAmount": (numSubtract),
-                "userPayAmount": (totalPrice),
-                "email": formData.email,
-                "phone": formData.contact,
-                "fullName": formData.name,
-                "address": formData.address,
-                "city": formData.city,
-                "state": formData.state,
-                "pin": formData.pinCode,
-                "paymentMethod": "COD",
-              }
-            ),
+            body: JSON.stringify({
+              productId: product._id,
+              overAllPrice: product?.quantity * product?.salePrice,
+              discountAmount: numSubtract,
+              userPayAmount: totalPrice,
+              email: formData.email,
+              phone: formData.contact,
+              fullName: formData.name,
+              address: formData.address,
+              city: formData.city,
+              state: formData.state,
+              pin: formData.pinCode,
+              paymentMethod: "COD",
+            }),
             headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            }
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
           }
         );
         response = await response.json();
-        if(!response.success) {
-          throw new Error("Order failed!!")
+        if (!response.success) {
+          throw new Error("Order failed!!");
         }
-        
-        toast.success("Order placed successfully!")
-        navigate("/paymentsuccess", {state: {orderId:"", paymentId:""}});
+
+        toast.success("Order placed successfully!");
+        navigate("/paymentsuccess", { state: { orderId: "", paymentId: "" } });
       } catch (error) {
         console.log(error);
         toast.error("Order failed, please try again");
       }
-      
     } else {
       alert("Please fill all the required fields correctly.");
     }
@@ -161,36 +161,34 @@ const CheckoutPage = () => {
           `${import.meta.env.VITE_API_URL}/api/v1/order/add-order`,
           {
             method: "POST",
-            body: JSON.stringify(
-              {
-                "productId": product._id,
-                "overAllPrice": (product?.quantity * product?.salePrice),
-                "discountAmount": (numSubtract),
-                "userPayAmount": (totalPrice),
-                "email": formData.email,
-                "phone": formData.contact,
-                "fullName": formData.name,
-                "address": formData.address,
-                "city": formData.city,
-                "state": formData.state,
-                "pin": formData.pinCode,
-                "paymentMethod": "RazorPay",
-              }
-            ),
+            body: JSON.stringify({
+              productId: product._id,
+              overAllPrice: product?.quantity * product?.salePrice,
+              discountAmount: numSubtract,
+              userPayAmount: totalPrice,
+              email: formData.email,
+              phone: formData.contact,
+              fullName: formData.name,
+              address: formData.address,
+              city: formData.city,
+              state: formData.state,
+              pin: formData.pinCode,
+              paymentMethod: "RazorPay",
+            }),
             headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            }
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
           }
         );
         response = await response.json();
-        if(!response.success) {
-          throw new Error("Order failed!!")
+        if (!response.success) {
+          throw new Error("Order failed!!");
         }
         const order_Id = response.data;
 
-        if(!order_Id) {
-          throw new Error("Order failed!!")
+        if (!order_Id) {
+          throw new Error("Order failed!!");
         }
 
         const {
@@ -208,9 +206,12 @@ const CheckoutPage = () => {
           currency: "INR",
           name: formData.name,
           description: "Your Order",
-          image: "https://beforeigosolutions.com/pascale-atkinson/attachment/dummy-profile-pic-300x300-1/",
+          image:
+            "https://beforeigosolutions.com/pascale-atkinson/attachment/dummy-profile-pic-300x300-1/",
           order_id: order.id,
-          callback_url: `${import.meta.env.VITE_API_URL}/api/paymentverification`,
+          callback_url: `${
+            import.meta.env.VITE_API_URL
+          }/api/paymentverification`,
           prefill: {
             name: formData.name,
             email: formData.email,
@@ -223,39 +224,38 @@ const CheckoutPage = () => {
             color: "#121212",
           },
           handler: async function (response) {
-            
             const orderId = response?.razorpay_order_id;
             const paymentId = response?.razorpay_payment_id;
             const result = await fetch(
               `${import.meta.env.VITE_API_URL}/api/payment/add-payment-details`,
               {
                 method: "POST",
-                body: JSON.stringify(
-                  {
-                    "razorpay_order_id": orderId,
-                    "razorpay_payment_id": paymentId,
-                    order_Id
-                  }
-                ),
+                body: JSON.stringify({
+                  razorpay_order_id: orderId,
+                  razorpay_payment_id: paymentId,
+                  order_Id,
+                }),
                 headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json'
-                }
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                },
               }
             );
             alert("Payment Successfull");
-            navigate("/paymentsuccess", {state: {orderId, paymentId}});
+            navigate("/paymentsuccess", { state: { orderId, paymentId } });
           },
           modal: {
             ondismiss: async function () {
               const response = await fetch(
-                `${import.meta.env.VITE_API_URL}/api/v1/order/delete-order/${order_Id}`,
+                `${
+                  import.meta.env.VITE_API_URL
+                }/api/v1/order/delete-order/${order_Id}`,
                 {
                   method: "GET",
                   headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                  }
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                  },
                 }
               );
               console.log(response);
@@ -287,9 +287,6 @@ const CheckoutPage = () => {
     if (formData.contact.length !== 10) {
       errors.contact = "Phone number must be exactly 10 digits";
     }
-  
-    // setFormErrors(errors);
-    // return Object.keys(errors).length === 0;
 
     setFormErrors(errors);
     setIsFormValid(Object.keys(errors).length === 0);
@@ -368,7 +365,7 @@ const CheckoutPage = () => {
                     <span className="text-red-500">{formErrors.address}</span>
                   )}
                 </div>
-                
+
                 <div>
                   <label className="block mb-1">State</label>
                   <select
@@ -455,9 +452,12 @@ const CheckoutPage = () => {
 
           <section className="mb-6">
             <h2 className="text-xl font-semibold mb-2">Order Details</h2>
-            {product &&
+            {product && (
               <div className="mb-4">
-                <img className="h-36 w-36 rounded-lg mb-4" src={product.images[0]} />
+                <img
+                  className="h-36 w-36 rounded-lg mb-4"
+                  src={product.images[0]}
+                />
                 <div className="flex justify-between">
                   <span className="font-semibold">{product.name}</span>
                   <span>₹{product.salePrice}</span>
@@ -465,17 +465,15 @@ const CheckoutPage = () => {
                 <div className="flex justify-between">
                   <span>Quantity: {product.quantity}</span>
                 </div>
-              </div>            
-            }
+              </div>
+            )}
             <div className="flex justify-between mt-2">
               <span>Shipping:</span>
               <span>Free</span>
             </div>
             <div className="flex justify-between mt-2">
               <span>Discount:</span>
-              <span>
-                - ₹{numSubtract}
-              </span>
+              <span>- ₹{numSubtract}</span>
             </div>
 
             <div className="flex justify-between mt-4 font-bold">

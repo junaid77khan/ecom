@@ -1,11 +1,10 @@
 // /* eslint-disable react/prop-types */
-import { useParams } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
-import { posts } from '../data/Blog-Data';
+import { useParams } from "react-router-dom";
+import { posts } from "../data/Blog-Data";
 
 const BlogRead = () => {
   const { id } = useParams();
-  const post = posts.find(post => post.id === id);
+  const post = posts.find((post) => post.id === id);
 
   if (!post) {
     return <div>Post not found</div>;
@@ -18,9 +17,9 @@ const BlogRead = () => {
       {/* Blog Content Section */}
       <div className="w-full max-w-4xl">
         {/* Header Image */}
-        <img 
-          src={post.imageUrl} 
-          alt={post.title} 
+        <img
+          src={post.imageUrl}
+          alt={post.title}
           className="w-full lg:w-1/2 mx-auto h-96 object-cover rounded-lg"
         />
 
@@ -43,47 +42,25 @@ const BlogRead = () => {
         <div className="text-base md:text-lg lg:text-xl text-gray-800">
           {post?.content?.map((section, index) => (
             <div key={index} className="mb-8">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">{section.title && section?.title}</h2>
-              {section?.paragraphs && section?.paragraphs?.map((paragraph, pIndex) => (
-                <p key={pIndex} className="mb-4">{paragraph}</p>
-              ))}
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
+                {section.title && section?.title}
+              </h2>
+              {section?.paragraphs &&
+                section?.paragraphs?.map((paragraph, pIndex) => (
+                  <p key={pIndex} className="mb-4">
+                    {paragraph}
+                  </p>
+                ))}
               {section.image && (
-                <img src={section.image} alt={section.imageAlt} className="w-full lg:w-1/2 h-96 object-cover rounded-lg mb-4" />
+                <img
+                  src={section.image}
+                  alt={section.imageAlt}
+                  className="w-full lg:w-1/2 h-96 object-cover rounded-lg mb-4"
+                />
               )}
             </div>
           ))}
         </div>
-
-        {/* Comments Section */}
-        {/* <div className="w-full max-w-4xl mt-8">
-          <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">Leave a comment</h3>
-          <form>
-            <div className="mb-4">
-              <label className="block text-gray-700">Name</label>
-              <input 
-                type="text" 
-                className="w-full p-2 border border-gray-300 rounded mt-1" 
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700">Email</label>
-              <input 
-                type="email" 
-                className="w-full p-2 border border-gray-300 rounded mt-1" 
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700">Comment</label>
-              <textarea 
-                className="w-full p-2 border border-gray-300 rounded mt-1" 
-                rows="4"
-              ></textarea>
-            </div>
-            <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-              Post comment
-            </button>
-          </form>
-        </div> */}
       </div>
     </div>
   );
@@ -91,5 +68,4 @@ const BlogRead = () => {
 
 export default BlogRead;
 
-BlogRead.jsx
-
+BlogRead.jsx;

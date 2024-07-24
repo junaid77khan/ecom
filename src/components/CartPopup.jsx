@@ -66,15 +66,7 @@ const PopupCart = ({ product }) => {
             Continue Shopping
           </button>
         </div>
-        {/* Star particle animation container */}
-        {/* <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {[...Array(20)].map((_, index) => (
-            <div
-              key={index}
-              className="absolute bg-yellow-300 w-2 h-2 rounded-full animate-star-particles"
-            ></div>
-          ))}
-        </div> */}
+       
       </div>
     </div>
   );

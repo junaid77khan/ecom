@@ -1,38 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+/* eslint-disable no-undef */
+import { Link } from "react-router-dom";
 
 const UserProfile = () => {
-  // const [user, setUser] = useState(null);
-  // const [orders, setOrders] = useState([]);
-  // const [addresses, setAddresses] = useState([]);
-  // const [isLoading, setIsLoading] = useState(true);
-
-  // useEffect(() => {
-  //   // Fetch user data, orders, and addresses from your API
-  //   const fetchUserData = async () => {
-  //     try {
-  //       // Replace these with actual API calls
-  //       const userData = await fetchUser();
-  //       const orderData = await fetchOrders();
-  //       const addressData = await fetchAddresses();
-
-  //       setUser(userData);
-  //       setOrders(orderData);
-  //       setAddresses(addressData);
-  //       setIsLoading(false);
-  //     } catch (error) {
-  //       console.error('Error fetching user data:', error);
-  //       setIsLoading(false);
-  //     }
-  //   };
-
-  //   fetchUserData();
-  // }, []);
-
-  // if (isLoading) {
-  //   return <div className="text-center mt-8">Loading...</div>;
-  // }
-
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6">Account</h1>
@@ -46,10 +15,19 @@ const UserProfile = () => {
       <div className="grid md:grid-cols-2 gap-8">
         <div className="bg-white p-6 rounded-lg shadow-md">
           <h3 className="text-xl font-semibold mb-4">Account Details</h3>
-          <p><strong>Name:</strong> {user.name}</p>
-          <p><strong>Email:</strong> {user.email}</p>
-          <p><strong>Phone:</strong> {user.phone}</p>
-          <Link to="/change-password" className="text-blue-500 hover:underline mt-4 inline-block">
+          <p>
+            <strong>Name:</strong> {user.name}
+          </p>
+          <p>
+            <strong>Email:</strong> {user.email}
+          </p>
+          <p>
+            <strong>Phone:</strong> {user.phone}
+          </p>
+          <Link
+            to="/change-password"
+            className="text-blue-500 hover:underline mt-4 inline-block"
+          >
             Change Password
           </Link>
         </div>
@@ -57,10 +35,10 @@ const UserProfile = () => {
         <div className="bg-white p-6 rounded-lg shadow-md">
           <h3 className="text-xl font-semibold mb-4">Order History</h3>
           {orders.length === 0 ? (
-            <p>You haven't placed any orders yet.</p>
+            <p>You haven&apos;t placed any orders yet.</p>
           ) : (
             <ul>
-              {orders.map(order => (
+              {orders.map((order) => (
                 <li key={order.id} className="mb-2">
                   Order #{order.id} - {order.date} - ${order.total}
                 </li>
@@ -75,10 +53,12 @@ const UserProfile = () => {
             <p>No addresses saved.</p>
           ) : (
             <div className="grid md:grid-cols-2 gap-4">
-              {addresses.map(address => (
+              {addresses.map((address) => (
                 <div key={address.id} className="border p-4 rounded">
                   <p>{address.street}</p>
-                  <p>{address.city}, {address.state} {address.zip}</p>
+                  <p>
+                    {address.city}, {address.state} {address.zip}
+                  </p>
                   <p>{address.country}</p>
                 </div>
               ))}

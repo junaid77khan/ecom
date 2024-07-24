@@ -1,8 +1,5 @@
-// import { GlobeDemo } from "../components/GlobeDemo";
-import { useState, useEffect } from "react";
-// import { toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
-import { Toaster, toast } from 'sonner'
+import { useState } from "react";
+import { toast } from "sonner";
 
 const Spinner = () => (
   <div className="absolute inset-0 flex justify-center items-center">
@@ -17,7 +14,7 @@ const ContactUs = () => {
     message: "",
   });
 
-  const[loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,17 +32,15 @@ const ContactUs = () => {
         `${import.meta.env.VITE_API_URL}/api/v1/message/add-message`,
         {
           method: "POST",
-          body: JSON.stringify(
-            {
-              "name": details.name,
-              "email": details.email,
-              "message": details.message
-            }
-          ),
+          body: JSON.stringify({
+            name: details.name,
+            email: details.email,
+            message: details.message,
+          }),
           headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          }
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
         }
       );
       const addMessageData = await addMessageResponse.json();
@@ -58,7 +53,7 @@ const ContactUs = () => {
       setDetails({
         name: "",
         email: "",
-        message:""
+        message: "",
       });
     } catch (error) {
       console.error("Error adding message:", error);
@@ -71,7 +66,9 @@ const ContactUs = () => {
   return (
     <div className="w-full bg-orange-50 flex flex-col md:flex-row justify-around">
       <div className="shadow-2xl rounded mt-4 lg:mx-8  w-full lg:w-1/3 px-8 py-5 h-full">
-        <h2 className="lg:text-3xl text-2xl font-bold text-gray-800 mb-6">Contact Us</h2>
+        <h2 className="lg:text-3xl text-2xl font-bold text-gray-800 mb-6">
+          Contact Us
+        </h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
@@ -122,15 +119,17 @@ const ContactUs = () => {
             ></textarea>
           </div>
           <div className="mt-2 py-10  border-t w-full flex flex-wrap justify-center items-center border-blueGray-200 text-center">
-                <button
-                  type="submit"
-                  className="mt-5 font-semibold bg-orange-500 px-4 text-gray-100 py-2 rounded-lg hover:bg-orange-600 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none relative"
-                  disabled={loading} 
-                  onClick={handleSubmit}
-                >
-                  {loading && <Spinner />}
-                  <span className={` ${loading ? 'invisible' : 'visible'}`}>Add Message</span>
-                </button>
+            <button
+              type="submit"
+              className="mt-5 font-semibold bg-orange-500 px-4 text-gray-100 py-2 rounded-lg hover:bg-orange-600 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none relative"
+              disabled={loading}
+              onClick={handleSubmit}
+            >
+              {loading && <Spinner />}
+              <span className={` ${loading ? "invisible" : "visible"}`}>
+                Add Message
+              </span>
+            </button>
           </div>
         </form>
       </div>

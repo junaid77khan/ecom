@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect,} from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { ProductInformation } from "../ProductInformation";
 import { ProductReview } from "../ProductReview";
