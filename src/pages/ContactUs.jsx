@@ -1,7 +1,8 @@
 // import { GlobeDemo } from "../components/GlobeDemo";
 import { useState, useEffect } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import { toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
+import { Toaster, toast } from 'sonner'
 
 const Spinner = () => (
   <div className="absolute inset-0 flex justify-center items-center">

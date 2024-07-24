@@ -1,12 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import { ToastContainer } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 import { posts } from "./data/Blog-Data";
 
 import { ContactUs, NavBar } from "./components";
+import { Toaster } from 'sonner'
 
 import Footer from "./components/Footer";
-import Blog from "./pages/BlogPost";
+// import Blog from "./pages/BlogPost";
 import ProductDetails from "./pages/ProductDetails";
 import Home from "./pages/Home";
 import Categories from "./pages/Categories_Component/Categories";
@@ -71,19 +72,9 @@ function App() {
         <Footer />
         {/* <Outlet /> */}
       </div>
-      <ToastContainer />
+      <Toaster richColors position="top-center"  />
     </Provider>
   );
 }
 
 export default App;
-
-// const BlogList = ({ posts }) => {
-//   return (
-//     <div>
-//       {posts.map(post => (
-//         <BlogPost key={post.id} post={post} />
-//       ))}
-//     </div>
-//   );
-// };

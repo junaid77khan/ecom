@@ -1,13 +1,15 @@
 /* eslint-disable react/prop-types */
 
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import { toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 import { ProductReview } from "../components/ProductReview";
 import { ProductCard } from "../components/ProductCard";
 import { ProductInformation } from "../components/ProductInformation";
+import { Toaster, toast } from 'sonner'
+
 
 const ProductDetails = () => {
   const { productId } = useParams();
