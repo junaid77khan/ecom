@@ -1,0 +1,33 @@
+/* styles.css */
+.footer-glass {
+    background: rgba(255, 165, 0, 0.2);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .bg-orange-200 {
+    background-color: rgba(255, 165, 0, 0.2);
+  }
+  
+  .text-orange-700 {
+    color: #ff9800;
+  }
+  
+  .text-orange-600 {
+    color: #ffa726;
+  }
+  
+  .text-orange-500 {
+    color: #ffb74d;
+  }
+  
+  .border-orange-300 {
+    border-color: #ffcc80;
+  }
+  
+  .text-orange-800 {
+    color: #e65100;
+  }
+  
