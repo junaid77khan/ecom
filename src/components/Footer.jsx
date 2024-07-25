@@ -5,7 +5,7 @@ import { AiOutlineYoutube } from "react-icons/ai";
 
 const Footer = () => {
   return (
-    <footer className="relative bg-orange-700 pt-8 pb-6">
+    <footer className="relative bg-orange-700 pt-4 pb-2">
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap text-left lg:text-left">
           <div className="w-full lg:w-6/12 px-4">
@@ -110,22 +110,26 @@ const Footer = () => {
                   Company
                 </span>
                 <ul className="list-unstyled">
-                  
+                  <li>
+                    <a
+                      className="text-white hover:text-orange-800 font-semibold block pb-2 text-sm"
+                      href="/deliverypolicy"
+                    >
+                      Shipping &amp; Refund Policy
+                    </a>
+                  </li>
                   <li>
                     <a
                       className="text-white hover:text-orange-800 font-semibold block pb-2 text-sm"
                       href="/terms&condition"
                     >
                       Terms &amp; Conditions
-
                     </a>
                   </li>
                   <li>
                     <a
                       className="text-white hover:text-orange-800 font-semibold block pb-2 text-sm"
-
                       href="/privacypolicy"
-
                     >
                       Privacy Policy
                     </a>
