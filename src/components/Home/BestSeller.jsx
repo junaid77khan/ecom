@@ -81,7 +81,7 @@ const BestSeller = () => {
     } catch (error) {
       console.log("Error fetching product reviews", error);
     }
-  })
+  }, [])
 
 
   return (

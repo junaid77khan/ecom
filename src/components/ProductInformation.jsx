@@ -5,7 +5,6 @@ import { showPopup } from "../store/popupSlice";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { Toaster, toast } from 'sonner'
 
 const ProductInformation = (props) => {
@@ -100,7 +99,7 @@ const ProductInformation = (props) => {
             className="w-full lg:h-96 h-80 object-cover rounded-xl"
           />
         </div>
-        <div className="flex mt-4 overflow-x-auto">
+        <div className="flex mt-4 overflow-x-auto image-slider-container">
           {product.images.map((img, index) => (
             <img
               key={index}
