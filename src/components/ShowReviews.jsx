@@ -5,6 +5,7 @@ import { useState } from "react";
 
 export const ShowReviews = (props) => {
     const{reviews} = props;
+    console.log(reviews);
     const [allReviews, setAllReviews] = useState(false);
     return (
         <>
