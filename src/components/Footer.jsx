@@ -114,7 +114,7 @@ const Footer = () => {
                   <li>
                     <a
                       className="text-white hover:text-orange-800 font-semibold block pb-2 text-sm"
-                      href="/deliverypolicy"
+                      href="/terms&condition"
                     >
                       Terms &amp; Conditions
 
@@ -126,7 +126,6 @@ const Footer = () => {
 
                       href="/privacypolicy"
 
-                      href="/terms&condition"
                     >
                       Privacy Policy
                     </a>
