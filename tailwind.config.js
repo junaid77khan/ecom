@@ -59,7 +59,7 @@ module.exports = {
       },
     },
   },
-  plugins: [addVariablesForColors],
+  plugins: [addVariablesForColors, require('tailwind-scrollbar-hide')],
 };
 
 function addVariablesForColors({ addBase, theme }) {
