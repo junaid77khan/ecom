@@ -14,31 +14,26 @@ const BlogRead = () => {
 
   return (
     <div className="flex flex-col items-center px-4 py-8 md:px-8 lg:px-16 bg-orange-50">
-      {/* Blog Content Section */}
+      
       <div className="w-full max-w-4xl">
-        {/* Header Image */}
         <img
           src={post.imageUrl}
           alt={post.title}
           className="w-full lg:w-1/2 mx-auto h-96 object-cover rounded-lg"
         />
 
-        {/* Blog Title */}
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mt-8 mb-4">
           {post.title}
         </h1>
 
-        {/* Date */}
         <div className="text-sm md:text-base lg:text-lg text-gray-600 text-center mb-4">
           {post.date}
         </div>
 
-        {/* Introduction */}
         <div className="text-base md:text-lg lg:text-xl text-gray-800 mb-8">
           <p>{post.introduction}</p>
         </div>
 
-        {/* Blog Content */}
         <div className="text-base md:text-lg lg:text-xl text-gray-800">
           {post?.content?.map((section, index) => (
             <div key={index} className="mb-8">

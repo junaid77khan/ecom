@@ -110,14 +110,7 @@ const Footer = () => {
                   Company
                 </span>
                 <ul className="list-unstyled">
-                  <li>
-                    <a
-                      className="text-white hover:text-orange-800 font-semibold block pb-2 text-sm"
-                      href=""
-                    >
-                      About us
-                    </a>
-                  </li>
+                  
                   <li>
                     <a
                       className="text-white hover:text-orange-800 font-semibold block pb-2 text-sm"
@@ -140,6 +133,14 @@ const Footer = () => {
                       href="/contact-us"
                     >
                       Contact Us
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className="text-white hover:text-orange-800 font-semibold block pb-2 text-sm"
+                      href="mailto:skpdecor3@gmail.com"
+                    >
+                      Email
                     </a>
                   </li>
                 </ul>

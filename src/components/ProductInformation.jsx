@@ -8,8 +8,6 @@ import { useNavigate } from "react-router-dom";
 
 import { Toaster, toast } from 'sonner'
 
-import { bestSellerProduct } from "../data/HomeData";
-
 const ProductInformation = (props) => {
   const { product } = props;
   const [productQuantity, setProductQuantity] = useState(1);
