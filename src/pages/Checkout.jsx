@@ -116,6 +116,7 @@ const CheckoutPage = () => {
             method: "POST",
             body: JSON.stringify({
               productId: product._id,
+              quantity: product.quantity,
               overAllPrice: product?.quantity * product?.salePrice,
               discountAmount: numSubtract,
               userPayAmount: totalPrice,
@@ -160,6 +161,7 @@ const CheckoutPage = () => {
             method: "POST",
             body: JSON.stringify({
               productId: product._id,
+              quantity: product.quantity,
               overAllPrice: product?.quantity * product?.salePrice,
               discountAmount: numSubtract,
               userPayAmount: totalPrice,
