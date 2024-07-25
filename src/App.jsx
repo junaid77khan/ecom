@@ -19,6 +19,8 @@ import { NotFound } from "./pages/Notfound";
 import PaymentSuccess from "./pages/payment/PaymentSucess";
 import OtpForm from "./pages/OtpForm";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsAndConditions from "./pages/Terms&Condition";
+import ShippingDeliveryPolicy from "./pages/DeliveryPolicy";
 
 function App() {
   return (
@@ -28,6 +30,10 @@ function App() {
         <Routes>
           <Route path="/otp" element={<OtpForm />} />
           <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+          <Route path="/terms&condition" element={<TermsAndConditions />} />
+          <Route path="/deliverypolicy" element={<ShippingDeliveryPolicy />} />
+
+
 
           <Route path="/blogs" element={<BlogPost post={posts[0]} />} />
           <Route path="/blogs/:id" element={<BlogRead posts={posts} />} />
