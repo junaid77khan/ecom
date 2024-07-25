@@ -1,11 +1,6 @@
 import { useState } from "react";
 import { toast } from "sonner";
-
-const Spinner = () => (
-  <div className="absolute inset-0 flex justify-center items-center">
-    <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></div>
-  </div>
-);
+import { Spinner } from "../components/Spinner";
 
 const ContactUs = () => {
   const [details, setDetails] = useState({

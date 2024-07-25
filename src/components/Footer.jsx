@@ -110,26 +110,23 @@ const Footer = () => {
                   Company
                 </span>
                 <ul className="list-unstyled">
+                  
                   <li>
                     <a
                       className="text-white hover:text-orange-800 font-semibold block pb-2 text-sm"
                       href="/deliverypolicy"
                     >
-                      Shipping &amp; Refund Policy
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      className="text-white hover:text-orange-800 font-semibold block pb-2 text-sm"
-                      href="/terms&condition"
-                    >
                       Terms &amp; Conditions
+
                     </a>
                   </li>
                   <li>
                     <a
                       className="text-white hover:text-orange-800 font-semibold block pb-2 text-sm"
+
                       href="/privacypolicy"
+
+                      href="/terms&condition"
                     >
                       Privacy Policy
                     </a>
@@ -140,6 +137,14 @@ const Footer = () => {
                       href="/contact-us"
                     >
                       Contact Us
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className="text-white hover:text-orange-800 font-semibold block pb-2 text-sm"
+                      href="mailto:skpdecor3@gmail.com"
+                    >
+                      Email
                     </a>
                   </li>
                 </ul>

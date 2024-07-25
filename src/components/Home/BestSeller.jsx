@@ -1,11 +1,9 @@
 import { useState, useEffect,} from "react";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { ProductInformation } from "../ProductInformation";
-import { ProductReview } from "../ProductReview";
 import { DummyBestSeller } from "./HomeDummy/DummyBestSeller";
+import { ShowReviews } from "../ShowReviews";
 
 const BestSeller = () => {
-  const [allReviews, setAllReviews] = useState(false);
   const [bestSellerProduct, setBestSellerProduct] = useState({});
   const [productId, setProductId] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -108,50 +106,13 @@ const BestSeller = () => {
                     <h3 className="lg:text-xl text-lg font-semibold text-red-600 mb-2">
                       Customer Reviews:
                     </h3>
-                    {bestSellerProductReview.length === 0 &&
+                    {!loading && bestSellerProductReview.length === 0 &&
                       <div className="w-[100%]   ">
                         <div colSpan="6" className="w-full h-full text-xl lg:text-2xl py-10 px-5 font-bold">No reviews yet</div>
                       </div>
                     }
-                    {bestSellerProductReview.length > 0 &&
-                      <>
-                        {!allReviews && (
-                          <div className="ease-linear duration-200">
-                            {bestSellerProductReview?.length > 0 && (
-                              <ProductReview
-                                ratingReview={bestSellerProductReview[0]}
-                              />
-                            )}
-                            {bestSellerProductReview?.length > 1 && (
-                              <ProductReview
-                                ratingReview={bestSellerProductReview[1]}
-                              />
-                            )}
-                            <button
-                              onClick={() => setAllReviews(true)}
-                              className="flex justify-center items-center w-full "
-                            >
-                              <FaChevronDown className="lg:text-2xl text-md" />
-                            </button>
-                          </div>
-                        )}
-                        {allReviews && (
-                          <div className="ease-out duration-300">
-                            {bestSellerProductReview.map((ratingReview) => (
-                              <ProductReview
-                                key={ratingReview._id}
-                                ratingReview={ratingReview}
-                              />
-                            ))}
-                            <button
-                              onClick={() => setAllReviews(false)}
-                              className="flex justify-center items-center w-full "
-                            >
-                              <FaChevronUp className="lg:text-2xl text-md" />
-                            </button>
-                          </div>
-                        )}
-                      </>
+                    {!loading && bestSellerProductReview.length > 0 &&
+                      <ShowReviews reviews={bestSellerProductReview} />
                     }
                   </div>
             </div>

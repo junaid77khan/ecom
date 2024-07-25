@@ -1,17 +1,13 @@
-/* eslint-disable react/prop-types */
-
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
-import { FaChevronUp, FaChevronDown } from "react-icons/fa";
-import { ProductReview } from "../components/ProductReview";
 import { ProductCard } from "../components/ProductCard";
 import { ProductInformation } from "../components/ProductInformation";
 import { toast } from "sonner";
 import { DummyBestSeller } from "../components/Home/HomeDummy/DummyBestSeller";
+import { ShowReviews } from "../components/ShowReviews";
 
 const ProductDetails = () => {
   const { productId } = useParams();
-  const [allReviews, setAllReviews] = useState(false);
   const navigate = useNavigate();
   const [product, setProduct] = useState({});
   const [productReviews, setProductReviews] = useState([]);
@@ -151,9 +147,7 @@ const ProductDetails = () => {
     };
 
     fetchProduct();
-  }, []);
 
-  useEffect(() => {
     const fetchReviews = async () => {
       try {
         const data = {
@@ -209,8 +203,6 @@ const ProductDetails = () => {
           <div className="bg-white py-7 shadow-md rounded-lg overflow-hidden">
             <ProductInformation product={product} />
 
-            {/* product reviews section */}
-
             <div className="mt-12 flex flex-col md:flex-row gap-4 justify-between items-start">
               <div className="px-5 w-full md:w-1/3 ">
                 <h1 className="lg:text-xl text-md font-semibold text-red-600">
@@ -263,46 +255,12 @@ const ProductDetails = () => {
                   </div>
                 )}
                 {!loading && productReviews.length > 0 && (
-                  <>
-                    {!allReviews && (
-                      <div className="ease-linear duration-200">
-                        {productReviews?.length > 0 && (
-                          <ProductReview ratingReview={productReviews[0]} />
-                        )}
-                        {productReviews?.length > 1 && (
-                          <ProductReview ratingReview={productReviews[1]} />
-                        )}
-                        <button
-                          onClick={() => setAllReviews(true)}
-                          className="flex justify-center items-center w-full "
-                        >
-                          <FaChevronDown className="lg:text-2xl text-md" />
-                        </button>
-                      </div>
-                    )}
-                    {allReviews && (
-                      <div className="ease-out duration-300">
-                        {productReviews.map((ratingReview) => (
-                          <ProductReview
-                            key={ratingReview._id}
-                            ratingReview={ratingReview}
-                          />
-                        ))}
-                        <button
-                          onClick={() => setAllReviews(false)}
-                          className="flex justify-center items-center w-full "
-                        >
-                          <FaChevronUp className="lg:text-2xl text-md" />
-                        </button>
-                      </div>
-                    )}
-                  </>
+                  <ShowReviews reviews={productReviews} />
                 )}
               </div>
             </div>
           </div>
 
-          {/* Related product */}
           {!loading && relatedProducts.length === 0 && (
             <div className="w-[100%]   ">
               <div

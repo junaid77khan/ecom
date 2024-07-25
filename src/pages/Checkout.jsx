@@ -6,12 +6,11 @@ import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
   const location = useLocation();
   const { product } = location.state || {};
 
   const [discount, setDiscount] = useState("");
-  const [shippingCost] = useState(0); // Shipping is free
+  const [shippingCost] = useState(0); 
   const [totalPrice, setTotalPrice] = useState(
     product?.quantity * product?.salePrice
   );
@@ -86,13 +85,11 @@ const CheckoutPage = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     if (name === "contact") {
-      // Allow only numeric input
       const numericValue = value.replace(/\D/g, "");
       setFormData({ ...formData, [name]: numericValue });
     } else {
       setFormData({ ...formData, [name]: value });
     }
-    // setFormData({ ...formData, [name]: value });
   };
 
   const applyDiscount = () => {

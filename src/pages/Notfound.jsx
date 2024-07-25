@@ -1,7 +1,6 @@
 import { setTitle } from "../utils/setTitle";
 
 export const NotFound = () => {
-  //set page tite
   setTitle("404 Not Found");
 
   return (
