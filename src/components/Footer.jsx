@@ -23,7 +23,7 @@ const Footer = () => {
               >
                 <i className="flex justify-center">
                   {" "}
-                  <AiOutlineFacebook className="h-8 w-8 flex justify-center text center" />
+                  <AiOutlineFacebook className="h-6 w-6 flex justify-center text center" />
                 </i>
               </button>
               <button
@@ -37,7 +37,7 @@ const Footer = () => {
               >
                 <i className="flex justify-center">
                   {" "}
-                  <AiOutlineYoutube className="h-8 w-8" />
+                  <AiOutlineYoutube className="h-6 w-6" />
                 </i>
               </button>
               <button
@@ -50,7 +50,7 @@ const Footer = () => {
                 type="button"
               >
                 <i className="flex text-center justify-center">
-                  <FaInstagram className="h-8 w-8" />
+                  <FaInstagram className="h-6 w-6" />
                 </i>
               </button>
               <button
@@ -59,7 +59,7 @@ const Footer = () => {
                 type="button"
               >
                 <i className="flex text-center justify-center">
-                  <AiOutlineLinkedin className="h-8 w-8" />
+                  <AiOutlineLinkedin className="h-6 w-6" />
                 </i>
               </button>
             </div>
@@ -113,15 +113,15 @@ const Footer = () => {
                   <li>
                     <a
                       className="text-white hover:text-orange-800 font-semibold block pb-2 text-sm"
-                      href=""
+                      href="/deliverypolicy"
                     >
-                      About us
+                      Shipping &amp; Refund Policy
                     </a>
                   </li>
                   <li>
                     <a
                       className="text-white hover:text-orange-800 font-semibold block pb-2 text-sm"
-                      href=""
+                      href="/terms&condition"
                     >
                       Terms &amp; Conditions
                     </a>
