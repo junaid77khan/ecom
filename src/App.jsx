@@ -21,7 +21,6 @@ import OtpForm from "./pages/OtpForm";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsAndConditions from "./pages/Terms&Condition";
 import ShippingDeliveryPolicy from "./pages/DeliveryPolicy";
-import { Helmet } from 'react-helmet-async';
 
 function App() {
   return (
