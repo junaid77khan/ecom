@@ -240,6 +240,19 @@ const CheckoutPage = () => {
                 },
               }
             );
+            await fetch(
+              `${import.meta.env.VITE_API_URL}/api/user/send-success-sms`,
+              {
+                method: "POST",
+                body: JSON.stringify({
+                  phoneNumer: contact,
+                }),
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                },
+              }
+            );
             alert("Payment Successfull");
             navigate("/paymentsuccess", { state: { orderId, paymentId } });
           },
@@ -277,7 +290,6 @@ const CheckoutPage = () => {
   const validateForm = () => {
     const errors = {};
     if (!formData.name) errors.name = "Name is required";
-    if (!formData.email) errors.email = "Email is required";
     if (!formData.contact) errors.contact = "Contact is required";
     if (!formData.address) errors.address = "Address is required";
     if (!formData.city) errors.city = "City is required";
