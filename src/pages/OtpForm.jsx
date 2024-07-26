@@ -17,7 +17,7 @@ const OtpForm = () => {
 
   useEffect(() => {
     if (!product || product.length === 0) {
-      navigate("/error");
+      navigate("/");
     }
   }, []);
 
