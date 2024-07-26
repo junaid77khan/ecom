@@ -140,6 +140,20 @@ const CheckoutPage = () => {
           throw new Error("Order failed!!");
         }
 
+        await fetch(
+          `${import.meta.env.VITE_API_URL}/api/v1/user/send-success-sms`,
+          {
+            method: "POST",
+            body: JSON.stringify({
+              phoneNumer: formData.contact,
+            }),
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
         toast.success("Order placed successfully!");
         navigate("/paymentsuccess", { state: { orderId: "", paymentId: "" } });
       } catch (error) {
@@ -241,11 +255,11 @@ const CheckoutPage = () => {
               }
             );
             await fetch(
-              `${import.meta.env.VITE_API_URL}/api/user/send-success-sms`,
+              `${import.meta.env.VITE_API_URL}/api/v1/user/send-success-sms`,
               {
                 method: "POST",
                 body: JSON.stringify({
-                  phoneNumer: contact,
+                  phoneNumer: formData.contact,
                 }),
                 headers: {
                   Accept: "application/json",
