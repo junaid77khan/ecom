@@ -3,7 +3,7 @@
 const PaymentCard = ({ amount, img, checkoutHandler }) => {
   return (
     <div className="flex flex-col items-center">
-      <img src={img} className="w-64 h-64 object-cover" alt="Product" />
+      {/* <img src={img} className="w-64 h-64 object-cover" alt="Product" /> */}
       <p>₹{amount}</p>
       <button
         onClick={() => checkoutHandler(amount)}
