@@ -58,7 +58,7 @@ function Cart() {
   }, [check]);
 
   return (
-    <div className="md:px-40 px-5 py-5 w-full bg-orange-50">
+    <div className="md:px-40 px-5 py-5 w-full bg-gradient-to-b from-orange-50 to-orange-0">
       <h1 className="md:text-4xl text-2xl lg:mb-14 mb-7">Your Cart</h1>
 
       {loading && (

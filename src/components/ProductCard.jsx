@@ -94,15 +94,15 @@ const ProductCard = (props) => {
     return (
         <div
             key={product._id}
-            className="bg-white hover:bg-gray-100 duration-200 lg:px-6 px-4 py-6 shadow-md rounded-lg h-90 md:w-80 w-72 cursor-pointer"
+            className="bg-white hover:bg-gray-100 duration-200 lg:px-6 px-4 py-6 shadow-md rounded-lg h-full md:w-80 w-72 cursor-pointer"
           >
             <img
               src={product.images[0]}
               alt={product.name}
               className="rounded-lg mb-2 w-full md:h-56 h-52"
             />
-            <h3 className="md:text-xl text-lg font-bold mb-2">{product.name.length > 30 ? `${product.name.substring(0, 30)}...` : product.name}</h3>
-            <p className="text-gray-600 mb-2">{product.description.length > 50 ? `${product.description.substring(0, 50)}...` : product.description}</p>
+            <h3 className="text-lg font-bold mb-2">{product.name.length > 25 ? `${product.name.substring(0,25)}...` : product.name}</h3>
+            <p className="text-gray-600 text-sm mb-2">{product.description.length > 50 ? `${product.description.substring(0, 50)}...` : product.description}</p>
             <div className="flex items-center justify-between mb-2">
               <span className="font-bold">₹{product.salePrice}</span>
               <ProductStarRating rating={typeof product?.avgRating === 'undefined' ? 5 : product.avgRating} />

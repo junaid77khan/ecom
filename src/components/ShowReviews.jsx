@@ -18,7 +18,7 @@ export const ShowReviews = (props) => {
                             )}
                             {reviews?.length > 1 && (
                               <ProductReview
-                                ratingReview={reviews[0]}
+                                ratingReview={reviews[1]}
                               />
                             )}
                             <button

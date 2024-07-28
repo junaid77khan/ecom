@@ -59,7 +59,7 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="w-full bg-orange-50 flex flex-col md:flex-row justify-around">
+    <div className="w-full bg-gradient-to-b from-orange-50 to-orange-0 flex flex-col md:flex-row justify-around py-5">
       <div className="shadow-2xl rounded mt-4 lg:mx-8  w-full lg:w-1/3 px-8 py-5 h-full">
         <h2 className="lg:text-3xl text-2xl font-bold text-gray-800 mb-6">
           Contact Us

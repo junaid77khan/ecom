@@ -27,7 +27,7 @@ const PrivacyPolicy = () => {
   ];
 
   return (
-    <div className="bg-gray-100 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+    <div className="bg-gradient-to-b from-orange-50 to-orange-0 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
         <div className="bg-orange-500 py-4 px-6">
           <h1 className="text-2xl font-bold text-white">

@@ -62,9 +62,9 @@ const CategoryProducts = () => {
   useEffect(() => {
 
     const priceRanges = {
-      all: { min: 0, max: 1000 },
-      affordable: { min: 0, max: 500 },
-      midRange: { min: 500, max: 1000 },
+      all: { min: 0, max: Infinity },
+      affordable: { min: 1, max: 1000 },
+      midRange: { min: 1000, max: 2000 },
     };
 
     const { min, max } = priceRanges[priceRangeOption];
@@ -76,7 +76,7 @@ const CategoryProducts = () => {
 
   
   return (      
-      <div className=" w-full mx-auto py-12 px-3 flex flex-col justify-center items-center bg-orange-50">
+      <div className=" w-full mx-auto py-12 px-3 flex flex-col justify-center items-center bg-gradient-to-b from-orange-50 to-orange-0">
       <h2 className="lg:text-3xl text-2xl font-bold mb-6">{categoryName}</h2>
       <div className="flex gap-4 mb-6">
         <select
@@ -85,8 +85,8 @@ const CategoryProducts = () => {
           onChange={(e) => setPriceRangeOption(e.target.value)}
         >
           <option className="text-black" value="all">All Prices</option>
-          <option value="affordable">0 - 500 ₹</option>
-          <option value="midRange">500 - 1000 ₹</option>
+          <option value="affordable">1 - 1000 ₹</option>
+          <option value="midRange">1000 - 2000 ₹</option>
         </select>
         <select
           className="border border-gray-300 rounded-md p-1 md:p-2 md:text-md text-sm"

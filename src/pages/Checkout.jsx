@@ -4,11 +4,17 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
+const Spinner = () => (
+  <div className="absolute inset-0 flex justify-center items-center bg-opacity-50 ">
+    <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-white"></div>
+  </div>
+);
+
 const CheckoutPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { product } = location.state || {};
-
+  const[loading, setLoading] = useState(false);
   const [discount, setDiscount] = useState("");
   const [shippingCost] = useState(0); 
   const [totalPrice, setTotalPrice] = useState(
@@ -139,6 +145,10 @@ const CheckoutPage = () => {
         if (!response.success) {
           throw new Error("Order failed!!");
         }
+        
+        const now = new Date(); 
+        const currentDate = now.toISOString().split('T')[0]; 
+        const currentTime = now.toTimeString().split(' ')[0];
 
         await fetch(
           `${import.meta.env.VITE_API_URL}/api/v1/user/send-success-sms`,
@@ -146,7 +156,12 @@ const CheckoutPage = () => {
             method: "POST",
             body: JSON.stringify({
               phoneNumer: formData.contact,
-              fullName: formData.name
+              fullName: formData.name,
+              email: formData.email,
+              productName: product.name,
+              quantity: product.quantity,
+              date: currentDate,
+              time: currentTime,
             }),
             headers: {
               Accept: "application/json",
@@ -155,15 +170,39 @@ const CheckoutPage = () => {
           }
         );
 
+        setLoading(false)
+
         toast.success("Order placed successfully!");
+            await fetch(
+              `${import.meta.env.VITE_API_URL}/api/v1/user/send-order-mail-admin`,
+              {
+                method: "POST",
+                body: JSON.stringify({
+                  fullName: formData.name,
+                  phoneNumber: formData.contact,
+                  productName: product.name,
+                  quantity: product.quantity,
+                  date: currentDate,
+                  time: currentTime
+                }),
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                },
+              }
+            );
         navigate("/paymentsuccess", { state: { orderId: "", paymentId: "" } });
       } catch (error) {
         console.log(error);
         toast.error("Order failed, please try again");
+      } finally {
+        setLoading(false)
       }
     } else {
       alert("Please fill all the required fields correctly.");
     }
+
+
   };
 
   const checkoutHandler = async () => {
@@ -204,6 +243,8 @@ const CheckoutPage = () => {
         if (!order_Id) {
           throw new Error("Order failed!!");
         }
+
+        setLoading(false);
 
         const {
           data: { key },
@@ -255,13 +296,22 @@ const CheckoutPage = () => {
                 },
               }
             );
+
+            const now = new Date(); 
+            const currentDate = now.toISOString().split('T')[0]; 
+            const currentTime = now.toTimeString().split(' ')[0];
             await fetch(
               `${import.meta.env.VITE_API_URL}/api/v1/user/send-success-sms`,
               {
                 method: "POST",
                 body: JSON.stringify({
                   phoneNumer: formData.contact,
-                  fullName: formData.name
+                  fullName: formData.name,
+                  email: formData.email,
+                  productName: product.name,
+                  quantity: product.quantity,
+                  date: currentDate,
+                  time: currentTime,
                 }),
                 headers: {
                   Accept: "application/json",
@@ -270,6 +320,25 @@ const CheckoutPage = () => {
               }
             );
             alert("Payment Successfull");
+            
+            await fetch(
+              `${import.meta.env.VITE_API_URL}/api/v1/user/send-order-mail-admin`,
+              {
+                method: "POST",
+                body: JSON.stringify({
+                  fullName: formData.name,
+                  phoneNumber: formData.contact,
+                  productName: product.name,
+                  quantity: product.quantity,
+                  date: currentDate,
+                  time: currentTime
+                }),
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                },
+              }
+            );
             navigate("/paymentsuccess", { state: { orderId, paymentId } });
           },
           modal: {
@@ -299,6 +368,7 @@ const CheckoutPage = () => {
         toast.error("An error occurred during checkout. Please try again.");
       }
     } else {
+      setLoading(false)
       alert("Please fill all the required fields.");
     }
   };
@@ -541,21 +611,19 @@ const CheckoutPage = () => {
             </div>
           </section>
 
-          {paymentMethod === "online" ? (
-            <button
-              className="bg-orange-500 text-white w-full py-2 rounded-md font-bold"
-              onClick={checkoutHandler}
-            >
-              Pay Now
-            </button>
-          ) : (
-            <button
-              className="bg-orange-500 text-white w-full py-2 rounded-md font-bold"
-              onClick={handleOrderPlacement}
-            >
-              Place Order
-            </button>
-          )}
+          <button
+            className="mt-5 font-semibold bg-orange-500 text-gray-100 w-full py-4 rounded-lg hover:bg-orange-600 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none relative"
+            onClick={() => {
+              setLoading(true);
+              paymentMethod === "online" ? checkoutHandler() : handleOrderPlacement();
+            }}
+            disabled={loading}
+          >
+            {loading && <Spinner />}
+            <span className={`ml-3 ${loading ? "invisible" : "visible"}`}>
+              {paymentMethod === "online" ? "Pay Now" : "Place Order"}
+            </span>
+          </button>
         </div>
       </div>
     </div>

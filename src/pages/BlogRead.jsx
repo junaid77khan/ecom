@@ -13,7 +13,7 @@ const BlogRead = () => {
   console.log(post);
 
   return (
-    <div className="flex flex-col items-center px-4 py-8 md:px-8 lg:px-16 bg-orange-50">
+    <div className="flex flex-col items-center px-4 py-8 md:px-8 lg:px-16 bg-gradient-to-b from-orange-50 to-orange-0">
       
       <div className="w-full max-w-4xl">
         <img
