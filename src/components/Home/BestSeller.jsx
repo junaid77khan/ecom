@@ -5,7 +5,6 @@ import { ShowReviews } from "../ShowReviews";
 
 const BestSeller = () => {
   const [bestSellerProduct, setBestSellerProduct] = useState({});
-  const [productId, setProductId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [bestSellerProductReview, setBestSellerProductReview] = useState([]);
 
@@ -29,7 +28,35 @@ const BestSeller = () => {
           throw new Error("Error fetching product data")
         }
         if(response.data.length > 0) setBestSellerProduct(response.data[0]);
-        if(response.data.length > 0) setProductId(response.data[0]._id);
+        let data = {
+          productId: response.data[0]._id
+        };
+        const token = JSON.parse(localStorage.getItem("Access Token"));
+        response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/v1/review/get-product-reviews`,
+          {
+            method: "POST",
+            mode: "cors",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(data),
+          }
+        );
+  
+        if (!response.ok) {
+          throw new Error("Failed to fetch product reviews");
+        }
+  
+        data = await response.json();
+  
+        if (!data.success) {
+          throw new Error("Fetch product reviews error");
+        }
+  
+        setBestSellerProductReview(data.data);
       };
       fetchBestSellerProduct();
     } catch (error) {
@@ -38,50 +65,6 @@ const BestSeller = () => {
       setLoading(false);
     }
   }, []);
-
-  useEffect(() => {
-    try {
-      const fetchReviews = async () => {
-          if (!productId) return;
-          try {
-            let data = {
-              productId: productId,
-            };
-            const token = JSON.parse(localStorage.getItem("Access Token"));
-            const response = await fetch(
-              `${import.meta.env.VITE_API_URL}/api/v1/review/get-product-reviews`,
-              {
-                method: "POST",
-                mode: "cors",
-                credentials: "include",
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify(data),
-              }
-            );
-      
-            if (!response.ok) {
-              throw new Error("Failed to fetch product reviews");
-            }
-      
-            data = await response.json();
-      
-            if (!data.success) {
-              throw new Error("Fetch product reviews error");
-            }
-      
-            setBestSellerProductReview(data.data);
-          } catch (error) {
-            console.error("Fetch product reviews error:", error);
-          }
-        };
-        fetchReviews();
-    } catch (error) {
-      console.log("Error fetching product reviews", error);
-    }
-  }, [])
 
 
   return (
