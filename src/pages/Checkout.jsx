@@ -146,6 +146,7 @@ const CheckoutPage = () => {
             method: "POST",
             body: JSON.stringify({
               phoneNumer: formData.contact,
+              fullName: formData.name
             }),
             headers: {
               Accept: "application/json",
@@ -260,6 +261,7 @@ const CheckoutPage = () => {
                 method: "POST",
                 body: JSON.stringify({
                   phoneNumer: formData.contact,
+                  fullName: formData.name
                 }),
                 headers: {
                   Accept: "application/json",
