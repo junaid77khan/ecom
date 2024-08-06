@@ -137,6 +137,14 @@ const Footer = () => {
                   <li>
                     <a
                       className="text-white hover:text-orange-800 font-semibold block pb-2 text-sm"
+                      href="/about-us"
+                    >
+                      About us
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className="text-white hover:text-orange-800 font-semibold block pb-2 text-sm"
                       href="/contact-us"
                     >
                       Contact Us

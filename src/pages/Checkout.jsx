@@ -199,6 +199,7 @@ const CheckoutPage = () => {
         setLoading(false)
       }
     } else {
+      setLoading(false);
       alert("Please fill all the required fields correctly.");
     }
 
@@ -376,6 +377,7 @@ const CheckoutPage = () => {
   const validateForm = () => {
     const errors = {};
     if (!formData.name) errors.name = "Name is required";
+    if (!formData.email) errors.email = "Email is required";
     if (!formData.contact) errors.contact = "Contact is required";
     if (!formData.address) errors.address = "Address is required";
     if (!formData.city) errors.city = "City is required";

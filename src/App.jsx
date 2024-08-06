@@ -21,6 +21,7 @@ import OtpForm from "./pages/OtpForm";
 // import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsAndConditions from "./pages/Terms&Condition";
 import ShippingDeliveryPolicy from "./pages/DeliveryPolicy";
+import AboutUs from "./pages/AboutUs";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           {/* <Route path="/privacypolicy" element={<PrivacyPolicy />} /> */}
           <Route path="/terms&condition" element={<TermsAndConditions />} />
           <Route path="/deliverypolicy" element={<ShippingDeliveryPolicy />} />
+          <Route path="/about-us" element={<AboutUs />} />
           <Route path="/blogs" element={<BlogPost post={posts[0]} />} />
           <Route path="/blogs/:id" element={<BlogRead posts={posts} />} />
           <Route path="/" element={<Home />} />

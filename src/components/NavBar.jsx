@@ -105,6 +105,20 @@ function NavBar() {
             Contact us
           </NavLink>
         </li>
+        <li className="my-2">
+            <NavLink
+              to={"/about-us"}
+              className={({ isActive }) =>
+                `block duration-200 hover:text-orange-400 ${
+                  isActive
+                    ? "text-orange-500 border-b border-orange-500"
+                    : "text-gray-500 border-b border-gray-300"
+                }`
+              }
+            >
+              About us
+            </NavLink>
+          </li>
       </ul>
       <ul className="flex flex-wrap justify-center lg:justify-end text-lg items-center gap-4 lg:gap-10">
         <li>
@@ -203,6 +217,20 @@ function NavBar() {
               onClick={toggleSidebar}
             >
               Contact us
+            </NavLink>
+          </li>
+          <li className="my-2">
+            <NavLink
+              to={"/about-us"}
+              className={({ isActive }) =>
+                `block duration-200 hover:text-orange-400 ${
+                  isActive
+                    ? "text-orange-500 border-b border-orange-500"
+                    : "text-gray-500 border-b border-gray-300"
+                }`
+              }
+            >
+              About us
             </NavLink>
           </li>
         </ul>
