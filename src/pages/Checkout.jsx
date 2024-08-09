@@ -531,23 +531,31 @@ const CheckoutPage = () => {
       <div className="container mx-auto shadow-2xl p-4 lg:w-1/2 bg-white">
         <div className=" rounded-lg p-6">
           <h1 className="text-2xl font-bold mb-6">Order Summary</h1>
-          <section className="mb-6">
-            <h2 className="text-xl font-semibold mb-2">Discount Code</h2>
-            <input
-              type="text"
-              name="discount"
-              placeholder="Enter discount code"
-              value={discount}
-              onChange={(e) => setDiscount(e.target.value)}
-              className="w-full p-2 border rounded-md"
-            />
-            <button
-              className="bg-orange-500 text-white px-4 py-2 rounded mt-2"
-              onClick={applyDiscount}
-            >
-              Apply
-            </button>
-          </section>
+          {
+            paymentMethod === 'cod' ? (
+              <p className="mt-6 text-red-500">
+                Discounts are only available for online payments.
+              </p>    
+            ) : (
+              <section className="mb-6">
+                <h2 className="text-xl font-semibold mb-2">Discount Code</h2>
+                <input
+                  type="text"
+                  name="discount"
+                  placeholder="Enter discount code"
+                  value={discount}
+                  onChange={(e) => setDiscount(e.target.value)}
+                  className="w-full p-2 border rounded-md"
+                />
+                <button
+                  className="bg-orange-500 text-white px-4 py-2 rounded mt-2"
+                  onClick={applyDiscount}
+                >
+                  Apply
+                </button>
+              </section>
+            )
+          }
 
           <section className="mb-6">
             <h2 className="text-xl font-semibold mb-2">Order Details</h2>
